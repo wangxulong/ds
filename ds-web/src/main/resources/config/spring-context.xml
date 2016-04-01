@@ -12,26 +12,14 @@
       default-lazy-init="true" >
     <!--注解扫描装配bean-->
     <context:component-scan base-package="com.wang"/>
-    <context:property-placeholder location="classpath:default.properties"/>
+    <context:property-placeholder location="classpath*:*.properties"/>
     <!--数据源配置-->
     <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
-        <property name="driverClassName">
-            <value>com.mysql.jdbc.Driver</value>
-        </property>
-        <property name="url">
-            <value>jdbc:mysql://localhost:3306/micro_service?useUnicode=true&amp;characterEncoding=utf8</value>
-        </property>
-        <property name="username">
-            <value>root</value>
-        </property>
-        <property name="password">
-            <value>admin123</value>
-        </property>
-
-        <property name="maxIdle">
-            <value>2</value>
-        </property>
-
+        <property name="username" value="${jdbc.username}"></property>
+        <property name="password" value="${jdbc.password}"></property>
+        <property name="url" value="${jdbc.url}"></property>
+        <property name="driverClassName" value="${jdbc.driverClassName}"></property>
+        <property name="maxIdle" value="${jdbc.maxIdle}"></property>
     </bean>
     <!--jdbcTemplate模板-->
     <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">

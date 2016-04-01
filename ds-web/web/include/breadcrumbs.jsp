@@ -22,7 +22,7 @@
     <li class="active">Blank Page</li>
   </ul><!-- /.breadcrumb -->
 
-  <!-- #section:basics/content.searchbox -->
+  <!-- #section:basics/content.searchbox
   <div class="nav-search" id="nav-search">
     <form class="form-search">
 								<span class="input-icon">
@@ -30,7 +30,7 @@
 									<i class="ace-icon fa fa-search nav-search-icon"></i>
 								</span>
     </form>
-  </div><!-- /.nav-search -->
+  </div>--><!-- /.nav-search -->
 
   <!-- /section:basics/content.searchbox -->
 </div>

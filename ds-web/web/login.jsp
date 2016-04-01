@@ -15,7 +15,7 @@
                         <h1>
                             <i class="ace-icon fa fa-leaf green"></i>
                            <%-- <span class="red">Ace</span>--%>
-                            <span class="white" id="id-text2">SHU-微服务后端管理</span>
+                            <span class="white" id="id-text2">DS课程管理平台</span>
                         </h1>
                         <h4 class="blue" id="id-company-text">&copy; 上海大学</h4>
                     </div>

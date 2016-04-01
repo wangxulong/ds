@@ -30,7 +30,7 @@
             <a href="#" class="navbar-brand">
                 <small>
                     <i class="fa fa-leaf"></i>
-                    SHU-微服务后端管理
+                    DS课程管理平台
                 </small>
             </a>
 
