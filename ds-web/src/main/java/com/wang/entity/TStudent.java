@@ -13,14 +13,14 @@ public class TStudent {
     private String name;
     private Integer sex;
     private Integer age;
-    @Column(name = "birth_date")
+
     private Date birthDate;
     private String studentNumber;
-    @Column(name = "join_date")
+
     private Date joinDate;
-    @Column(name = "leave_date")
+
     private Date leaveDate;
-    @Column(name = "create_time")
+
     private Date createTime;
     private Integer seminarTopicId;
 
@@ -84,7 +84,7 @@ public class TStudent {
     public void setStudentNumber(String studentNumber) {
         this.studentNumber = studentNumber;
     }
-
+    @Column(name = "join_date")
     public Date getJoinDate() {
         return joinDate;
     }
@@ -92,7 +92,7 @@ public class TStudent {
     public void setJoinDate(Date joinDate) {
         this.joinDate = joinDate;
     }
-
+    @Column(name = "leave_date")
     public Date getLeaveDate() {
         return leaveDate;
     }
@@ -100,7 +100,7 @@ public class TStudent {
     public void setLeaveDate(Date leaveDate) {
         this.leaveDate = leaveDate;
     }
-
+    @Column(name = "create_time")
     public Date getCreateTime() {
         return createTime;
     }

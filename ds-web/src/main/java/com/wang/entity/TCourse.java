@@ -12,7 +12,7 @@ public class TCourse {
     private int id;
     private String name;
     private Date startTime;
-    @Column(name = "endTime")
+
     private Date endTime;
     private String schedule;
     private String outline;
@@ -49,7 +49,7 @@ public class TCourse {
     public void setStartTime(Date startTime) {
         this.startTime = startTime;
     }
-
+    @Column(name = "endTime")
     public Date getEndTime() {
         return endTime;
     }

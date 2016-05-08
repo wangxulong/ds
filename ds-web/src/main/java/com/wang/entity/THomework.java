@@ -12,7 +12,7 @@ public class THomework {
     private Integer id;
     private String topic;
     private String desc;
-    @Column(name = "finsh_time")
+
     private Date finshTime;
     private Integer score;
     private Integer taskId;
@@ -48,7 +48,7 @@ public class THomework {
     public void setDesc(String desc) {
         this.desc = desc;
     }
-
+    @Column(name = "finsh_time")
     public Date getFinshTime() {
         return finshTime;
     }

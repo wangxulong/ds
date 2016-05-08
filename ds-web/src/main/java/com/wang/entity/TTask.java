@@ -12,9 +12,9 @@ public class TTask {
     private Integer id;
     private String topic;
     private String content;
-    @Column(name = "create_time")
+
     private Date createTime;
-    @Column(name = "end_time")
+
     private Date endTime;
 
     @Id
@@ -48,7 +48,7 @@ public class TTask {
         this.content = content;
     }
 
-
+    @Column(name = "create_time")
     public Date getCreateTime() {
         return createTime;
     }
@@ -56,7 +56,7 @@ public class TTask {
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
-
+    @Column(name = "end_time")
     public Date getEndTime() {
         return endTime;
     }

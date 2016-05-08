@@ -12,7 +12,7 @@ public class TGroup {
     private Integer id;
     private String name;
     private String desc;
-    @Column(name = "create_time")
+
     private Date createTime;
 
     @Id
@@ -45,7 +45,7 @@ public class TGroup {
     public void setDesc(String desc) {
         this.desc = desc;
     }
-
+    @Column(name = "create_time")
     public Date getCreateTime() {
         return createTime;
     }

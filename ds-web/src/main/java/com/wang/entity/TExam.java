@@ -12,9 +12,9 @@ public class TExam {
     private Integer id;
     private String title;
     private String desc;
-    @Column(name = "start_time")
+
     private Date startTime;
-    @Column(name = "end_time")
+
     private Date endTime;
     private String score;
 
@@ -48,8 +48,22 @@ public class TExam {
     public void setDesc(String desc) {
         this.desc = desc;
     }
+    @Column(name = "create_time")
+    public Date getStartTime() {
+        return startTime;
+    }
 
+    public void setStartTime(Date startTime) {
+        this.startTime = startTime;
+    }
+    @Column(name = "end_time")
+    public Date getEndTime() {
+        return endTime;
+    }
 
+    public void setEndTime(Date endTime) {
+        this.endTime = endTime;
+    }
 
     @Basic
     @Column(name = "score")

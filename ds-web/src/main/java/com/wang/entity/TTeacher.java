@@ -15,13 +15,13 @@ public class TTeacher {
     private String idcard;
     private Integer age;
     private String jobNumber;
-    @Column(name = "birth_date")
+
     private Date birthDate;
-    @Column(name = "join_date")
+
     private Date joinDate;
-    @Column(name = "leave_date")
+
     private Date leaveDate;
-    @Column(name = "create_time")
+
     private Date createTime;
 
     @Id
@@ -94,7 +94,7 @@ public class TTeacher {
     public void setBirthDate(Date birthDate) {
         this.birthDate = birthDate;
     }
-
+    @Column(name = "join_date")
     public Date getJoinDate() {
         return joinDate;
     }
@@ -102,7 +102,7 @@ public class TTeacher {
     public void setJoinDate(Date joinDate) {
         this.joinDate = joinDate;
     }
-
+    @Column(name = "leave_date")
     public Date getLeaveDate() {
         return leaveDate;
     }
@@ -110,7 +110,7 @@ public class TTeacher {
     public void setLeaveDate(Date leaveDate) {
         this.leaveDate = leaveDate;
     }
-
+    @Column(name = "create_time")
     public Date getCreateTime() {
         return createTime;
     }
