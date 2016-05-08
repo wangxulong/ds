@@ -14,7 +14,7 @@ import javax.annotation.Resource;
  * Created by wxl on 2016/5/8.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = "classpath:config/*-context.xml")
+@ContextConfiguration(locations = "classpath:config/spring-context.xml")
 public class TeacherDaoTest extends AbstractJUnit4SpringContextTests {
     @Resource
     private TeacherDao teacherDao;

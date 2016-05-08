@@ -1,19 +1,57 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : localhost_3306
-Source Server Version : 50173
+Source Server         : local
+Source Server Version : 50712
 Source Host           : localhost:3306
-Source Database       : micro_service
+Source Database       : ds
 
 Target Server Type    : MYSQL
-Target Server Version : 50173
+Target Server Version : 50712
 File Encoding         : 65001
 
-Date: 2016-04-01 20:08:31
+Date: 2016-05-08 19:44:55
 */
 
 SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for r_course_student
+-- ----------------------------
+DROP TABLE IF EXISTS `r_course_student`;
+CREATE TABLE `r_course_student` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `course_id` int(11) DEFAULT NULL,
+  `student_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `pk_r_course` (`course_id`),
+  KEY `pk_r_student` (`student_id`),
+  CONSTRAINT `pk_r_course` FOREIGN KEY (`course_id`) REFERENCES `t_course` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `pk_r_student` FOREIGN KEY (`student_id`) REFERENCES `t_student` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of r_course_student
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for r_homework_student
+-- ----------------------------
+DROP TABLE IF EXISTS `r_homework_student`;
+CREATE TABLE `r_homework_student` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `homework_id` int(11) DEFAULT NULL,
+  `student_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `pk_cs_homework` (`homework_id`),
+  KEY `pk_cs_student` (`student_id`),
+  CONSTRAINT `pk_cs_homework` FOREIGN KEY (`homework_id`) REFERENCES `t_homework` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `pk_cs_student` FOREIGN KEY (`student_id`) REFERENCES `t_student` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of r_homework_student
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for sys_resource
@@ -317,4 +355,291 @@ CREATE TABLE `tb_tag` (
 
 -- ----------------------------
 -- Records of tb_tag
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for t_attachment
+-- ----------------------------
+DROP TABLE IF EXISTS `t_attachment`;
+CREATE TABLE `t_attachment` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `path` varchar(255) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `format` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of t_attachment
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for t_course
+-- ----------------------------
+DROP TABLE IF EXISTS `t_course`;
+CREATE TABLE `t_course` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `start_time` datetime DEFAULT NULL,
+  `end_time` datetime DEFAULT NULL,
+  `schedule` varchar(255) DEFAULT NULL,
+  `outline` varchar(1000) DEFAULT NULL,
+  `teacher_id` int(11) DEFAULT NULL,
+  `group_id` int(11) DEFAULT NULL,
+  `exam_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `pk_course_teacher` (`teacher_id`),
+  KEY `pk_course_group` (`group_id`),
+  KEY `pk_course_exam` (`exam_id`),
+  CONSTRAINT `pk_course_exam` FOREIGN KEY (`exam_id`) REFERENCES `t_exam` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `pk_course_group` FOREIGN KEY (`group_id`) REFERENCES `t_group` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `pk_course_teacher` FOREIGN KEY (`teacher_id`) REFERENCES `t_teacher` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of t_course
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for t_exam
+-- ----------------------------
+DROP TABLE IF EXISTS `t_exam`;
+CREATE TABLE `t_exam` (
+  `id` int(11) NOT NULL,
+  `title` varchar(255) DEFAULT NULL,
+  `desc` varchar(1000) DEFAULT NULL,
+  `start_time` datetime DEFAULT NULL,
+  `end_time` datetime DEFAULT NULL,
+  `score` varchar(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of t_exam
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for t_exam_item
+-- ----------------------------
+DROP TABLE IF EXISTS `t_exam_item`;
+CREATE TABLE `t_exam_item` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `desc` varchar(1000) DEFAULT NULL,
+  `exam_id` int(11) DEFAULT NULL,
+  `attachment_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `pk_exam_submit_exam` (`exam_id`),
+  KEY `fk_exam_attachment` (`attachment_id`),
+  CONSTRAINT `fk_exam_attachment` FOREIGN KEY (`attachment_id`) REFERENCES `t_attachment` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `pk_exam_submit_exam` FOREIGN KEY (`exam_id`) REFERENCES `t_exam` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of t_exam_item
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for t_group
+-- ----------------------------
+DROP TABLE IF EXISTS `t_group`;
+CREATE TABLE `t_group` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `desc` varchar(255) DEFAULT NULL,
+  `create_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of t_group
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for t_homework
+-- ----------------------------
+DROP TABLE IF EXISTS `t_homework`;
+CREATE TABLE `t_homework` (
+  `id` int(11) NOT NULL,
+  `topic` varchar(255) DEFAULT NULL,
+  `desc` varchar(1000) DEFAULT NULL,
+  `finsh_time` datetime DEFAULT NULL,
+  `score` int(11) DEFAULT NULL,
+  `task_id` int(11) DEFAULT NULL,
+  `attachment_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `pk_homework_task` (`task_id`),
+  KEY `pk_homework_attachment` (`attachment_id`),
+  CONSTRAINT `pk_homework_attachment` FOREIGN KEY (`attachment_id`) REFERENCES `t_attachment` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `pk_homework_task` FOREIGN KEY (`task_id`) REFERENCES `t_task` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of t_homework
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for t_material
+-- ----------------------------
+DROP TABLE IF EXISTS `t_material`;
+CREATE TABLE `t_material` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `desc` varchar(255) DEFAULT NULL,
+  `course_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `pk_material_course` (`course_id`),
+  CONSTRAINT `pk_material_course` FOREIGN KEY (`course_id`) REFERENCES `t_course` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of t_material
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for t_note
+-- ----------------------------
+DROP TABLE IF EXISTS `t_note`;
+CREATE TABLE `t_note` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) DEFAULT NULL,
+  `content` varchar(1000) DEFAULT NULL,
+  `student_id` int(11) DEFAULT NULL,
+  `course_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_note_student` (`student_id`),
+  KEY `fk_note_course` (`course_id`),
+  CONSTRAINT `fk_note_course` FOREIGN KEY (`course_id`) REFERENCES `t_course` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `fk_note_student` FOREIGN KEY (`student_id`) REFERENCES `t_student` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of t_note
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for t_plan
+-- ----------------------------
+DROP TABLE IF EXISTS `t_plan`;
+CREATE TABLE `t_plan` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `topic` varchar(255) DEFAULT NULL,
+  `desc` varchar(1000) DEFAULT NULL,
+  `teacher_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `pk_plan_teacher` (`teacher_id`),
+  CONSTRAINT `pk_plan_teacher` FOREIGN KEY (`teacher_id`) REFERENCES `t_teacher` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of t_plan
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for t_seminar
+-- ----------------------------
+DROP TABLE IF EXISTS `t_seminar`;
+CREATE TABLE `t_seminar` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `desc` varchar(255) DEFAULT NULL,
+  `course_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `pk_seminar_course` (`course_id`),
+  CONSTRAINT `pk_seminar_course` FOREIGN KEY (`course_id`) REFERENCES `t_course` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of t_seminar
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for t_seminar_topic
+-- ----------------------------
+DROP TABLE IF EXISTS `t_seminar_topic`;
+CREATE TABLE `t_seminar_topic` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `desc` varchar(255) DEFAULT NULL,
+  `demand` varchar(255) DEFAULT NULL,
+  `seminar_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `pk_seminar_siminar_topic` (`seminar_id`),
+  CONSTRAINT `pk_seminar_siminar_topic` FOREIGN KEY (`seminar_id`) REFERENCES `t_seminar` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of t_seminar_topic
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for t_student
+-- ----------------------------
+DROP TABLE IF EXISTS `t_student`;
+CREATE TABLE `t_student` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `sex` int(1) DEFAULT NULL,
+  `age` int(11) DEFAULT NULL,
+  `birth_date` date DEFAULT NULL,
+  `student_number` varchar(255) DEFAULT NULL,
+  `join_date` datetime DEFAULT NULL,
+  `leave_date` datetime DEFAULT NULL,
+  `create_time` datetime DEFAULT NULL,
+  `seminar_topic_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `pk_student_seminar_topic` (`seminar_topic_id`),
+  CONSTRAINT `pk_student_seminar_topic` FOREIGN KEY (`seminar_topic_id`) REFERENCES `t_seminar_topic` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of t_student
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for t_task
+-- ----------------------------
+DROP TABLE IF EXISTS `t_task`;
+CREATE TABLE `t_task` (
+  `id` int(11) NOT NULL,
+  `topic` varchar(255) DEFAULT NULL,
+  `content` varchar(1000) DEFAULT NULL,
+  `create_time` datetime DEFAULT NULL,
+  `end_time` datetime DEFAULT NULL,
+  `course_id` int(11) DEFAULT NULL,
+  `teacher_id` int(11) DEFAULT NULL,
+  `attachment_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `pk_task_teacher` (`teacher_id`),
+  KEY `pk_task_course` (`course_id`),
+  KEY `pk_task_attachment` (`attachment_id`),
+  CONSTRAINT `pk_task_attachment` FOREIGN KEY (`attachment_id`) REFERENCES `t_attachment` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `pk_task_course` FOREIGN KEY (`course_id`) REFERENCES `t_course` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `pk_task_teacher` FOREIGN KEY (`teacher_id`) REFERENCES `t_teacher` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of t_task
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for t_teacher
+-- ----------------------------
+DROP TABLE IF EXISTS `t_teacher`;
+CREATE TABLE `t_teacher` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `sex` int(1) DEFAULT NULL,
+  `idcard` varchar(255) DEFAULT NULL,
+  `age` int(11) DEFAULT NULL,
+  `job_number` varchar(255) DEFAULT NULL,
+  `birth_date` date DEFAULT NULL,
+  `join_date` datetime DEFAULT NULL,
+  `leave_date` datetime DEFAULT NULL,
+  `create_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of t_teacher
 -- ----------------------------
