@@ -29,6 +29,9 @@
                                         <a class="blue addChildMenu" href="#"  data="${menu.parent.id}">
                                             <i class="ace-icon fa fa-plus bigger-130"></i>
                                         </a>
+                                        <a class="red deleteMenu" href="#" data="${menu.parent.id}">
+                                            <i class="ace-icon fa fa-trash-o bigger-130"></i>
+                                        </a>
                                     </div>
 
                                 </div>

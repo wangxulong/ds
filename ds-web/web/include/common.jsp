@@ -15,7 +15,9 @@
 <link rel="stylesheet" href="${ctx}/static/js/ace/assets/css/font-awesome.css" />
 
 <!-- page specific plugin styles -->
-
+<!--[if IE 7]>
+<link rel="stylesheet" href="${ctx}/static/js/ace/assets/css/font-awesome-ie7.css" />
+<![endif]-->
 <!-- text fonts -->
 <link rel="stylesheet" href="${ctx}/static/js/ace/assets/css/ace-fonts.css" />
 
@@ -59,5 +61,31 @@ window.jQuery || document.write("<script src='${ctx}/static/js/ace/assets/js/jqu
 <script type="text/javascript">
     if('ontouchstart' in document.documentElement) document.write("<script src='${ctx}/static/js/ace/assets/js/jquery.mobile.custom.js'>"+"<"+"/script>");
 </script>
+
+<script src="${ctx}/static/js/ace/assets/js/bootstrap.js"></script>
+<script src="${ctx}/static/js/ace/assets/js/typeahead.jquery.js"></script>
+<!-- ace scripts -->
+
+<script src="${ctx}/static/js/ace/assets/js/ace-elements.js"></script>
+<script src="${ctx}/static/js/ace/assets/js/ace.js"></script>
+
 <!--addRole-->
 <link rel="stylesheet" href="${ctx}/static/js/ace/assets/css/bootstrap-duallistbox.css" />
+
+<link rel="stylesheet" href="${ctx}/static/js/ace/assets/css/chosen.css" />
+<link rel="stylesheet" href="${ctx}/static/js/ace/assets/css/datepicker.css" />
+<link rel="stylesheet" href="${ctx}/static/js/ace/assets/css/bootstrap-timepicker.css" />
+<link rel="stylesheet" href="${ctx}/static/js/ace/assets/css/daterangepicker.css" />
+<link rel="stylesheet" href="${ctx}/static/js/ace/assets/css/colorpicker.css" />
+
+<script src="${ctx}/static/js/ace/assets/js/fuelux/fuelux.spinner.js"></script>
+<script src="${ctx}/static/js/ace/assets/js/date-time/bootstrap-datepicker.js"></script>
+<script src="${ctx}/static/js/ace/assets/js/date-time/bootstrap-timepicker.js"></script>
+<script src="${ctx}/static/js/ace/assets/js/date-time/moment.js"></script>
+<script src="${ctx}/static/js/ace/assets/js/date-time/daterangepicker.js"></script>
+<script src="${ctx}/static/js/ace/assets/js/bootstrap-colorpicker.js"></script>
+<script src="${ctx}/static/js/ace/assets/js/jquery.knob.js"></script>
+<script src="${ctx}/static/js/ace/assets/js/jquery.autosize.js"></script>
+<script src="${ctx}/static/js/ace/assets/js/jquery.inputlimiter.1.3.1.js"></script>
+<script src="${ctx}/static/js/ace/assets/js/jquery.maskedinput.js"></script>
+<script src="${ctx}/static/js/ace/assets/js/bootstrap-tag.js"></script>

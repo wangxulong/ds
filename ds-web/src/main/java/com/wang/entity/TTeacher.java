@@ -1,5 +1,7 @@
 package com.wang.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -15,11 +17,11 @@ public class TTeacher {
     private String idcard;
     private Integer age;
     private String jobNumber;
-
+    @DateTimeFormat( pattern = "yyyy-MM-dd" )
     private Date birthDate;
-
+    @DateTimeFormat( pattern = "yyyy-MM-dd" )
     private Date joinDate;
-
+    @DateTimeFormat( pattern = "yyyy-MM-dd" )
     private Date leaveDate;
 
     private Date createTime;
