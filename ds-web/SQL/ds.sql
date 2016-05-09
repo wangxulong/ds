@@ -217,6 +217,7 @@ CREATE TABLE `t_course` (
   `teacher_id` int(11) DEFAULT NULL,
   `group_id` int(11) DEFAULT NULL,
   `exam_id` int(11) DEFAULT NULL,
+  `available` int(1) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `pk_course_teacher` (`teacher_id`),
   KEY `pk_course_group` (`group_id`),
