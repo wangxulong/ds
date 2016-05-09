@@ -19,6 +19,7 @@ public class TCourse {
     private Integer teacherId;
     private Integer groupId;
     private Integer examId;
+    private Boolean available;
 
     @Id
     @Column(name = "id")
@@ -106,6 +107,16 @@ public class TCourse {
 
     public void setExamId(Integer examId) {
         this.examId = examId;
+    }
+
+    @Basic
+    @Column(name = "available")
+    public Boolean getAvailable() {
+        return available;
+    }
+
+    public void setAvailable(Boolean available) {
+        this.available = available;
     }
 
     @Override

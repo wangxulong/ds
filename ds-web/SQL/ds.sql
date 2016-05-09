@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : local
-Source Server Version : 50712
+Source Server         : MySQL
+Source Server Version : 50614
 Source Host           : localhost:3306
 Source Database       : ds
 
 Target Server Type    : MYSQL
-Target Server Version : 50712
+Target Server Version : 50614
 File Encoding         : 65001
 
-Date: 2016-05-08 19:44:55
+Date: 2016-05-09 14:52:16
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -387,6 +387,7 @@ CREATE TABLE `t_course` (
   `teacher_id` int(11) DEFAULT NULL,
   `group_id` int(11) DEFAULT NULL,
   `exam_id` int(11) DEFAULT NULL,
+  `available` int(1) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `pk_course_teacher` (`teacher_id`),
   KEY `pk_course_group` (`group_id`),
@@ -638,8 +639,11 @@ CREATE TABLE `t_teacher` (
   `leave_date` datetime DEFAULT NULL,
   `create_time` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_teacher
 -- ----------------------------
+INSERT INTO `t_teacher` VALUES ('1', 'wxl', null, null, null, null, null, null, null, null);
+INSERT INTO `t_teacher` VALUES ('2', 'wxl', null, null, null, null, null, null, null, null);
+INSERT INTO `t_teacher` VALUES ('3', 'wxl', null, null, null, null, null, null, null, null);
