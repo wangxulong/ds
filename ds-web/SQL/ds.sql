@@ -1,5 +1,5 @@
-﻿﻿# Host: localhost  (Version: 5.1.73-community)
-# Date: 2016-05-09 15:27:34
+﻿# Host: localhost  (Version: 5.1.73-community)
+# Date: 2016-05-09 17:07:26
 # Generator: MySQL-Front 5.3  (Build 4.234)
 
 /*!40101 SET NAMES utf8 */;
@@ -28,7 +28,7 @@ CREATE TABLE `sys_resource` (
 # Data for table "sys_resource"
 #
 
-INSERT INTO `sys_resource` VALUES (1,'系统管理','0',1,0,'0','',1,NULL,NULL,NULL),(2,'用户管理','1',1,1,'1','',1,NULL,'/sys/user/index',NULL),(3,'角色管理','1',2,1,'1','',1,NULL,'/sys/role/index',NULL),(4,'资源管理','1',3,1,'1','',1,NULL,'/sys/res/index',NULL),(5,'添加系统账号','2',1,2,'1-2','sysUser:add',1,NULL,NULL,NULL),(10,'删除用户','2',NULL,2,'1-2','sysUser:delete',1,NULL,NULL,NULL),(11,'添加角色','2',NULL,3,'1-3','sysRole:add',1,NULL,NULL,NULL),(12,'删除角色','2',NULL,3,'1-3','sysRole:delete',1,NULL,NULL,NULL),(14,'分配角色','2',3,2,'1-2','sysUser:allotRole',1,NULL,NULL,NULL),(15,'修改系统账号','2',1,2,'1-2','sysUser:edit',1,NULL,NULL,NULL),(16,'分配资源','2',1,3,'1-3','sysRole:allotRes',1,NULL,NULL,NULL),(17,'修改角色','2',1,3,'1-3','sysRole:edit',1,NULL,NULL,NULL),(18,'内容管理','0',NULL,0,'0','',1,NULL,NULL,NULL),(23,'课程教学管理','0',NULL,0,'0','',1,NULL,NULL,NULL),(24,'课程简介','1',NULL,23,'23',NULL,1,NULL,'/course/intorduce',NULL),(25,'课堂教学','1',NULL,23,'23',NULL,1,NULL,'/class/teach',NULL),(26,'作业管理','1',NULL,23,'23',NULL,1,NULL,'/task/manage',NULL),(27,'考试管理','1',NULL,23,'23',NULL,1,NULL,'/exam/manage',NULL);
+INSERT INTO `sys_resource` VALUES (1,'系统管理','0',1,0,'0','',1,NULL,NULL,NULL),(2,'用户管理','1',1,1,'1','',1,NULL,'/sys/user/index',NULL),(3,'角色管理','1',2,1,'1','',1,NULL,'/sys/role/index',NULL),(4,'资源管理','1',3,1,'1','',1,NULL,'/sys/res/index',NULL),(5,'添加系统账号','2',1,2,'1-2','sysUser:add',1,NULL,NULL,NULL),(10,'删除用户','2',NULL,2,'1-2','sysUser:delete',1,NULL,NULL,NULL),(11,'添加角色','2',NULL,3,'1-3','sysRole:add',1,NULL,NULL,NULL),(12,'删除角色','2',NULL,3,'1-3','sysRole:delete',1,NULL,NULL,NULL),(14,'分配角色','2',3,2,'1-2','sysUser:allotRole',1,NULL,NULL,NULL),(15,'修改系统账号','2',1,2,'1-2','sysUser:edit',1,NULL,NULL,NULL),(16,'分配资源','2',1,3,'1-3','sysRole:allotRes',1,NULL,NULL,NULL),(17,'修改角色','2',1,3,'1-3','sysRole:edit',1,NULL,NULL,NULL),(18,'内容管理','0',NULL,0,'0','',1,NULL,NULL,NULL),(23,'课程教学管理','0',NULL,0,'0','',1,NULL,NULL,NULL),(24,'课程简介','1',NULL,23,'23',NULL,1,NULL,'/course/index',NULL),(25,'课堂教学','1',NULL,23,'23',NULL,1,NULL,'/class/index',NULL),(26,'作业管理','1',NULL,23,'23',NULL,1,NULL,'/task/index',NULL),(27,'考试管理','1',NULL,23,'23',NULL,1,NULL,'/exam/index',NULL);
 
 #
 # Structure for table "sys_role"
@@ -217,6 +217,7 @@ CREATE TABLE `t_course` (
   `teacher_id` int(11) DEFAULT NULL,
   `group_id` int(11) DEFAULT NULL,
   `exam_id` int(11) DEFAULT NULL,
+  `available` int(1) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `pk_course_teacher` (`teacher_id`),
   KEY `pk_course_group` (`group_id`),

@@ -1,6 +1,7 @@
 package com.wang.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**øŒ≥ÃΩÈ…‹£®Œ‚√˜£©
@@ -9,4 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/course/")
 public class CourseController {
+    @RequestMapping("index")
+    public void index(Model model){
+    }
 }
