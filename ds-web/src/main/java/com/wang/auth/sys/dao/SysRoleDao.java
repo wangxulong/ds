@@ -13,4 +13,6 @@ import java.util.List;
 public interface SysRoleDao extends BaseDao<SysRole,Long> {
 
     public List<SysRole> findByIdIn(Collection ids);
+
+    SysRole findByRoleCode(String roleCode);
 }
