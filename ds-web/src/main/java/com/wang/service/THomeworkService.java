@@ -4,7 +4,7 @@ import com.wang.dao.THomeworkDao;
 import com.wang.entity.TAttachment;
 import com.wang.entity.THomework;
 import com.wang.form.HomeworkFormBean;
-import com.wang.util.UpFilesUtil;
+import com.wang.util.UpFilesUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -66,7 +66,7 @@ public class THomeworkService {
             //获取上传的文件
             MultipartFile file = homework.getPic();
             //存储文件到指定的位置
-            UpFilesUtil upFilesUtil = new UpFilesUtil();
+            UpFilesUtils upFilesUtil = new UpFilesUtils();
             upFilesUtil.saveFile(file);
             //保存附件基本信息到数据库
             TAttachment attachment = new TAttachment();
