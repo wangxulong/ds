@@ -1,5 +1,7 @@
 package com.wang.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -9,14 +11,26 @@ import java.util.Date;
 @Entity
 @Table(name = "t_homework", schema = "ds")
 public class THomework {
-    private Integer id;
-    private String topic;
-    private String desc;
+    protected Integer id;
+    protected String topic;
+    protected String desc;
 
-    private Date finshTime;
-    private Integer score;
-    private Integer taskId;
-    private Integer attachmentId;
+    protected Date createTime;
+    @DateTimeFormat( pattern = "yyyy-MM-dd" )
+    protected Date finshTime;
+
+    protected Integer score;
+    protected Integer taskId;
+    protected Integer attachmentId;
+
+    public THomework() {
+    }
+
+    public THomework(String topic, String desc, Date finshTime) {
+        this.topic = topic;
+        this.desc = desc;
+        this.finshTime = finshTime;
+    }
 
     @Id
     @Column(name = "id")
@@ -48,6 +62,15 @@ public class THomework {
     public void setDesc(String desc) {
         this.desc = desc;
     }
+    @Column(name = "create_time")
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
     @Column(name = "finsh_time")
     public Date getFinshTime() {
         return finshTime;
@@ -56,6 +79,7 @@ public class THomework {
     public void setFinshTime(Date finshTime) {
         this.finshTime = finshTime;
     }
+
 
     @Basic
     @Column(name = "score")

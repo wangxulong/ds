@@ -63,6 +63,7 @@
       <div class="form-group ">
         <label class="col-sm-3 control-label no-padding-right"> 出生年月 </label>
         <div class="col-sm-9">
+          <div class="col-sm-12">
           <div class="row">
             <div class="col-sm-9">
 
@@ -77,11 +78,13 @@
             </div>
           </div>
 
+          </div>
         </div>
       </div>
       <div class="form-group ">
         <label class="col-sm-3 control-label no-padding-right"> 入职时间 </label>
         <div class="col-sm-9">
+        <div class="col-sm-12">
           <div class="row">
             <div class="col-sm-9">
 
@@ -89,14 +92,15 @@
                 <form:input path="joinDate" readonly="true" class="form-control date-picker" id="birth" type="text" data-date-format="yyyy-mm-dd"
                             data-date-language="zh-CN"
                 />
-																	<span class="input-group-addon">
-																		<i class="fa fa-calendar bigger-110"></i>
-																	</span>
+                <span class="input-group-addon">
+                  <i class="fa fa-calendar bigger-110"></i>
+                </span>
               </div>
             </div>
           </div>
 
         </div>
+          </div>
       </div>
      <%-- <div class="form-group ">
         <label class="col-sm-3 control-label no-padding-right"> 离职时间 </label>
@@ -135,7 +139,7 @@
   </div>
 </div>
 
-
++
 
 
 

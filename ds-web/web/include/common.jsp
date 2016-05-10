@@ -77,6 +77,7 @@ window.jQuery || document.write("<script src='${ctx}/static/js/ace/assets/js/jqu
 <link rel="stylesheet" href="${ctx}/static/js/ace/assets/css/bootstrap-timepicker.css" />
 <link rel="stylesheet" href="${ctx}/static/js/ace/assets/css/daterangepicker.css" />
 <link rel="stylesheet" href="${ctx}/static/js/ace/assets/css/colorpicker.css" />
+<link rel="stylesheet" href="${ctx}/static/css/common.css" />
 
 <script src="${ctx}/static/js/ace/assets/js/fuelux/fuelux.spinner.js"></script>
 <script src="${ctx}/static/js/ace/assets/js/date-time/bootstrap-datepicker.js"></script>

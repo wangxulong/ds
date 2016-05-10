@@ -174,7 +174,7 @@
   <script src="${ctx}/static/js/ace/assets/js/ace/ace.onpage-help.js"></script>
   <script src="${ctx}/static/js/ace/docs/assets/js/rainbow.js"></script>
   <script src="${ctx}/static/js/ace/docs/assets/js/language/generic.js"></script>
-  <script src="${ctx}/static/js/ace/docs/assets/js/language/html.js"></script>
+  <script src="${ctx}/static/js/ace/docs/assets/js/language/html.js"]></script>
   <script src="${ctx}/static/js/ace/docs/assets/js/language/css.js"></script>
   <script src="${ctx}/static/js/ace/docs/assets/js/language/javascript.js"></script>--%>
   <div id="modal-form" class="modal" tabindex="-1">
@@ -184,5 +184,11 @@
     </div>
   </div>
 </div>
+<script>
+  $('.date-picker').datepicker({autoclose:true}).next().on(ace.click_event, function(){
+    $(this).prev().focus();
+  });
+</script>
+
 </body>
 </html>

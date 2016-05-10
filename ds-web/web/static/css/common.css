@@ -1,0 +1,9 @@
+/*中间表格上面标签*/
+.flag-style{
+    width: 100%;
+    background-color:#c8c8ca;
+    font-size: 15px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    margin-bottom: 2px;
+}
