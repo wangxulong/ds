@@ -22,6 +22,7 @@ import java.util.List;
 @Service
 @Transactional
 public class TeacherService {
+    //老师角色
     private static String TEACHER_DODE="teacher";
     @Resource
     private TeacherDao teacherDao;

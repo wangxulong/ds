@@ -1,5 +1,7 @@
 package com.wang.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -14,11 +16,13 @@ public class TStudent {
     private Integer sex;
     private Integer age;
 
+    private String password;
+    @DateTimeFormat( pattern = "yyyy-MM-dd" )
     private Date birthDate;
     private String studentNumber;
-
+    @DateTimeFormat( pattern = "yyyy-MM-dd" )
     private Date joinDate;
-
+    @DateTimeFormat( pattern = "yyyy-MM-dd" )
     private Date leaveDate;
 
     private Date createTime;
@@ -117,6 +121,15 @@ public class TStudent {
 
     public void setSeminarTopicId(Integer seminarTopicId) {
         this.seminarTopicId = seminarTopicId;
+    }
+    @Basic
+    @Column(name = "password")
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override

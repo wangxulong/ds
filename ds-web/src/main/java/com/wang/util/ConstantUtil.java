@@ -12,4 +12,10 @@ public class ConstantUtil {
     public static final byte normal_status = 1;
     public static final byte hot_status=3;
 
+
+    //一页数据大小
+    public static final int PAGE_SIZE =10;
+    //1
+    public static final int FIRST =1;
+
 }
