@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh_CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>基本信息</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <!-- Bootstrap -->
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<!--导航-->
+<nav class="navbar navbar-default   header" >
+    <div class="container">
+        <!--小屏幕导航按钮和Logo-->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav-content"
+                    >
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="index.html" class="navbar-brand">DS课程平台</a>
+        </div>
+
+        <!--小屏幕导航按钮和Logo-->
+
+        <!--导航-->
+        <div class="collapse navbar-collapse" id="nav-content">
+            <ul class="nav navbar-nav navbar-left">
+                <li  class="active"><a href="user-info.html" ><span class="glyphicon glyphicon-user"></span> 个人信息 </a></li>
+                <li><a href="user-homework.html" ><span class="glyphicon glyphicon-tasks"></span> 作业</a></li>
+                <li><a href="user-discuss-lession.html" ><span class="glyphicon glyphicon-comment"></span> 研讨课</a></li>
+                <li><a href="user-leave.html" ><span class="glyphicon glyphicon-tags "></span> 请假</a></li>
+                <li><a href="user-exam.html"><span class="glyphicon glyphicon-bookmark"></span> 考试</a></li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a id="dLabel" data-target="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                             王旭龙
+                            <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="dLabel">
+                        <li><a href="#"> 我的作业</a></li>
+                        <li><a href="#"> 我的请假</a></li>
+                        <li><a href="#"> 我的分数</a></li>
+                    </ul>
+                </li>
+                <li ><a href="#"><span class="glyphicon glyphicon-off text-danger" ></span>  退出</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-2">
+            <div class="list-group">
+                <a href="user-info.html" class="list-group-item ">
+                    基本信息
+                </a>
+                <a href="user-account.html" class="list-group-item active">账号信息</a>
+            </div>
+        </div>
+        <div class="col-md-10">
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        修改登录账号
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <form class="form-horizontal">
+                                <div class="form-group">
+                                    <label for="inputPassword1" class="col-sm-2 control-label">原密码</label>
+                                    <div class="col-sm-10">
+                                        <input type="password" class="form-control" id="inputPassword1" placeholder="原密码">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputPassword2" class="col-sm-2 control-label">新密码</label>
+                                    <div class="col-sm-10">
+                                        <input type="password" class="form-control" id="inputPassword2" placeholder="新密码">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputPassword3" class="col-sm-2 control-label">确认密码</label>
+                                    <div class="col-sm-10">
+                                        <input type="password" class="form-control" id="inputPassword3" placeholder="确认密码">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-offset-2 col-sm-10">
+                                        <button type="submit" class="btn btn-primary">修改</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+
+</body>
+</html>

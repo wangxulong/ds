@@ -6,6 +6,7 @@ import com.wang.auth.sys.entity.SysUser;
 import com.wang.dao.StudentDao;
 import com.wang.dto.Pager;
 import com.wang.dto.QuestionDto;
+import com.wang.dto.ResultMessage;
 import com.wang.dto.StudentDto;
 import com.wang.entity.TStudent;
 import com.wang.entity.TTeacher;
@@ -21,6 +22,7 @@ import javax.annotation.Resource;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
+import javax.xml.transform.Result;
 import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
@@ -67,7 +69,7 @@ public class StudentService {
         if(null == student.getId()){
             //新添加
             student.setCreateTime(new Date());
-            student.setPassword(PasswordHelper.decryptBase64(student.getStudentNumber()));
+            student.setPassword(PasswordHelper.encrytBase64(student.getStudentNumber()));
 
         }else{
             TStudent dbStudent = studentDao.findOne(student.getId());
@@ -90,5 +92,27 @@ public class StudentService {
         for(Integer id:ids){
             studentDao.delete(id);
         }
+    }
+
+    //学生登录
+    public TStudent login(String name,String password){
+        password =  PasswordHelper.encrytBase64(password);
+        TStudent student = studentDao.findByStudentNumberAndPassword(name, password);
+        return student;
+    }
+    //修改密码
+    public ResultMessage changePassword(String password, String newPassword, TStudent student) {
+        ResultMessage resultMessage = new ResultMessage(ResultMessage.SUCCESS,"密码修改成功");
+        student = studentDao.getOne(student.getId());
+        password = PasswordHelper.encrytBase64(password);
+        if(!password.equals(student.getPassword())){
+            //密码不一致
+            resultMessage.setStatus(ResultMessage.ERROR);
+            resultMessage.setMessage("原始密码有误");
+        }
+
+        student.setPassword(PasswordHelper.encrytBase64(newPassword));
+        studentDao.save(student);
+        return resultMessage;
     }
 }

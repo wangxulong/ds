@@ -18,4 +18,6 @@ public class ConstantUtil {
     //1
     public static final int FIRST =1;
 
+    //学生登录标志
+    public  static final String STUDENT_LOGIN_FLAG="loginStudent";
 }

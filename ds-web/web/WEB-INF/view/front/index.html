@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="zh_CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>首页面</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/animate.min.css" />
+    <link rel="stylesheet" href="css/index.css" />
+    <!-- Bootstrap -->
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<!--导航-->
+<nav class="navbar navbar-default navbar-fixed-top header" >
+    <div class="container">
+        <!--小屏幕导航按钮和Logo-->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav-content"
+                    >
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="index.html" class="navbar-brand">DS课程平台</a>
+        </div>
+
+        <!--小屏幕导航按钮和Logo-->
+
+        <!--导航-->
+        <div class="collapse navbar-collapse" id="nav-content">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="active"><a href="#home">首页 </a></li>
+                <li><a href="#course">课程信息</a></li>
+                <li><a href="#teacher">教师信息</a></li>
+                <li><a href="#outline">课程大纲</a></li>
+                <li><a href="user-info.html" class="userCenter">个人中心</a></li>
+                <li><a  class="btn btn-success btn-sm login" id="btnLogin" href="#" style="color:#000;">登录</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+<!--home-->
+<section id="home"  >
+    <div class="flicker-example wow fadeInUp" >
+        <ul>
+            <li data-background="js/libs/Flickerplate-2.1.1/img/flicker-1.jpg">
+                <div class="flick-title">
+                    数据结构
+                </div>
+                <div class="flick-sub-text">
+                    数据结构是计算机存储、组织数据的方式。数据结构是指相互之间存在一种或多种特定关系的数据元素的集合。
+                </div>
+            </li>
+            <li data-background="js/libs/Flickerplate-2.1.1/img/flicker-2.jpg">
+                <div class="flick-title">
+                    上海大学
+                </div>
+                <div class="flick-sub-text">
+                    上海大学（Shanghai University），简称上大，是上海市属、国家“211工程”重点建设的综合性大学
+                </div>
+            </li>
+            <li data-background="js/libs/Flickerplate-2.1.1/img/flicker-3.jpg">
+                <div class="flick-title">
+                    曹旻 副教授
+                </div>
+                <div class="flick-sub-text">
+                    工学博士，1988年从教。研究兴趣：软件工程，分布式计算，面向对象技术，网格计算等
+                </div>
+            </li>
+        </ul>
+
+    </div>
+    <!--<div class="row-fluid wow  lightSpeedIn" >-->
+        <!--<div class="col-md-12">-->
+            <!---->
+        <!--</div>-->
+        <!--&lt;!&ndash;<div class="col-md-10">&ndash;&gt;-->
+            <!--&lt;!&ndash;<h1>数据结构课程等你来玩！</h1>&ndash;&gt;-->
+            <!--&lt;!&ndash;<h3>自信、勇敢、坚持你都可以吗？要想锻炼学习编程，就加入我们吧！</h3>&ndash;&gt;-->
+            <!--&lt;!&ndash;<img src="images/ds-shujiujiegou.jpg" class="img-circle img-responsive">&ndash;&gt;-->
+        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+        <!--&lt;!&ndash;<div class="col-md-1"></div>&ndash;&gt;-->
+    <!--</div>-->
+
+</section>
+<!--home-->
+<!--课程course-->
+<section id="course">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 wow fadeInLeft" >
+                <img src="images/course.png" class="img-responsive">
+            </div>
+            <div class="col-md-8 wow fadeInRight">
+                <h2>数据结构</h2>
+                <p class="main">
+                    数据结构是计算机学科的算法理论基础和软件设计的技术基础，主要研究信息的逻辑结构及其基本操作在计算机中的表示和实现。
+                    它不仅是计算机学科各专业的核心课程，而且已成为其它理工科专业的热门选修课。
+                </p>
+                <p >
+                本课程的先修课程：高级语言程序设计，离散数学， 后续课程：操作系统、编译原理、数据库系统等课程。
+                </p>
+            </div>
+        </div>
+    </div>
+
+</section>
+<!--课程course-->
+<!--teacher-->
+<section id="teacher">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 wow bounce">
+                <img src="images/teacher-1.png" class="img-responsive img-circle">
+                <h5>姓名1</h5>
+                <p>简单介绍</p>
+                <button class="btn btn-default">教学计划</button>
+            </div>
+            <div class="col-md-3 wow bounce" >
+                <img src="images/teacher-2.png" class="img-responsive img-circle">
+                <h5>姓名1</h5>
+                <p>简单介绍</p>
+                <button class="btn btn-default">教学计划</button>
+            </div>
+            <div class="col-md-3 wow bounce">
+                <img src="images/teacher-3.png" class="img-responsive img-circle">
+                <h5>姓名1</h5>
+                <p>简单介绍</p>
+                <button class="btn btn-default">教学计划</button>
+            </div>
+            <div class="col-md-3 wow bounce">
+                <img src="images/teacher-4.png" class="img-responsive img-circle">
+                <h5>姓名1</h5>
+                <p>简单介绍</p>
+                <button class="btn btn-default">教学计划</button>
+            </div>
+        </div>
+    </div>
+
+</section>
+<!--teacher-->
+
+<section id="outline" >
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 wow bounce text-center">
+                <img src="images/outline.png" class="img-responsive  " >
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--footer-->
+<footer id="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <p>网站首页&nbsp;&nbsp;|&nbsp;&nbsp;联系我们&nbsp;&nbsp;|&nbsp;&nbsp;上海大学</p>
+                <p> Copyright © 2016 上海大学</p>
+            </div>
+        </div>
+    </div>
+</footer>
+<!--footer-->
+
+
+
+
+
+
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/wow.min.js"></script>
+<script src="js/singlePageNav.js"></script>
+
+<script src="js/libs/Flickerplate-2.1.1/js/min/modernizr-custom-v2.7.1.min.js" type="text/javascript"></script>
+<script src="js/libs/Flickerplate-2.1.1/js/min/hammer-v2.0.3.min.js" type="text/javascript"></script>
+
+<!--Include flickerplate-->
+<link href="js/libs/Flickerplate-2.1.1/css/flickerplate.css"  type="text/css" rel="stylesheet">
+<script src="js/libs/Flickerplate-2.1.1/js/min/flickerplate.min.js" type="text/javascript"></script>
+<script >
+//    小屏幕导航点击关闭菜单
+    $(".navbar-collapse a").on("click",function(){
+        $(".navbar-collapse").collapse("hide");
+    });
+    //初始化WoW
+    new WOW().init();
+    //singlePageNav
+    $('.nav').onePageNav({
+        offset:0,
+        filter: ':not(.userCenter)'
+    });
+$(function(){
+    $('.flicker-example').flickerplate(
+            {
+                auto_flick 				: true,
+                auto_flick_delay 		: 8,
+                flick_animation 		: 'transform-slide'
+            });
+    $("#btnLogin").on("click",function (e) {
+         e.preventDefault();
+
+         $("#modelLogin").modal("show");
+    });
+});
+</script>
+<!--loginForm-->
+<div class="modal fade" id="modelLogin">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">
+                      登录
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <form >
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-2"></div>
+                                <div class="col-md-8">
+                                    <div class="input-group">
+                                        <span class="input-group-addon" id="basic-addon1">
+                                             <span class="glyphicon glyphicon-user"></span>
+                                        </span>
+                                        <input type="text" class="form-control" placeholder="学号" aria-describedby="basic-addon1">
+                                    </div>
+                                </div>
+                                <div class="col-md-2"></div>
+                            </div>
+
+
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-2"></div>
+                                <div class="col-md-8">
+                                    <div class="input-group">
+                                        <span class="input-group-addon" id="basic-addon2">
+                                            <span class="glyphicon glyphicon-lock"></span>
+                                        </span>
+                                        <input type="password" class="form-control" placeholder="密码" aria-describedby="basic-addon2">
+                                    </div>
+                                </div>
+                                <div class="col-md-2"></div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary">保存</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+</body>
+
+</html>

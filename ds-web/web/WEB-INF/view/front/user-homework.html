@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="zh_CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>基本信息</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <!-- Bootstrap -->
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<!--导航-->
+<nav class="navbar navbar-default   header" >
+    <div class="container">
+        <!--小屏幕导航按钮和Logo-->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav-content"
+                    >
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="index.html" class="navbar-brand">DS课程平台</a>
+        </div>
+
+        <!--小屏幕导航按钮和Logo-->
+
+        <!--导航-->
+        <div class="collapse navbar-collapse" id="nav-content">
+            <ul class="nav navbar-nav navbar-left">
+                <li  ><a href="user-info.html" ><span class="glyphicon glyphicon-user"></span> 个人信息 </a></li>
+                <li class="active"><a href="user-homework.html" ><span class="glyphicon glyphicon-tasks"></span> 作业</a></li>
+                <li><a href="user-discuss-lession.html" ><span class="glyphicon glyphicon-comment"></span> 研讨课</a></li>
+                <li  ><a href="user-leave.html" ><span class="glyphicon glyphicon-tags "></span> 请假</a></li>
+                <li><a href="user-exam.html"><span class="glyphicon glyphicon-bookmark"></span> 考试</a></li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a id="dLabel" data-target="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                             王旭龙
+                            <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="dLabel">
+                        <li><a href="#"> 我的作业</a></li>
+                        <li><a href="#"> 我的请假</a></li>
+                        <li><a href="#"> 我的分数</a></li>
+                    </ul>
+                </li>
+                <li ><a href="#"><span class="glyphicon glyphicon-off text-danger" ></span>  退出</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-2">
+            <div class="list-group">
+                <a href="user-homework.html" class="list-group-item active">
+                    我的作业
+                </a>
+                <a href="user-homework-upload.html" class="list-group-item">上传作业</a>
+            </div>
+        </div>
+        <div class="col-md-10">
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        作业信息
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>
+                                #
+                            </th>
+                            <th>
+                                作业名称
+                            </th>
+                            <th>
+                                时间
+                            </th>
+                            <th>
+                                作业状态
+                            </th>
+                            <th>
+                                操作
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>
+                                1
+                            </td>
+                            <td>
+                                链表作业
+                            </td>
+                            <td>
+                               2016-04-12
+                            </td>
+                            <td>
+                                已提交
+                            </td>
+                            <td>
+                                <a class="btn btn-sm btn-primary">下载</a>
+                            </td>
+                        </tr>
+                        <tr class="success">
+                            <td>
+                                2
+                            </td>
+                            <td>
+                                图操作作业
+                            </td>
+                            <td>
+                               2016-08-12
+                            </td>
+                            <td>
+                                已评阅
+                            </td>
+                            <td>
+                                <a class="btn btn-sm btn-primary">下载</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <ul class="pagination">
+                        <li>
+                            <a href="#">上一页</a>
+                        </li>
+                        <li>
+                            <a href="#">1</a>
+                        </li>
+                        <li>
+                            <a href="#">2</a>
+                        </li>
+                        <li>
+                            <a href="#">3</a>
+                        </li>
+                        <li>
+                            <a href="#">4</a>
+                        </li>
+                        <li>
+                            <a href="#">5</a>
+                        </li>
+                        <li>
+                            <a href="#">下一页</a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,84 @@
+.header{
+    background:#FFFFFF !important;
+    border:none;
+    -webkit-box-shadow: 0px 2px 8px 0px rgba(50,50,50,0.25);
+    -moz-box-shadow: 0px 2px 8px 0px rgba(50,50,50,0.25);
+    box-shadow: 0px 2px 8px 0px rgba(50,50,50,0.25);
+}
+.navbar .navbar-brand{
+    font-size:24px;
+    font-weight: bold;
+    color:rgb(46, 136, 57) !important;
+}
+
+/*home*/
+#home{
+    margin-top:50px;
+    /*background: rgba(46, 136, 57, 0.6);*/
+    /*text-align: center;*/
+    /*padding:60px 0px;*/
+
+    /*background:url(../images/index-background.jpg);*/
+    /*background-repeat:no-repeat;*/
+    /*background-size:100% 100%;*/
+}
+#home img{
+    display: inline-block;
+    margin-top:30px;
+}
+
+/*course*/
+#course{
+    background: #eee;
+    padding:50px 0px;
+}
+
+#course img{
+    max-height: 300px;
+}
+
+
+#course h1{
+    font-weight: bold;
+}
+#course .main{
+    margin:30px 0px;
+    font-size:18px;
+}
+
+/*teacher*/
+#teacher{
+    text-align: center;
+     padding :50px 0px;
+}
+#teacher  img{
+    width:120px;
+    height:120px;
+    display: inline-block;
+}
+#teacher button{
+    border:1px #2E8839 solid;
+}
+#teacher button:hover{
+    background: #2E8839;
+    color:#FFF;
+}
+/*outline*/
+#outline{
+    padding:50px 0px;
+    background: #eee;
+    text-align: center;
+}
+#outline img{
+    display: inline-block;
+}
+
+
+/*footer*/
+#footer{
+    margin-top:50px;
+    text-align: center;
+    background-color: rgba(4, 13, 15, 0.73);
+    padding-top:20px;
+    color:#FFF;
+}

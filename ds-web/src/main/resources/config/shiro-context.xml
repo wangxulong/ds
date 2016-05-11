@@ -34,10 +34,12 @@
                 /static/**  = anon
                 /admin/logout = logout
                 /admin/login =anon
+                /front/** =anon
                 /ajax/** =anon
                 /user/** = authc
                 /admin/** = authc
                 /sys/** = authc
+
             </value>
         </property>
     </bean>
