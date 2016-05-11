@@ -12,9 +12,30 @@ public class TTask {
     private Integer id;
     private String topic;
     private String content;
+    private Integer  courseId;
+    private Integer  teacherId;
+    private Integer  attachmentId;
+
+    public void setTeacherId(Integer teacherId) {
+        this.teacherId = teacherId;
+    }
+
+    public void setAttachmentId(Integer attachmentId) {
+        this.attachmentId = attachmentId;
+    }
+    @Basic
+    @Column(name = "teacher_id")
+    public Integer getTeacherId() {
+
+        return teacherId;
+    }
+    @Basic
+    @Column(name = "attachment_id")
+    public Integer getAttachmentId() {
+        return attachmentId;
+    }
 
     private Date createTime;
-
     private Date endTime;
 
     @Id
@@ -26,6 +47,16 @@ public class TTask {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public void setCourseId(Integer courseId) {
+        this.courseId = courseId;
+    }
+    @Basic
+    @Column(name = "course_id")
+    public Integer getCourseId() {
+        return courseId;
+
     }
 
     @Basic
@@ -65,29 +96,6 @@ public class TTask {
         this.endTime = endTime;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
 
-        TTask tTask = (TTask) o;
 
-        if (id != null ? !id.equals(tTask.id) : tTask.id != null) return false;
-        if (topic != null ? !topic.equals(tTask.topic) : tTask.topic != null) return false;
-        if (content != null ? !content.equals(tTask.content) : tTask.content != null) return false;
-        if (createTime != null ? !createTime.equals(tTask.createTime) : tTask.createTime != null) return false;
-        if (endTime != null ? !endTime.equals(tTask.endTime) : tTask.endTime != null) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (topic != null ? topic.hashCode() : 0);
-        result = 31 * result + (content != null ? content.hashCode() : 0);
-        result = 31 * result + (createTime != null ? createTime.hashCode() : 0);
-        result = 31 * result + (endTime != null ? endTime.hashCode() : 0);
-        return result;
-    }
 }

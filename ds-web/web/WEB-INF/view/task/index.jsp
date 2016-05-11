@@ -8,6 +8,11 @@
 <div>
     <div class="flag-style">
         <span>布置作业</span>
+
+        <a class="btn btn-xs btn-success " href="${ctx}/task/add" >
+            <i class="ace-icon fa fa-plus bigger-120 "></i>
+        </a>
+
     </div>
     <table id="sample-table-1" class="table table-striped table-bordered table-hover">
         <thead>
@@ -44,17 +49,13 @@
                 <td> ${homeWork.finshTime}</td>
                 <td class="hidden-480">
                     <div class="hidden-sm hidden-xs btn-group">
-                            <a class="btn btn-xs btn-success " href="${ctx}/task/add" >
-                                <i class="ace-icon fa fa-plus bigger-120 "></i>
-                            </a>
-                            <button class="btn btn-xs btn-info">
+                            <a class="btn btn-xs btn-success" href="${ctx}/task/edit/${homeWork.id}">
                                 <i class="ace-icon fa fa-pencil bigger-120"></i>
-                            </button>
-                            <a class="btn btn-xs btn-danger" href="${ctx}/task/delete?id=${homeWork.id}">
+                            </a>
+                            <a class="btn btn-xs btn-danger" href="${ctx}/task/delete/${homeWork.id}">
                                 <i class="ace-icon fa fa-trash-o bigger-120"></i>
                             </a>
                     </div>
-
                 </td>
             </tr>
         </c:forEach>

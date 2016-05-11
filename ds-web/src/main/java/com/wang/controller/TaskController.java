@@ -1,10 +1,14 @@
 package com.wang.controller;
 
+import com.wang.dao.RcourseStudentDao;
+import com.wang.dao.TCourseDao;
+import com.wang.dao.TTaskDao;
 import com.wang.entity.THomework;
 import com.wang.form.HomeworkFormBean;
 import com.wang.service.THomeworkService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.Resource;
@@ -18,7 +22,6 @@ public class TaskController {
 
     @Resource
     private THomeworkService tHomeworkService;
-
 
     @RequestMapping("index")
     public void index(Model model){
@@ -37,9 +40,22 @@ public class TaskController {
         tHomeworkService.addOneHomeWork(form);
         return "redirect:/task/index";
     }
+    @RequestMapping("edit/{id}")
+    public String  edit(@PathVariable("id") Integer id ,Model model){
 
-    @RequestMapping(value = "delete")
-    public String delete(int id){
+        HomeworkFormBean homeWork =tHomeworkService.homeworkToFormBean(id);
+        model.addAttribute("homeWork",homeWork);
+        return "task/update";
+    }
+
+    @RequestMapping("update")
+    public String update(HomeworkFormBean form){
+        tHomeworkService.updateOneHomeWork(form);
+        return "redirect:/task/index";
+    }
+
+    @RequestMapping(value = "delete/{id}")
+    public String delete(@PathVariable("id") Integer id){
         tHomeworkService.deleteOneHomeWork(id);
         return "redirect:/task/index";
     }

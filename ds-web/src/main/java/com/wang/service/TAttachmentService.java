@@ -20,5 +20,8 @@ public class TAttachmentService {
     public void addAttachment(TAttachment attachment){
         tAttachmentDao.save(attachment);
     }
-
+    /*获取附件*/
+    public TAttachment getOneAttachment(int id){
+        return tAttachmentDao.getOne(id);
+    }
 }

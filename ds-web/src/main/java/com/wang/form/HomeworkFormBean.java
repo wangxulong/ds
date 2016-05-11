@@ -17,4 +17,7 @@ public class HomeworkFormBean extends THomework {
     public void setPic(MultipartFile pic) {
         this.pic = pic;
     }
+    public HomeworkFormBean(){
+    }
+
 }
