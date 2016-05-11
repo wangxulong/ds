@@ -45,7 +45,9 @@ public class StudentService {
         Integer currentPage = (Integer) params.get("currentPage");
         Integer pageSize = (Integer) params.get("pageSize");
         EntityManager entityManager = managerFactory.createEntityManager();
-        String sql = "SELECT a.id,a.name FROM t_student a  ";
+        String sql = "SELECT a.id,a.name,a.sex,a.birth_date as birthDate,a.student_number as studentNumber,a.leave_date as leaveDate,a.create_time as createTime " +
+                ",a.join_date as joinDate " +
+                " FROM t_student a  ";
         Query query = entityManager.createNativeQuery(sql);
         query.unwrap(SQLQuery.class).setResultTransformer(Transformers.aliasToBean(StudentDto.class));
         query.setFirstResult(currentPage-1);

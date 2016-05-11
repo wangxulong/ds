@@ -19,12 +19,11 @@
             </label>
         </th>
         <th>姓名</th>
-        <%--<th>性别</th>
-        <th>身份证号</th>
-        <th>工作证号</th>
-        <th>入职时间</th>
+        <th>性别</th>
+        <th>学生证号</th>
+        <th>入学日期</th>
         <th>出生日期</th>
-        <th>操作</th>--%>
+        <th>操作</th>
 
     </tr>
     </thead>
@@ -42,7 +41,7 @@
             <td>
                     ${student.name}
             </td>
-          <%--  <td>
+            <td>
                 <c:choose>
                     <c:when test="${student.sex eq 1}">
                         男
@@ -54,11 +53,9 @@
 
             </td>
             <td>
-                    ${student.idcard}
+                    ${student.studentNumber}
             </td>
-            <td>
-                    ${student.jobNumber}
-            </td>
+
             <td>
                     <fmt:formatDate value="${student.joinDate}" pattern="yyyy-MM-dd" />
             </td>
@@ -67,11 +64,11 @@
             </td>
             <td class="hidden-480">
                 <div class="hidden-sm hidden-xs btn-group">
-                        &lt;%&ndash;<shiro:hasPermission name="s:add">&ndash;%&gt;
-                        &lt;%&ndash;<button class="btn btn-xs btn-success addSysRole">&ndash;%&gt;
-                        &lt;%&ndash;<i class="ace-icon fa fa-plus bigger-120 "></i>&ndash;%&gt;
-                        &lt;%&ndash;</button>&ndash;%&gt;
-                        &lt;%&ndash;</shiro:hasPermission>&ndash;%&gt;
+                        <%--<shiro:hasPermission name="s:add">--%>
+                        <%--<button class="btn btn-xs btn-success addSysRole">--%>
+                        <%--<i class="ace-icon fa fa-plus bigger-120 "></i>--%>
+                        <%--</button>--%>
+                        <%--</shiro:hasPermission>--%>
 
                     <a class="btn btn-xs btn-info "  href="${ctx}/student/edit/${student.id}"  >
                         <i class="ace-icon fa fa-pencil bigger-120"></i> 修改
@@ -84,7 +81,7 @@
                 </div>
 
 
-            </td>--%>
+            </td>
         </tr>
     </c:forEach>
 

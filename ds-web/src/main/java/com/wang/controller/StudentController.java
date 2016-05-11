@@ -25,8 +25,6 @@ import java.util.Map;
 public class StudentController  {
     @Resource
     private StudentService studentService;
-    @Resource
-    private TeacherService teacherService;
 
     private Map<String,Object> wrapRequest(HttpServletRequest request){
         Map<String,Object> params = new HashMap();
