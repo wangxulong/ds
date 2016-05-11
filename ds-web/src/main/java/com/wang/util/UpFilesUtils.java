@@ -10,27 +10,37 @@ import java.util.Date;
  * Created by Administrator on 2016/5/10 0010.
  */
 public class UpFilesUtils {
+    //所有文件存储的位置
+    public static String filePath ="";
+    //具体文件存储位置
+    public static String savePath="";
+    //真实文件名
+    public static String realName="";
+    //具体文件的后缀名
+    public static String prefix="";
+    //文件存储的文件名
+    public static Long fileName;
 
-    public static final String picPath="/upload/files/";
-    public  String filePath ="";
-
-    public void saveFile(MultipartFile file) {
+    public static String getPath(){
+        return filePath = UpFilesUtils.class.getClassLoader().getResource("/").getPath();
+    }
+    //存储上传文件到类路径下
+    public static void saveFile(MultipartFile file) {
         if (null != file) {
-            String realName = file.getOriginalFilename();
-            String prefix = realName.substring(realName.lastIndexOf("."));
-            Long fileName = new Date().getTime();
-            filePath = this.getClass().getResource("/").getPath() + picPath + fileName + prefix;
+            realName = file.getOriginalFilename();
+            prefix = realName.substring(realName.lastIndexOf("."));
+            fileName = new Date().getTime();
+            savePath = getPath()+ fileName + prefix;
             // 转存文件
             try {
-                file.transferTo(new File(filePath));
+                file.transferTo(new File(savePath));
             } catch (IOException e) {
                 throw new RuntimeException("保存文件失败");
             }
         }
     }
-    public void test(){
-        int i;
-    }
+
+
 
 }
 

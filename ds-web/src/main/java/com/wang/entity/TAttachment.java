@@ -54,27 +54,5 @@ public class TAttachment {
         this.format = format;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
 
-        TAttachment that = (TAttachment) o;
-
-        if (id != that.id) return false;
-        if (path != null ? !path.equals(that.path) : that.path != null) return false;
-        if (name != null ? !name.equals(that.name) : that.name != null) return false;
-        if (format != null ? !format.equals(that.format) : that.format != null) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = id;
-        result = 31 * result + (path != null ? path.hashCode() : 0);
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (format != null ? format.hashCode() : 0);
-        return result;
-    }
 }

@@ -13,7 +13,7 @@ import java.util.Date;
 public class THomework {
     protected Integer id;
     protected String topic;
-    protected String desc;
+    protected String description;
 
     protected Date createTime;
     @DateTimeFormat( pattern = "yyyy-MM-dd" )
@@ -26,9 +26,9 @@ public class THomework {
     public THomework() {
     }
 
-    public THomework(String topic, String desc, Date finshTime) {
+    public THomework(String topic, String description, Date finshTime) {
         this.topic = topic;
-        this.desc = desc;
+        this.description = description;
         this.finshTime = finshTime;
     }
 
@@ -54,13 +54,13 @@ public class THomework {
     }
 
     @Basic
-    @Column(name = "desc")
-    public String getDesc() {
-        return desc;
+    @Column(name = "description")
+    public String getDescription() {
+        return description;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setDescription(String description) {
+        this.description = description;
     }
     @Column(name = "create_time")
     public Date getCreateTime() {
@@ -111,34 +111,7 @@ public class THomework {
         this.attachmentId = attachmentId;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
 
-        THomework tHomework = (THomework) o;
 
-        if (id != null ? !id.equals(tHomework.id) : tHomework.id != null) return false;
-        if (topic != null ? !topic.equals(tHomework.topic) : tHomework.topic != null) return false;
-        if (desc != null ? !desc.equals(tHomework.desc) : tHomework.desc != null) return false;
-        if (finshTime != null ? !finshTime.equals(tHomework.finshTime) : tHomework.finshTime != null) return false;
-        if (score != null ? !score.equals(tHomework.score) : tHomework.score != null) return false;
-        if (taskId != null ? !taskId.equals(tHomework.taskId) : tHomework.taskId != null) return false;
-        if (attachmentId != null ? !attachmentId.equals(tHomework.attachmentId) : tHomework.attachmentId != null)
-            return false;
 
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (topic != null ? topic.hashCode() : 0);
-        result = 31 * result + (desc != null ? desc.hashCode() : 0);
-        result = 31 * result + (finshTime != null ? finshTime.hashCode() : 0);
-        result = 31 * result + (score != null ? score.hashCode() : 0);
-        result = 31 * result + (taskId != null ? taskId.hashCode() : 0);
-        result = 31 * result + (attachmentId != null ? attachmentId.hashCode() : 0);
-        return result;
-    }
 }

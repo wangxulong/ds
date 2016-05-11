@@ -39,7 +39,7 @@
                     </label>
                 </td>
                 <td>${homeWork.topic}</td>
-                <td> ${homeWork.desc}</td>
+                <td> ${homeWork.description}</td>
                 <td>${homeWork.createTime}</td>
                 <td> ${homeWork.finshTime}</td>
                 <td class="hidden-480">

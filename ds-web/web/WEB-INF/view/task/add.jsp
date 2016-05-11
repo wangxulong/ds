@@ -49,7 +49,7 @@
 
       <div class="col-sm-9">
         <div class="col-sm-9">
-          <form:textarea path="desc" cols="3" placeholder="简单描述" class="form-control" />
+          <form:textarea path="description" cols="3" placeholder="简单描述" class="form-control" />
         </div>
       </div>
     </div>

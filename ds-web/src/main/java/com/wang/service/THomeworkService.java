@@ -29,6 +29,7 @@ public class THomeworkService {
         list = tHomeworkDao.findAll();
         return list;
     }
+
     /*获取某一次作业*/
     public THomework getOneTHomeWork(int id){
        THomework homework = new THomework();
@@ -57,23 +58,25 @@ public class THomeworkService {
         THomework  homeworkTemp = new THomework();
         homeworkTemp.setTopic(homework.getTopic());
         homeworkTemp.setFinshTime(homework.getFinshTime());
-        homeworkTemp.setDesc(homework.getDesc());
+        homeworkTemp.setDescription(homework.getDescription());
 
-        if (homework.getPic()==null){  //没有附件
+        if (homework.getPic().isEmpty()){  //没有附件
 
             tHomeworkDao.save(homeworkTemp);
+
         }else {                         //有附件
             //获取上传的文件
             MultipartFile file = homework.getPic();
             //存储文件到指定的位置
-            UpFilesUtils upFilesUtil = new UpFilesUtils();
-            upFilesUtil.saveFile(file);
+            UpFilesUtils.saveFile(file);
+
             //保存附件基本信息到数据库
             TAttachment attachment = new TAttachment();
-            attachment.setName(file.getName());
-            attachment.setFormat(file.getContentType());
-            attachment.setPath(upFilesUtil.filePath);
+            attachment.setName(UpFilesUtils.realName);
+            attachment.setFormat(UpFilesUtils.prefix);
+            attachment.setPath(UpFilesUtils.savePath);
             tAttachmentService.addAttachment(attachment);
+
             homeworkTemp.setAttachmentId(attachment.getId());
             tHomeworkDao.save(homeworkTemp);
 
