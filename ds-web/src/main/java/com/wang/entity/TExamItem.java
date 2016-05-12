@@ -10,9 +10,10 @@ import javax.persistence.*;
 public class TExamItem {
     private Integer id;
     private String name;
-    private String desc;
+    private String description;
     private Integer examId;
     private Integer attachmentId;
+    private Integer type;
 
     @Id
     @Column(name = "id")
@@ -36,13 +37,13 @@ public class TExamItem {
     }
 
     @Basic
-    @Column(name = "desc")
-    public String getDesc() {
-        return desc;
+    @Column(name = "description")
+    public String getDescription() {
+        return description;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @Basic
@@ -65,6 +66,16 @@ public class TExamItem {
         this.attachmentId = attachmentId;
     }
 
+    @Basic
+    @Column(name = "type")
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -74,7 +85,7 @@ public class TExamItem {
 
         if (id != null ? !id.equals(tExamItem.id) : tExamItem.id != null) return false;
         if (name != null ? !name.equals(tExamItem.name) : tExamItem.name != null) return false;
-        if (desc != null ? !desc.equals(tExamItem.desc) : tExamItem.desc != null) return false;
+        if (description != null ? !description.equals(tExamItem.description) : tExamItem.description != null) return false;
         if (examId != null ? !examId.equals(tExamItem.examId) : tExamItem.examId != null) return false;
         if (attachmentId != null ? !attachmentId.equals(tExamItem.attachmentId) : tExamItem.attachmentId != null)
             return false;
@@ -86,7 +97,7 @@ public class TExamItem {
     public int hashCode() {
         int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (desc != null ? desc.hashCode() : 0);
+        result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + (examId != null ? examId.hashCode() : 0);
         result = 31 * result + (attachmentId != null ? attachmentId.hashCode() : 0);
         return result;

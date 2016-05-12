@@ -1,5 +1,7 @@
 package com.wang.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -11,11 +13,13 @@ import java.util.Date;
 public class TExam {
     private Integer id;
     private String title;
-    private String desc;
-
+    private String description;
+    @DateTimeFormat( pattern = "yyyy-MM-dd" )
     private Date startTime;
-
+    @DateTimeFormat( pattern = "yyyy-MM-dd" )
     private Date endTime;
+    private Integer year;
+    private Integer term;
     private String score;
 
     @Id
@@ -30,6 +34,26 @@ public class TExam {
     }
 
     @Basic
+    @Column(name = "year")
+    public Integer getYear() {
+        return year;
+    }
+
+    public void setYear(Integer year) {
+        this.year = year;
+    }
+
+    @Basic
+    @Column(name = "term")
+    public Integer getTerm() {
+        return term;
+    }
+
+    public void setTerm(Integer term) {
+        this.term = term;
+    }
+
+    @Basic
     @Column(name = "title")
     public String getTitle() {
         return title;
@@ -40,15 +64,16 @@ public class TExam {
     }
 
     @Basic
-    @Column(name = "desc")
-    public String getDesc() {
-        return desc;
+    @Column(name = "description")
+    public String getDescription() {
+        return description;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setDescription(String description) {
+        this.description = description;
     }
-    @Column(name = "create_time")
+
+    @Column(name = "start_time")
     public Date getStartTime() {
         return startTime;
     }
@@ -84,7 +109,7 @@ public class TExam {
 
         if (id != null ? !id.equals(tExam.id) : tExam.id != null) return false;
         if (title != null ? !title.equals(tExam.title) : tExam.title != null) return false;
-        if (desc != null ? !desc.equals(tExam.desc) : tExam.desc != null) return false;
+        if (description != null ? !description.equals(tExam.description) : tExam.description != null) return false;
         if (startTime != null ? !startTime.equals(tExam.startTime) : tExam.startTime != null) return false;
         if (endTime != null ? !endTime.equals(tExam.endTime) : tExam.endTime != null) return false;
         if (score != null ? !score.equals(tExam.score) : tExam.score != null) return false;
@@ -96,7 +121,7 @@ public class TExam {
     public int hashCode() {
         int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (title != null ? title.hashCode() : 0);
-        result = 31 * result + (desc != null ? desc.hashCode() : 0);
+        result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + (startTime != null ? startTime.hashCode() : 0);
         result = 31 * result + (endTime != null ? endTime.hashCode() : 0);
         result = 31 * result + (score != null ? score.hashCode() : 0);
