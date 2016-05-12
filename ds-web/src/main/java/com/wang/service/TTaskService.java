@@ -4,14 +4,22 @@ import com.wang.dao.RcourseStudentDao;
 import com.wang.dao.TAttachmentDao;
 import com.wang.dao.TCourseDao;
 import com.wang.dao.TTaskDao;
+import com.wang.dto.StudentDto;
+import com.wang.dto.StudentTaskDto;
 import com.wang.entity.*;
 import com.wang.form.TaskFormBean;
 import com.wang.util.UpFilesUtils;
+import org.hibernate.SQLQuery;
+import org.hibernate.transform.Transformers;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Query;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,23 +30,25 @@ import java.util.List;
 @Transactional
 public class TTaskService {
     @Resource
+    private EntityManagerFactory managerFactory;
+    @Qualifier("TTaskDao")
+    @Resource
     private TTaskDao tTaskDao;
+    @Qualifier("TAttachmentDao")
     @Resource
     private TAttachmentDao tAttachmentDao;
     @Resource
     private RcourseStudentDao rcourseStudentDao;
+    @Qualifier("TCourseDao")
     @Resource
     private TCourseDao tCourseDao;
     /*获取所有的任务*/
     public List<TTask> getAllTask(){
-        List<TTask> list = new ArrayList<TTask>();
-        list = tTaskDao.findAll();
-        return list;
+        return tTaskDao.findAll();
     }
     /*获取某一次任务*/
     public TTask getOnetask(int id){
-        TTask task = new TTask();
-        task = tTaskDao.findOne(id);
+        TTask task = tTaskDao.findOne(id);
         return task;
     }
 
@@ -153,4 +163,37 @@ public class TTaskService {
             return null;
         }
     }
+    /**
+     * 根据学生的ID获取关于课程的任务
+     * 1.通过学生的ID，在r_course_student中找到课程的ID
+     * 2.根据课程的ID找到任务的内容
+     * 1.作业ID
+     * 2.作业名称
+     * 3.描述
+     * 3.开始时间
+     * 4.结束时间
+     * 5.是否有附件
+     SELECT  c.id,c.topic,c.content,c.create_time as createTime,c.end_time as endTime,c.attachment_id attachId from r_course_student a 
+     left join t_course b on b.id = a.course_id
+     left JOIN  t_task c on c.course_id = a.course_id
+     where a.student_id = 2
+     ORDER BY c.create_time desc
+     */
+
+    public List<StudentTaskDto> getTaskByStudentId(Integer studentId){
+        EntityManager entityManager = managerFactory.createEntityManager();
+        String sql = "SELECT  c.id,c.topic,c.content,c.create_time as createTime,c.end_time as endTime," +
+                "c.attachment_id attachId from r_course_student a " +
+                " left join t_course b on b.id = a.course_id " +
+                " left JOIN  t_task c on c.course_id = a.course_id " +
+                " where a.student_id ="+studentId.intValue() +
+                " ORDER BY c.create_time desc";
+        Query query = entityManager.createNativeQuery(sql);
+        query.unwrap(SQLQuery.class).setResultTransformer(Transformers.aliasToBean(StudentTaskDto.class));
+        List rows = query.getResultList();
+        entityManager.close();
+        return rows;
+    }
+
+
 }

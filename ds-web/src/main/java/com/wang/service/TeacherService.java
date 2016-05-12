@@ -6,9 +6,14 @@ import com.wang.auth.sys.dao.SysUserDao;
 import com.wang.auth.sys.entity.SysRole;
 import com.wang.auth.sys.entity.SysUser;
 import com.wang.auth.sys.service.SysUserService;
+import com.wang.dao.TCourseDao;
 import com.wang.dao.TeacherDao;
+import com.wang.entity.TCourse;
+import com.wang.entity.TGroup;
 import com.wang.entity.TTeacher;
+import com.wang.util.ConstantUtil;
 import com.wang.util.PasswordHelper;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,6 +35,11 @@ public class TeacherService {
     private SysUserDao sysUserDao;
     @Resource
     private SysRoleDao sysRoleDao;
+    @Resource
+    private GroupService groupService;
+    @Qualifier("TCourseDao")
+    @Resource
+    private TCourseDao courseDao;
 
     public List<TTeacher> findAllTeacher(){
        return teacherDao.findAll();
@@ -50,6 +60,18 @@ public class TeacherService {
             teacher.setCreateTime(new Date());
             //添加账号信息
             addSysUser(teacher);
+
+            teacherDao.save(teacher);
+            //添加课程信息
+            TGroup group = groupService.getDsGroup();
+            TCourse course = new TCourse();
+            course.setAvailable(true);
+            course.setName(ConstantUtil.DS);
+            course.setTeacherId(teacher.getId());
+            course.setGroupId(group.getId());
+            //courseDao.save(course);
+            return;
+
         }else{
             TTeacher dbTeacher = teacherDao.findOne(teacher.getId());
             if(null ==  dbTeacher){

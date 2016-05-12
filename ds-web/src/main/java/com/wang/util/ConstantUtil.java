@@ -20,4 +20,11 @@ public class ConstantUtil {
 
     //学生登录标志
     public  static final String STUDENT_LOGIN_FLAG="loginStudent";
+
+    //上传的文件的标识
+    public static final String STUDENT_HOMEWORK_PATH="upload\\studentHomework";
+    public static final String TASK_PATH="upload\\task";
+
+    //数据结构
+    public static final String DS = "数据结构";
 }

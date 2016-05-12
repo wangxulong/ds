@@ -21,7 +21,7 @@
 <link href="${ctx}/static/front/js/libs/file-input/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
 
 <%--validator--%>
-<link rel="stylesheet" href="${ctx}/static/js/bootstrapvalidator/dist/css/bootstrapValidator.css/>"/>
+<link rel="stylesheet" href="${ctx}/static/js/bootstrapvalidator/dist/css/bootstrapValidator.css"/>
 <script type="text/javascript" src="${ctx}/static/js/bootstrapvalidator/dist/js/bootstrapValidator.js"></script>
 <script type="text/javascript" src="${ctx}/static/js/bootstrapvalidator/dist/js/language/zh_CN.js"></script>
 
