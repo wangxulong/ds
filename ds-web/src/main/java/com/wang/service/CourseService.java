@@ -77,11 +77,9 @@ public class CourseService {
     /*更新任务*/
     public void updateCourse(CourseFormBean courseFormBean){
 
-        TCourse course = new TCourse();
+        TCourse course = tCourseDao.findOne(courseFormBean.getId());
 
-        course.setId(courseFormBean.getId());
         course.setName(courseFormBean.getName());
-        course.setStartTime(courseFormBean.getStartTime());
         course.setOutline(courseFormBean.getOutline());
 
         if (courseFormBean.getFile().isEmpty()){  //没有附件

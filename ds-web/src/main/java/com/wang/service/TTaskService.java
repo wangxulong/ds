@@ -1,9 +1,8 @@
 package com.wang.service;
 
-import com.wang.dao.RcourseStudentDao;
-import com.wang.dao.TAttachmentDao;
-import com.wang.dao.TCourseDao;
-import com.wang.dao.TTaskDao;
+import com.wang.auth.sys.entity.SysUser;
+import com.wang.auth.sys.service.SecurityService;
+import com.wang.dao.*;
 import com.wang.dto.StudentDto;
 import com.wang.dto.StudentTaskDto;
 import com.wang.entity.*;
@@ -21,6 +20,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -31,6 +31,8 @@ import java.util.List;
 public class TTaskService {
     @Resource
     private EntityManagerFactory managerFactory;
+    @Resource
+    private SecurityService securityService;
     @Qualifier("TTaskDao")
     @Resource
     private TTaskDao tTaskDao;
@@ -42,6 +44,12 @@ public class TTaskService {
     @Qualifier("TCourseDao")
     @Resource
     private TCourseDao tCourseDao;
+
+
+    @Resource
+    private TeacherDao teacherDao;
+
+
     /*获取所有的任务*/
     public List<TTask> getAllTask(){
         return tTaskDao.findAll();
@@ -73,9 +81,15 @@ public class TTaskService {
 
         TTask task = new TTask();
         task.setTopic(taskFormBean.getTopic());
+        task.setCreateTime(new Date());
         task.setEndTime(taskFormBean.getEndTime());
         task.setContent(taskFormBean.getContent());
-
+        SysUser sysUser = securityService.getLoginUser();
+        String jobNumber = sysUser.getUserName();
+        TTeacher tTeacher = teacherDao.findByJobNumber(jobNumber);
+        task.setTeacherId(tTeacher.getId());
+        //TODO 李昌亚
+        task.setCourseId(1);//设置课程ID
         if (taskFormBean.getFile().isEmpty()){  //没有附件
 
             tTaskDao.save(task);
