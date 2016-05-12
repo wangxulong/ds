@@ -13,4 +13,16 @@ public class ClassController {
     @RequestMapping("index")
     public void index(Model model){
     }
+
+    @RequestMapping("material/index")
+    public void materialIndex(Model model){
+    }
+
+    @RequestMapping("request/index")
+    public void requestIndex(Model model){
+    }
+
+    @RequestMapping("seminar/index")
+    public void seminarIndex(Model model){
+    }
 }

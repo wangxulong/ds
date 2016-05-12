@@ -5,8 +5,6 @@
     <title></title>
 </head>
 <body>
-<p><a href="/class/material/index">课堂资料</a></p>
-<p><a href="/class/request/index">学生请假</a></p>
-<p><a href="/class/seminar/index">研讨课</a></p>
+<p>请假条</p>
 </body>
 </html>
