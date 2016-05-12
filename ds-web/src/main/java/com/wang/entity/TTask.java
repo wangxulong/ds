@@ -1,5 +1,7 @@
 package com.wang.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -16,6 +18,7 @@ public class TTask {
     protected Integer  teacherId;
     protected Integer  attachmentId;
     protected Date createTime;
+    @DateTimeFormat( pattern = "yyyy-MM-dd" )
     protected Date endTime;
 
     public void setTeacherId(Integer teacherId) {

@@ -1,5 +1,5 @@
 ﻿# Host: localhost  (Version: 5.1.73-community)
-# Date: 2016-05-09 17:07:26
+# Date: 2016-05-12 14:29:01
 # Generator: MySQL-Front 5.3  (Build 4.234)
 
 /*!40101 SET NAMES utf8 */;
@@ -22,13 +22,13 @@ CREATE TABLE `sys_resource` (
   `url` varchar(255) DEFAULT NULL,
   `script` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8;
 
 #
 # Data for table "sys_resource"
 #
 
-INSERT INTO `sys_resource` VALUES (1,'系统管理','0',1,0,'0','',1,NULL,NULL,NULL),(2,'用户管理','1',1,1,'1','',1,NULL,'/sys/user/index',NULL),(3,'角色管理','1',2,1,'1','',1,NULL,'/sys/role/index',NULL),(4,'资源管理','1',3,1,'1','',1,NULL,'/sys/res/index',NULL),(5,'添加系统账号','2',1,2,'1-2','sysUser:add',1,NULL,NULL,NULL),(10,'删除用户','2',NULL,2,'1-2','sysUser:delete',1,NULL,NULL,NULL),(11,'添加角色','2',NULL,3,'1-3','sysRole:add',1,NULL,NULL,NULL),(12,'删除角色','2',NULL,3,'1-3','sysRole:delete',1,NULL,NULL,NULL),(14,'分配角色','2',3,2,'1-2','sysUser:allotRole',1,NULL,NULL,NULL),(15,'修改系统账号','2',1,2,'1-2','sysUser:edit',1,NULL,NULL,NULL),(16,'分配资源','2',1,3,'1-3','sysRole:allotRes',1,NULL,NULL,NULL),(17,'修改角色','2',1,3,'1-3','sysRole:edit',1,NULL,NULL,NULL),(18,'内容管理','0',NULL,0,'0','',1,NULL,NULL,NULL),(23,'课程教学管理','0',NULL,0,'0','',1,NULL,NULL,NULL),(24,'课程简介','1',NULL,23,'23',NULL,1,NULL,'/course/index',NULL),(25,'课堂教学','1',NULL,23,'23',NULL,1,NULL,'/class/index',NULL),(26,'作业管理','1',NULL,23,'23',NULL,1,NULL,'/task/index',NULL),(27,'考试管理','1',NULL,23,'23',NULL,1,NULL,'/exam/index',NULL);
+INSERT INTO `sys_resource` VALUES (1,'系统管理','0',1,0,'0','',1,NULL,NULL,NULL),(2,'用户管理','1',1,1,'1','',1,NULL,'/sys/user/index',NULL),(3,'角色管理','1',2,1,'1','',1,NULL,'/sys/role/index',NULL),(4,'资源管理','1',3,1,'1','',1,NULL,'/sys/res/index',NULL),(5,'添加系统账号','2',1,2,'1-2','sysUser:add',1,NULL,NULL,NULL),(10,'删除用户','2',NULL,2,'1-2','sysUser:delete',1,NULL,NULL,NULL),(11,'添加角色','2',NULL,3,'1-3','sysRole:add',1,NULL,NULL,NULL),(12,'删除角色','2',NULL,3,'1-3','sysRole:delete',1,NULL,NULL,NULL),(14,'分配角色','2',3,2,'1-2','sysUser:allotRole',1,NULL,NULL,NULL),(15,'修改系统账号','2',1,2,'1-2','sysUser:edit',1,NULL,NULL,NULL),(16,'分配资源','2',1,3,'1-3','sysRole:allotRes',1,NULL,NULL,NULL),(17,'修改角色','2',1,3,'1-3','sysRole:edit',1,NULL,NULL,NULL),(23,'课程教学管理','0',NULL,0,'0','',1,NULL,NULL,NULL),(24,'课程简介','1',NULL,23,'23',NULL,1,NULL,'/course/index',NULL),(25,'课堂教学','1',NULL,23,'23',NULL,1,NULL,'/class/index',NULL),(26,'作业管理','1',NULL,23,'23',NULL,1,NULL,'/task/index',NULL),(27,'考试管理','1',NULL,23,'23',NULL,1,NULL,'/exam/index',NULL),(29,'人员管理','0',NULL,0,'0','',1,NULL,NULL,NULL),(30,'教师管理','1',NULL,29,'29',NULL,1,NULL,'/teacher/index',NULL),(31,'学生管理','1',NULL,29,'29',NULL,1,NULL,'/student/index',NULL),(32,'课程组管理','1',NULL,29,'29',NULL,1,NULL,'/group/index',NULL);
 
 #
 # Structure for table "sys_role"
@@ -43,13 +43,13 @@ CREATE TABLE `sys_role` (
   `resource_ids` varchar(255) DEFAULT NULL,
   `available` tinyint(4) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 #
 # Data for table "sys_role"
 #
 
-INSERT INTO `sys_role` VALUES (1,'超级管理员','不能删除','admin','1,2,5,10,14,15,3,11,12,16,17,4,23,24,25,26,27',1),(2,'普通用户','就是一般用户角色','user','1,2,5,3,11,9',1),(3,'顾客','有限制的访问','customer','1,2,5,10',1),(4,'ddd','ddd','ddd','1,3,16',1);
+INSERT INTO `sys_role` VALUES (1,'超级管理员','不能删除','admin','1,2,5,10,15,3,11,12,16,17,4,23,24,25,26,27,29,30,31,32',1),(2,'普通用户','就是一般用户角色','user','1,2,5,3,11,9',1),(3,'顾客','有限制的访问','customer','1,2,5,10',1),(4,'ddd','ddd','ddd','1,3,16',1),(5,'教师','普通教师','teacher','23,24,25,26,27,29,30,31',1);
 
 #
 # Structure for table "sys_user"
@@ -70,13 +70,13 @@ CREATE TABLE `sys_user` (
   `create_time` datetime DEFAULT NULL,
   `status` tinyint(4) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 #
 # Data for table "sys_user"
 #
 
-INSERT INTO `sys_user` VALUES (7,'admin','ee0f01d962a9c7189c727f3a4cecbace','aa6cc0cc67e847db28cc173a7a03b977','1',NULL,'Yage','15201895065','1749362086@qq.com','',NULL,NULL);
+INSERT INTO `sys_user` VALUES (7,'admin','ee0f01d962a9c7189c727f3a4cecbace','aa6cc0cc67e847db28cc173a7a03b977','1',NULL,'Yage','15201895065','1749362086@qq.com','',NULL,NULL),(8,'15721377','316198d639dfc144ba53fdebc746fe4d','e6c93efe91b0ecb9e527a6cc6f7245be','5',NULL,'王徐龙',NULL,NULL,NULL,NULL,NULL),(9,'123','8e4e5d489e930984902adb4cad6a1f43','420fb3fab064011e0a578f65cd39b91b','5',NULL,'李昌亚',NULL,NULL,NULL,NULL,NULL);
 
 #
 # Structure for table "t_attachment"
@@ -89,12 +89,38 @@ CREATE TABLE `t_attachment` (
   `name` varchar(255) DEFAULT NULL,
   `format` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 
 #
 # Data for table "t_attachment"
 #
 
+INSERT INTO `t_attachment` VALUES (7,'/D:/github/project/test/ds/classes/artifacts/ds_web_Web_exploded/WEB-INF/classes/','pic','application/msword'),(8,'/D:/github/project/test/ds/classes/artifacts/ds_web_Web_exploded/WEB-INF/classes/','pic','application/msword'),(9,'/D:/github/project/test/ds/classes/artifacts/ds_web_Web_exploded/WEB-INF/classes/1462947340839.jpg','DSC_0261.jpg','.jpg'),(10,'/D:/github/project/test/ds/classes/artifacts/ds_web_Web_exploded/WEB-INF/classes/1462948007345.lck','testlog0.log.3.lck','.lck'),(11,'/D:/github/project/test/ds/classes/artifacts/ds_web_Web_exploded/WEB-INF/classes/1462949105905.doc','论文10720919.doc','.doc'),(12,'/D:/github/project/test/ds/classes/artifacts/ds_web_Web_exploded/WEB-INF/classes/1462949180126.jpg','DSC_0261.jpg','.jpg'),(13,'/D:/github/project/test/ds/classes/artifacts/ds_web_Web_exploded/WEB-INF/classes/1462974729911.doc','论文10720919.doc','.doc'),(14,'/D:/github/project/test/ds/classes/artifacts/ds_web_Web_exploded/WEB-INF/classes/1463032604458.txt','设计模式观看顺序.txt','.txt');
+
+#
+# Structure for table "t_course"
+#
+
+DROP TABLE IF EXISTS `t_course`;
+CREATE TABLE `t_course` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `start_time` datetime DEFAULT NULL,
+  `end_time` datetime DEFAULT NULL,
+  `schedule` varchar(255) DEFAULT NULL,
+  `outline` varchar(1000) DEFAULT NULL,
+  `teacher_id` int(11) DEFAULT NULL,
+  `group_id` int(11) DEFAULT NULL,
+  `exam_id` int(11) DEFAULT NULL,
+  `available` int(1) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+#
+# Data for table "t_course"
+#
+
+INSERT INTO `t_course` VALUES (1,'数据结构','2016-03-12 00:00:00','2016-06-20 00:00:00',NULL,NULL,1,1,1,NULL);
 
 #
 # Structure for table "t_exam"
@@ -104,7 +130,7 @@ DROP TABLE IF EXISTS `t_exam`;
 CREATE TABLE `t_exam` (
   `id` int(11) NOT NULL,
   `title` varchar(255) DEFAULT NULL,
-  `desc` varchar(1000) DEFAULT NULL,
+  `description` varchar(1000) DEFAULT NULL,
   `start_time` datetime DEFAULT NULL,
   `end_time` datetime DEFAULT NULL,
   `score` varchar(11) DEFAULT NULL,
@@ -124,14 +150,10 @@ DROP TABLE IF EXISTS `t_exam_item`;
 CREATE TABLE `t_exam_item` (
   `id` int(11) NOT NULL,
   `name` varchar(255) DEFAULT NULL,
-  `desc` varchar(1000) DEFAULT NULL,
+  `description` varchar(1000) DEFAULT NULL,
   `exam_id` int(11) DEFAULT NULL,
   `attachment_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `pk_exam_submit_exam` (`exam_id`),
-  KEY `fk_exam_attachment` (`attachment_id`),
-  CONSTRAINT `fk_exam_attachment` FOREIGN KEY (`attachment_id`) REFERENCES `t_attachment` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  CONSTRAINT `pk_exam_submit_exam` FOREIGN KEY (`exam_id`) REFERENCES `t_exam` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 #
@@ -147,118 +169,16 @@ DROP TABLE IF EXISTS `t_group`;
 CREATE TABLE `t_group` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
-  `desc` varchar(255) DEFAULT NULL,
-  `create_time` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-#
-# Data for table "t_group"
-#
-
-
-#
-# Structure for table "t_teacher"
-#
-
-DROP TABLE IF EXISTS `t_teacher`;
-CREATE TABLE `t_teacher` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) DEFAULT NULL,
-  `sex` int(1) DEFAULT NULL,
-  `idcard` varchar(255) DEFAULT NULL,
-  `age` int(11) DEFAULT NULL,
-  `job_number` varchar(255) DEFAULT NULL,
-  `birth_date` date DEFAULT NULL,
-  `join_date` datetime DEFAULT NULL,
-  `leave_date` datetime DEFAULT NULL,
+  `description` varchar(500) DEFAULT NULL,
   `create_time` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 #
-# Data for table "t_teacher"
+# Data for table "t_group"
 #
 
-INSERT INTO `t_teacher` VALUES (1,'wxl',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
-
-#
-# Structure for table "t_plan"
-#
-
-DROP TABLE IF EXISTS `t_plan`;
-CREATE TABLE `t_plan` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `topic` varchar(255) DEFAULT NULL,
-  `desc` varchar(1000) DEFAULT NULL,
-  `teacher_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `pk_plan_teacher` (`teacher_id`),
-  CONSTRAINT `pk_plan_teacher` FOREIGN KEY (`teacher_id`) REFERENCES `t_teacher` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-#
-# Data for table "t_plan"
-#
-
-
-#
-# Structure for table "t_course"
-#
-
-DROP TABLE IF EXISTS `t_course`;
-CREATE TABLE `t_course` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) DEFAULT NULL,
-  `start_time` datetime DEFAULT NULL,
-  `end_time` datetime DEFAULT NULL,
-  `schedule` varchar(255) DEFAULT NULL,
-  `outline` varchar(1000) DEFAULT NULL,
-  `teacher_id` int(11) DEFAULT NULL,
-  `group_id` int(11) DEFAULT NULL,
-  `exam_id` int(11) DEFAULT NULL,
-  `available` int(1) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `pk_course_teacher` (`teacher_id`),
-  KEY `pk_course_group` (`group_id`),
-  KEY `pk_course_exam` (`exam_id`),
-  CONSTRAINT `pk_course_exam` FOREIGN KEY (`exam_id`) REFERENCES `t_exam` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  CONSTRAINT `pk_course_group` FOREIGN KEY (`group_id`) REFERENCES `t_group` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  CONSTRAINT `pk_course_teacher` FOREIGN KEY (`teacher_id`) REFERENCES `t_teacher` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-#
-# Data for table "t_course"
-#
-
-
-#
-# Structure for table "t_task"
-#
-
-DROP TABLE IF EXISTS `t_task`;
-CREATE TABLE `t_task` (
-  `id` int(11) NOT NULL,
-  `topic` varchar(255) DEFAULT NULL,
-  `content` varchar(1000) DEFAULT NULL,
-  `create_time` datetime DEFAULT NULL,
-  `end_time` datetime DEFAULT NULL,
-  `course_id` int(11) DEFAULT NULL,
-  `teacher_id` int(11) DEFAULT NULL,
-  `attachment_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `pk_task_teacher` (`teacher_id`),
-  KEY `pk_task_course` (`course_id`),
-  KEY `pk_task_attachment` (`attachment_id`),
-  CONSTRAINT `pk_task_attachment` FOREIGN KEY (`attachment_id`) REFERENCES `t_attachment` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  CONSTRAINT `pk_task_course` FOREIGN KEY (`course_id`) REFERENCES `t_course` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  CONSTRAINT `pk_task_teacher` FOREIGN KEY (`teacher_id`) REFERENCES `t_teacher` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-#
-# Data for table "t_task"
-#
-
+INSERT INTO `t_group` VALUES (1,'数据结构课程组简介','<font size=\"3\">数据结构是计算机学科的算法理论基础和软件设计的技术基础，主要研究信息的逻辑结构及其基本操作在计算机中的表示和实现。 它不仅是计算机学科各专业的核心课程，而且已成为其它理工科专业的热门选修课。&nbsp;\r\n</font><div><font size=\"3\" color=\"#7bd148\"><b><br></b></font></div><div><font size=\"3\" color=\"#444444\"><b>本课程的先修课程：高级语言程序设计，离散数学， 后续课程：操作系统、编译原理、数据库系统等课程。</b></font></div>','2016-05-11 23:29:02');
 
 #
 # Structure for table "t_homework"
@@ -266,22 +186,40 @@ CREATE TABLE `t_task` (
 
 DROP TABLE IF EXISTS `t_homework`;
 CREATE TABLE `t_homework` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `topic` varchar(255) DEFAULT NULL,
-  `desc` varchar(1000) DEFAULT NULL,
+  `description` varchar(1000) DEFAULT NULL,
   `finsh_time` datetime DEFAULT NULL,
   `score` int(11) DEFAULT NULL,
   `task_id` int(11) DEFAULT NULL,
   `attachment_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `pk_homework_task` (`task_id`),
-  KEY `pk_homework_attachment` (`attachment_id`),
-  CONSTRAINT `pk_homework_attachment` FOREIGN KEY (`attachment_id`) REFERENCES `t_attachment` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  CONSTRAINT `pk_homework_task` FOREIGN KEY (`task_id`) REFERENCES `t_task` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 #
 # Data for table "t_homework"
+#
+
+INSERT INTO `t_homework` VALUES (4,'天外有天呀','与太容易天人合一','2016-05-27 00:00:00',NULL,NULL,9,'2016-05-11 14:15:40'),(8,'数据结构中图的遍历','任务图如图一','2016-05-28 00:00:00',NULL,NULL,13,'2016-05-11 21:52:10'),(9,'饭店会有人跳舞花','三个分发给回复','2016-05-20 00:00:00',NULL,NULL,11,'2016-05-11 14:45:06'),(10,'有太阳雨天','体育体育体育','2016-05-27 00:00:00',NULL,NULL,NULL,'2016-05-11 14:45:41'),(11,'发的广泛地','有体育他人','2016-05-07 00:00:00',NULL,NULL,12,'2016-05-11 14:46:20');
+
+#
+# Structure for table "t_material"
+#
+
+DROP TABLE IF EXISTS `t_material`;
+CREATE TABLE `t_material` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `desc` varchar(255) DEFAULT NULL,
+  `course_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `pk_material_course` (`course_id`),
+  CONSTRAINT `pk_material_course` FOREIGN KEY (`course_id`) REFERENCES `t_course` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+#
+# Data for table "t_material"
 #
 
 
@@ -342,57 +280,17 @@ CREATE TABLE `t_student` (
   `leave_date` datetime DEFAULT NULL,
   `create_time` datetime DEFAULT NULL,
   `seminar_topic_id` int(11) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `pk_student_seminar_topic` (`seminar_topic_id`),
   CONSTRAINT `pk_student_seminar_topic` FOREIGN KEY (`seminar_topic_id`) REFERENCES `t_seminar_topic` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 #
 # Data for table "t_student"
 #
 
-
-#
-# Structure for table "r_course_student"
-#
-
-DROP TABLE IF EXISTS `r_course_student`;
-CREATE TABLE `r_course_student` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `course_id` int(11) DEFAULT NULL,
-  `student_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `pk_r_course` (`course_id`),
-  KEY `pk_r_student` (`student_id`),
-  CONSTRAINT `pk_r_course` FOREIGN KEY (`course_id`) REFERENCES `t_course` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  CONSTRAINT `pk_r_student` FOREIGN KEY (`student_id`) REFERENCES `t_student` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-#
-# Data for table "r_course_student"
-#
-
-
-#
-# Structure for table "r_homework_student"
-#
-
-DROP TABLE IF EXISTS `r_homework_student`;
-CREATE TABLE `r_homework_student` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `homework_id` int(11) DEFAULT NULL,
-  `student_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `pk_cs_homework` (`homework_id`),
-  KEY `pk_cs_student` (`student_id`),
-  CONSTRAINT `pk_cs_homework` FOREIGN KEY (`homework_id`) REFERENCES `t_homework` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  CONSTRAINT `pk_cs_student` FOREIGN KEY (`student_id`) REFERENCES `t_student` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-#
-# Data for table "r_homework_student"
-#
-
+INSERT INTO `t_student` VALUES (2,'王旭龙',1,NULL,'2016-05-03','15721377','2016-05-04 00:00:00',NULL,'2016-05-11 14:10:52',NULL,'YWRtaW4xMjM=');
 
 #
 # Structure for table "t_note"
@@ -418,22 +316,116 @@ CREATE TABLE `t_note` (
 
 
 #
-# Structure for table "t_material"
+# Structure for table "r_homework_student"
 #
 
-DROP TABLE IF EXISTS `t_material`;
-CREATE TABLE `t_material` (
+DROP TABLE IF EXISTS `r_homework_student`;
+CREATE TABLE `r_homework_student` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) DEFAULT NULL,
-  `desc` varchar(255) DEFAULT NULL,
-  `course_id` int(11) DEFAULT NULL,
+  `homework_id` int(11) DEFAULT NULL,
+  `student_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `pk_material_course` (`course_id`),
-  CONSTRAINT `pk_material_course` FOREIGN KEY (`course_id`) REFERENCES `t_course` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
+  KEY `pk_cs_homework` (`homework_id`),
+  KEY `pk_cs_student` (`student_id`),
+  CONSTRAINT `pk_cs_homework` FOREIGN KEY (`homework_id`) REFERENCES `t_homework` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `pk_cs_student` FOREIGN KEY (`student_id`) REFERENCES `t_student` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 #
-# Data for table "t_material"
+# Data for table "r_homework_student"
+#
+
+
+#
+# Structure for table "r_course_student"
+#
+
+DROP TABLE IF EXISTS `r_course_student`;
+CREATE TABLE `r_course_student` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `course_id` int(11) DEFAULT NULL,
+  `student_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `pk_r_course` (`course_id`),
+  KEY `pk_r_student` (`student_id`),
+  CONSTRAINT `pk_r_course` FOREIGN KEY (`course_id`) REFERENCES `t_course` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `pk_r_student` FOREIGN KEY (`student_id`) REFERENCES `t_student` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+#
+# Data for table "r_course_student"
+#
+
+
+#
+# Structure for table "t_task"
+#
+
+DROP TABLE IF EXISTS `t_task`;
+CREATE TABLE `t_task` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `topic` varchar(255) DEFAULT NULL,
+  `content` varchar(1000) DEFAULT NULL,
+  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `end_time` datetime DEFAULT NULL,
+  `course_id` int(11) DEFAULT NULL,
+  `teacher_id` int(11) DEFAULT NULL,
+  `attachment_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `pk_task_teacher` (`teacher_id`),
+  KEY `pk_task_course` (`course_id`),
+  KEY `pk_task_attachment` (`attachment_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+#
+# Data for table "t_task"
+#
+
+INSERT INTO `t_task` VALUES (1,'体育',' 为同一家','2016-05-12 13:57:35','2016-05-20 00:00:00',NULL,NULL,NULL),(2,'书拒绝你','爱空间的规划让','2016-05-12 13:54:36','2016-05-20 00:00:00',NULL,NULL,NULL),(4,'看清我耳机套期望i','二维图人员','2016-05-12 13:56:44','2016-05-20 00:00:00',NULL,NULL,14);
+
+#
+# Structure for table "t_teacher"
+#
+
+DROP TABLE IF EXISTS `t_teacher`;
+CREATE TABLE `t_teacher` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `sex` int(1) DEFAULT NULL,
+  `idcard` varchar(255) DEFAULT NULL,
+  `age` int(11) DEFAULT NULL,
+  `job_number` varchar(255) DEFAULT NULL,
+  `birth_date` date DEFAULT NULL,
+  `join_date` datetime DEFAULT NULL,
+  `leave_date` datetime DEFAULT NULL,
+  `create_time` datetime DEFAULT NULL,
+  `description` text,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+#
+# Data for table "t_teacher"
+#
+
+INSERT INTO `t_teacher` VALUES (1,'wxl',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(2,'王徐龙',1,'410426199004025559',NULL,'15721377','2016-05-09','2016-05-26 00:00:00',NULL,'2016-05-10 21:10:25',NULL),(3,'李昌亚',0,'121212',NULL,'123','2016-05-05','2016-05-17 00:00:00',NULL,'2016-05-12 13:33:15','<div style=\"text-align: center;\"><span style=\"line-height: 1.5; text-align: left;\"><font color=\"#16a765\">工作认证亲</font></span><br></div>');
+
+#
+# Structure for table "t_plan"
+#
+
+DROP TABLE IF EXISTS `t_plan`;
+CREATE TABLE `t_plan` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `topic` varchar(255) DEFAULT NULL,
+  `desc` varchar(1000) DEFAULT NULL,
+  `teacher_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `pk_plan_teacher` (`teacher_id`),
+  CONSTRAINT `pk_plan_teacher` FOREIGN KEY (`teacher_id`) REFERENCES `t_teacher` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+#
+# Data for table "t_plan"
 #
 
 
