@@ -3,6 +3,7 @@ package com.wang.controller.front;
 import com.wang.auth.sys.service.SysUserService;
 import com.wang.dto.ResultMessage;
 import com.wang.entity.TStudent;
+import com.wang.service.GroupService;
 import com.wang.service.StudentService;
 import com.wang.util.ConstantUtil;
 import org.slf4j.Logger;
@@ -26,9 +27,12 @@ public class IndexController {
 
     @Resource
     private StudentService studentService;
+    @Resource
+    private GroupService groupService;
 
     @RequestMapping("index")
-    public void index(){
+    public void index(Model model){
+        model.addAttribute("group",groupService.getDsGroup());
     }
 
     @RequestMapping("login")

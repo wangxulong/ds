@@ -42,7 +42,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a href="index.html" class="navbar-brand">DS课程平台</a>
+      <a href="${ctx}/front/index" class="navbar-brand">DS课程平台</a>
     </div>
 
     <!--小屏幕导航按钮和Logo-->
@@ -65,6 +65,7 @@
           </a>
           <ul class="dropdown-menu" aria-labelledby="dLabel">
             <li ><a href="${ctx}/front/logout"><span class="glyphicon glyphicon-off text-danger" ></span>  退出</a></li>
+            <li ><a href="${ctx}/front/index"><span class="glyphicon glyphicon-home text-danger" ></span>  首页面</a></li>
           </ul>
         </li>
 

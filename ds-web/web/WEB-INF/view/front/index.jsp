@@ -41,7 +41,7 @@
               <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
                   <a id="dLabel" href="#" data-target="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                    王旭龙
+                      ${sessionScope.loginStudent.name}
                     <span class="caret"></span>
                   </a>
                   <ul class="dropdown-menu " aria-labelledby="dLabel">
@@ -108,14 +108,13 @@
         <img src="${ctx}/static/front/images/course.png" class="img-responsive">
       </div>
       <div class="col-md-8 wow fadeInRight">
-        <h2>数据结构</h2>
+        <h2>${group.name}</h2>
         <p class="main">
-          数据结构是计算机学科的算法理论基础和软件设计的技术基础，主要研究信息的逻辑结构及其基本操作在计算机中的表示和实现。
-          它不仅是计算机学科各专业的核心课程，而且已成为其它理工科专业的热门选修课。
+          ${group.description}
         </p>
-        <p >
+      <%--  <p >
           本课程的先修课程：高级语言程序设计，离散数学， 后续课程：操作系统、编译原理、数据库系统等课程。
-        </p>
+        </p>--%>
       </div>
     </div>
   </div>

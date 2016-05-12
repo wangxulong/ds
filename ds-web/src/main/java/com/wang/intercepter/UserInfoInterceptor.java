@@ -19,8 +19,18 @@ public class UserInfoInterceptor extends HandlerInterceptorAdapter {
     @Resource
     private SysResourceService sysResourceService;
 
-    public void postHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, ModelAndView modelAndView) throws Exception {
+    @Override
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         SysUser user = sysUserService.getCurrentUser();
+        if(null == user){
+            response.sendRedirect(request.getServletContext().getContextPath());
+        }
+        return super.preHandle(request, response, handler);
+    }
+
+    public void postHandle(HttpServletRequest httpServletRequest, HttpServletResponse reponse, Object o, ModelAndView modelAndView) throws Exception {
+        SysUser user = sysUserService.getCurrentUser();
+
         if(null!=modelAndView){
             modelAndView.addObject("loginUser",user);
             modelAndView.addObject("myMenus",sysResourceService.getMyMenus());

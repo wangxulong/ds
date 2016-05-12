@@ -11,7 +11,7 @@ import java.util.Date;
 public class TGroup {
     private Integer id;
     private String name;
-    private String desc;
+    private String description;
 
     private Date createTime;
 
@@ -35,16 +35,17 @@ public class TGroup {
     public void setName(String name) {
         this.name = name;
     }
-
     @Basic
-    @Column(name = "desc")
-    public String getDesc() {
-        return desc;
+    @Column(name = "description")
+    public String getDescription() {
+        return description;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setDescription(String description) {
+        this.description = description;
     }
+    @Basic
+
     @Column(name = "create_time")
     public Date getCreateTime() {
         return createTime;
@@ -54,27 +55,5 @@ public class TGroup {
         this.createTime = createTime;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
 
-        TGroup tGroup = (TGroup) o;
-
-        if (id != null ? !id.equals(tGroup.id) : tGroup.id != null) return false;
-        if (name != null ? !name.equals(tGroup.name) : tGroup.name != null) return false;
-        if (desc != null ? !desc.equals(tGroup.desc) : tGroup.desc != null) return false;
-        if (createTime != null ? !createTime.equals(tGroup.createTime) : tGroup.createTime != null) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (desc != null ? desc.hashCode() : 0);
-        result = 31 * result + (createTime != null ? createTime.hashCode() : 0);
-        return result;
-    }
 }

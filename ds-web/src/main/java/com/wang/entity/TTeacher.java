@@ -23,7 +23,7 @@ public class TTeacher {
     private Date joinDate;
     @DateTimeFormat( pattern = "yyyy-MM-dd" )
     private Date leaveDate;
-
+    private String description;
     private Date createTime;
 
     @Id
@@ -35,6 +35,16 @@ public class TTeacher {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    @Basic
+    @Column(name = "description")
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @Basic
