@@ -52,6 +52,7 @@
             </ul>
 
             <div class="tab-content">
+                <!--上传试卷的tab-->
                 <div id="home" class="tab-pane in active">
                     <p>试卷上传</p>
                     <div class="row">
@@ -90,6 +91,7 @@
                                         </form:select>
                                     </div>
                                 </div>
+                                <!--隐藏的提交组件-->
                                 <div class="hidden center" id="form-content">
                                     <div class="modal-header">
                                         <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -179,20 +181,86 @@
                                         保存
                                     </button>
                                 </div>
+                                <!--已经提交的组件-->
+                               <%-- <div class="center">
+                                    <label class="control-label no-padding-right" onclick="call()"> 文件名 </label>
+                                    <a class="btn btn-xs btn-success " href="#" >
+                                        下载
+                                    </a>
+                                </div>--%>
                         </div><!-- /.col -->
                     </div><!-- /.row -->
                 </div>
-
+                <!--成绩提交的tab-->
                 <div id="profile" class="tab-pane">
-                    <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid.</p>
-                </div>
+                    <p>成绩提交界面</p>
+                    <div>
+                        <div class="flag-style">
+                            <span>成绩提交</span>
 
+                        <%--    <a class="btn btn-xs btn-success " href="${ctx}/task/add" >
+                                <i class="ace-icon fa fa-plus bigger-120 "></i>
+                            </a>--%>
+
+                        </div>
+                        <table id="sample-table-1" class="table table-striped table-bordered table-hover">
+                            <thead>
+                            <tr>
+                                <th class="center">
+                                    <label class="position-relative">
+                                        <input type="checkbox" class="ace" />
+                                        <span class="lbl"></span>
+                                    </label>
+                                </th>
+                                <th>学号</th>
+                                <th>姓名</th>
+                                <th>平时成绩</th>
+                                <th>考试成绩</th>
+                                <th class="hidden-480">操作</th>
+
+
+                            </tr>
+                            </thead>
+
+                            <tbody>
+
+                            <c:forEach items="${allStu}" var="stu">
+                                <tr>
+                                    <td class="center">
+                                        <label class="position-relative">
+                                            <input type="checkbox" class="ace" />
+                                            <span class="lbl"></span>
+                                        </label>
+                                    </td>
+                                    <td>${stu.studentNumber}</td>
+                                    <td> ${stu.name}</td>
+                                    <td>${stu.sex}</td>
+                                    <td> ${stu.age}</td>
+                                    <td class="hidden-480">
+                                        <div class="hidden-sm hidden-xs btn-group">
+                                            <a class="btn btn-xs btn-success" href="#">
+                                                <i class="ace-icon fa fa-pencil bigger-120"></i>
+                                            </a>
+                                            <a class="btn btn-xs btn-danger" href="#">
+                                                <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </c:forEach>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!--计算统计的tab-->
                 <div id="dropdown1" class="tab-pane">
-                    <p>Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro fanny pack lo-fi farm-to-table readymade.</p>
+                    <p>学生姓名  成绩</p><br/>
+                    <p>wxl                  100</p><br/>
                 </div>
 
                 <div id="dropdown2" class="tab-pane">
-                    <p>Trust fund seitan letterpress, keytar raw denim keffiyeh etsy art party before they sold out master cleanse gluten-free squid scenester freegan cosby sweater. Fanny pack portland seitan DIY, art party locavore wolf cliche high life echo park Austin.</p>
+                    <p>学生姓名  等级</p><br/>
+                    <p>wxl        A++</p><br/>
                 </div>
             </div>
         </div>
@@ -207,8 +275,6 @@
             else
                 $("#form-content").addClass('hidden')
         };
-    </script>
-    <script>
         $(function(){
             var mydate = new Date();
             var year=mydate.getFullYear();
@@ -217,25 +283,23 @@
             }
             $("#exemtitle").removeClass('hidden');
         });
-    </script>
-    <script>
         $(function(){
             $(".btnSave").on("click",function(){
                 $("#formSysRole").submit();
-                alert("走了")
+                alert("试卷提交成功")
             });
         });
-
         $('.date-picker').datepicker({autoclose:true}).next().on(ace.click_event, function(){
             $(this).prev().focus();
         });
-     /*   $(function(){
-            var year=document.getElementById('year')
-
-            alert(year.key)
-            year.index(3)
-            $("#exemtitle").removeClass('hidden');
-        });*/
+    </script>
+    <script>
+        function call(){
+            alert("hah");
+            $.get("${ctx}/exam/search",function(data){
+                    alert(data);
+            })
+        };
     </script>
 </body>
 </html>

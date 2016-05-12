@@ -57,4 +57,9 @@ public class TExamService {
         }
 
     }
+
+    public boolean searchExist(int year,int term,int type){
+        boolean flag=false;
+        return flag;
+    }
 }
