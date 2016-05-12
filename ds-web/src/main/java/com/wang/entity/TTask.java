@@ -9,12 +9,14 @@ import java.util.Date;
 @Entity
 @Table(name = "t_task", schema = "ds")
 public class TTask {
-    private Integer id;
-    private String topic;
-    private String content;
-    private Integer  courseId;
-    private Integer  teacherId;
-    private Integer  attachmentId;
+    protected Integer id;
+    protected String topic;
+    protected String content;
+    protected Integer  courseId;
+    protected Integer  teacherId;
+    protected Integer  attachmentId;
+    protected Date createTime;
+    protected Date endTime;
 
     public void setTeacherId(Integer teacherId) {
         this.teacherId = teacherId;
@@ -35,8 +37,7 @@ public class TTask {
         return attachmentId;
     }
 
-    private Date createTime;
-    private Date endTime;
+
 
     @Id
     @Column(name = "id")
@@ -87,6 +88,7 @@ public class TTask {
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
+
     @Column(name = "end_time")
     public Date getEndTime() {
         return endTime;

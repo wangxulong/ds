@@ -24,7 +24,7 @@
                 </label>
             </th>
             <th>作业主题</th>
-            <th>简单描述</th>
+            <th>作业内容</th>
             <th>布置时间</th>
             <th>截止时间</th>
             <th class="hidden-480">操作</th>
@@ -35,7 +35,7 @@
 
         <tbody>
 
-        <c:forEach items="${allhomeWork}" var="homeWork">
+        <c:forEach items="${allTask}" var="task">
             <tr>
                 <td class="center">
                     <label class="position-relative">
@@ -43,16 +43,16 @@
                         <span class="lbl"></span>
                     </label>
                 </td>
-                <td>${homeWork.topic}</td>
-                <td> ${homeWork.description}</td>
-                <td>${homeWork.createTime}</td>
-                <td> ${homeWork.finshTime}</td>
+                <td>${task.topic}</td>
+                <td> ${task.content}</td>
+                <td>${task.createTime}</td>
+                <td> ${task.endTime}</td>
                 <td class="hidden-480">
                     <div class="hidden-sm hidden-xs btn-group">
-                            <a class="btn btn-xs btn-success" href="${ctx}/task/edit/${homeWork.id}">
+                            <a class="btn btn-xs btn-success" href="${ctx}/task/edit/${task.id}">
                                 <i class="ace-icon fa fa-pencil bigger-120"></i>
                             </a>
-                            <a class="btn btn-xs btn-danger" href="${ctx}/task/delete/${homeWork.id}">
+                            <a class="btn btn-xs btn-danger" href="${ctx}/task/delete/${task.id}">
                                 <i class="ace-icon fa fa-trash-o bigger-120"></i>
                             </a>
                     </div>

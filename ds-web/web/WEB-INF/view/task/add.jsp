@@ -32,7 +32,7 @@
             <div class="col-sm-9">
 
               <div class="input-group"  >
-                <form:input path="finshTime" readonly="true" class="form-control date-picker"  type="text" data-date-format="yyyy-mm-dd"
+                <form:input path="endTime" readonly="true" class="form-control date-picker"  type="text" data-date-format="yyyy-mm-dd"
                             data-date-language="zh-CN"
                         />
                 <span class="input-group-addon">
@@ -45,11 +45,11 @@
       </div>
     </div>
     <div class="form-group">
-      <label class="col-sm-3 control-label no-padding-right"> 简单描述 </label>
+      <label class="col-sm-3 control-label no-padding-right"> 作业内容 </label>
 
       <div class="col-sm-9">
         <div class="col-sm-9">
-          <form:textarea path="description" cols="3" placeholder="简单描述" class="form-control" />
+          <form:textarea path="content" cols="3" placeholder="作业内容" class="form-control" />
         </div>
       </div>
     </div>
@@ -59,7 +59,7 @@
 
       <div class="col-sm-9">
         <div class="col-sm-9">
-          <form:input path="pic" type="file"    class="form-control"/>
+          <form:input path="file" type="file"    class="form-control"/>
         </div>
       </div>
     </div>

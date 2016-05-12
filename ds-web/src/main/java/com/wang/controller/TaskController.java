@@ -1,11 +1,8 @@
 package com.wang.controller;
 
-import com.wang.dao.RcourseStudentDao;
-import com.wang.dao.TCourseDao;
-import com.wang.dao.TTaskDao;
-import com.wang.entity.THomework;
-import com.wang.form.HomeworkFormBean;
-import com.wang.service.THomeworkService;
+import com.wang.entity.TTask;
+import com.wang.form.TaskFormBean;
+import com.wang.service.TTaskService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,42 +18,43 @@ import javax.annotation.Resource;
 public class TaskController {
 
     @Resource
-    private THomeworkService tHomeworkService;
+    private TTaskService tTaskService;
 
     @RequestMapping("index")
     public void index(Model model){
-        model.addAttribute("allhomeWork",tHomeworkService.getAllTHomeWork());
+        model.addAttribute("allTask",tTaskService.getAllTask());
     }
     //添加
     @RequestMapping("add")
     public void add(Model model){
-        THomework command = new HomeworkFormBean();
+
+        TTask command = new TaskFormBean();
         model.addAttribute("command", command);
     }
     //保存记录到数据库
     @RequestMapping(value = "save")
-    public String save(HomeworkFormBean form){
+    public String save(TaskFormBean form){
 
-        tHomeworkService.addOneHomeWork(form);
+        tTaskService.addOneTask(form);
         return "redirect:/task/index";
     }
     @RequestMapping("edit/{id}")
     public String  edit(@PathVariable("id") Integer id ,Model model){
 
-        HomeworkFormBean homeWork =tHomeworkService.homeworkToFormBean(id);
-        model.addAttribute("homeWork",homeWork);
+        TaskFormBean task =tTaskService.taskToFormBean(id);
+        model.addAttribute("task",task);
         return "task/update";
     }
 
     @RequestMapping("update")
-    public String update(HomeworkFormBean form){
-        tHomeworkService.updateOneHomeWork(form);
+    public String update(TaskFormBean form){
+        tTaskService.updateOneTask(form);
         return "redirect:/task/index";
     }
 
     @RequestMapping(value = "delete/{id}")
     public String delete(@PathVariable("id") Integer id){
-        tHomeworkService.deleteOneHomeWork(id);
+        tTaskService.deleteOneTask(id);
         return "redirect:/task/index";
     }
 

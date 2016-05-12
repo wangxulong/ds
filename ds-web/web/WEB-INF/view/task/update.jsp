@@ -12,15 +12,15 @@
 </div>
 
 
-  <form:form class="form-horizontal" role="form" commandName="homeWork" id="formSysRole" action="${ctx}/task/update" enctype="multipart/form-data">
+  <form:form class="form-horizontal" role="form" commandName="task" id="formSysRole" action="${ctx}/task/update" enctype="multipart/form-data">
     <!-- #section:elements.form -->
-      <form:input path="id" type="hidden" value="${homeWork.id}"/>
+      <form:input path="id" type="hidden" value="${task.id}"/>
     <div class="form-group">
       <label class="col-sm-3 control-label no-padding-right"> 作业主题 </label>
 
       <div class="col-sm-9">
         <div class="col-sm-9">
-          <form:input path="topic" class="form-control" value="${homeWork.topic}"></form:input>
+          <form:input path="topic" class="form-control" value="${task.topic}"></form:input>
         </div>
       </div>
     </div>
@@ -33,8 +33,8 @@
             <div class="col-sm-9">
 
               <div class="input-group">
-                <form:input path="finshTime" readonly="true" class="form-control date-picker"  type="text" data-date-format="yyyy-mm-dd"
-                            data-date-language="zh-CN" value="${homeWork.finshTime}" />
+                <form:input path="endTime" readonly="true" class="form-control date-picker"  type="text" data-date-format="yyyy-mm-dd"
+                            data-date-language="zh-CN" value="${task.endTime}" />
                 <span class="input-group-addon">
                   <i class="fa fa-calendar bigger-110"></i>
                 </span>
@@ -49,7 +49,7 @@
 
       <div class="col-sm-9">
         <div class="col-sm-9">
-          <form:textarea path="description" cols="3" class="form-control" value="${homeWork.description}"/>
+          <form:textarea path="content" cols="3" class="form-control" value="${task.content}"/>
         </div>
       </div>
     </div>
@@ -59,7 +59,7 @@
 
       <div class="col-sm-9">
         <div class="col-sm-9">
-          <form:input path="pic" type="file"    class="form-control" />
+          <form:input path="file" type="file"    class="form-control" />
         </div>
       </div>
     </div>
