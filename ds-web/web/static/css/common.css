@@ -13,3 +13,9 @@
 .flag a:hover{
     text-decoration: none;
 }
+.button-style{
+    border: none;
+    background-color: rgba(255, 245, 240, 0);
+    font-size: 16px;
+    color: cornflowerblue;
+}

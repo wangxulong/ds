@@ -102,6 +102,35 @@
         </div>
           </div>
       </div>
+      <div class="form-group">
+        <label class="col-sm-3 control-label no-padding-right"> 状态</label>
+        <div class="col-sm-9">
+          <label class="radio-inline">
+            <form:radiobutton path="state" value="1" class="ace" />
+            <span class="lbl"> 教学中</span>
+          </label>
+          <label class="radio-inline">
+            <form:radiobutton path="state" value="0" class="ace" />
+            <span class="lbl"> 未教学</span>
+          </label>
+        </div>
+      </div>
+        <div class="form-group">
+          <label class="col-sm-3 control-label no-padding-right">职称</label>
+          <div class="col-sm-9">
+            <div class="col-sm-9">
+              <form:select path="level" style="width:100%;" id="form-field-select-3">
+                <form:option value="">&nbsp;</form:option>
+                <form:option value="教授">教授</form:option>
+                <form:option value="副教授">副教授</form:option>
+                <form:option value="讲师">讲师</form:option>
+                <form:option value="助教">助教</form:option>
+              </form:select>
+              </div>
+            </div>
+
+
+        </div>
 
       <div class="form-group">
         <label class="col-sm-3 control-label no-padding-right"> 描述 </label>

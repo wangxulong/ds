@@ -3,6 +3,8 @@ package com.wang.controller;
 import com.wang.entity.TCourse;
 import com.wang.form.CourseFormBean;
 import com.wang.service.CourseService;
+import com.wang.service.GroupService;
+import com.wang.service.TeacherService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,10 +20,16 @@ import javax.annotation.Resource;
 public class CourseController {
     @Resource
     private CourseService courseService;
-
+    @Resource
+    private GroupService groupService;
+    @Resource
+    private TeacherService teacherService;
     @RequestMapping("index")
     public void index(Model model){
+        String  messages = groupService.getGroupMessage();
         model.addAttribute("Course",courseService.getAllCourse());
+        model.addAttribute("group",messages);
+        model.addAttribute("teachers",teacherService.findAllTeacher());
     }
 
     //添加
@@ -55,4 +63,7 @@ public class CourseController {
         courseService.deleteCourseById(id);
         return "redirect:/course/index";
     }
+//    @RequestMapping(value = "group"){
+//
+//    }
 }

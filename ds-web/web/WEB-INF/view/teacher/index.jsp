@@ -24,6 +24,8 @@
         <th>工作证号</th>
         <th>入职时间</th>
         <th>出生日期</th>
+        <th>职称</th>
+        <th>状态</th>
         <th>操作</th>
 
     </tr>
@@ -64,6 +66,19 @@
             </td>
             <td>
                 <fmt:formatDate value="${teacher.birthDate}" pattern="yyyy-MM-dd" />
+            </td>
+            <td>
+                    ${teacher.level}
+            </td>
+            <td>
+                <c:choose>
+                    <c:when test="${teacher.state eq 1}">
+                        教学中
+                    </c:when>
+                    <c:otherwise>
+                        未教学
+                    </c:otherwise>
+                </c:choose>
             </td>
             <td class="hidden-480">
                 <div class="hidden-sm hidden-xs btn-group">

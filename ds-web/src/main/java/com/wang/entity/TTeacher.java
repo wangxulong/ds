@@ -25,6 +25,9 @@ public class TTeacher {
     private Date leaveDate;
     private String description;
     private Date createTime;
+    private String level;
+    private Integer state;
+
 
     @Id
     @Column(name = "id")
@@ -131,39 +134,18 @@ public class TTeacher {
         this.createTime = createTime;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        TTeacher tTeacher = (TTeacher) o;
-
-        if (id != null ? !id.equals(tTeacher.id) : tTeacher.id != null) return false;
-        if (name != null ? !name.equals(tTeacher.name) : tTeacher.name != null) return false;
-        if (sex != null ? !sex.equals(tTeacher.sex) : tTeacher.sex != null) return false;
-        if (idcard != null ? !idcard.equals(tTeacher.idcard) : tTeacher.idcard != null) return false;
-        if (age != null ? !age.equals(tTeacher.age) : tTeacher.age != null) return false;
-        if (jobNumber != null ? !jobNumber.equals(tTeacher.jobNumber) : tTeacher.jobNumber != null) return false;
-        if (birthDate != null ? !birthDate.equals(tTeacher.birthDate) : tTeacher.birthDate != null) return false;
-        if (joinDate != null ? !joinDate.equals(tTeacher.joinDate) : tTeacher.joinDate != null) return false;
-        if (leaveDate != null ? !leaveDate.equals(tTeacher.leaveDate) : tTeacher.leaveDate != null) return false;
-        if (createTime != null ? !createTime.equals(tTeacher.createTime) : tTeacher.createTime != null) return false;
-
-        return true;
+    @Column(name = "state")
+    public Integer getState() {
+        return state;
     }
-
-    @Override
-    public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (sex != null ? sex.hashCode() : 0);
-        result = 31 * result + (idcard != null ? idcard.hashCode() : 0);
-        result = 31 * result + (age != null ? age.hashCode() : 0);
-        result = 31 * result + (jobNumber != null ? jobNumber.hashCode() : 0);
-        result = 31 * result + (birthDate != null ? birthDate.hashCode() : 0);
-        result = 31 * result + (joinDate != null ? joinDate.hashCode() : 0);
-        result = 31 * result + (leaveDate != null ? leaveDate.hashCode() : 0);
-        result = 31 * result + (createTime != null ? createTime.hashCode() : 0);
-        return result;
+    public void setState(Integer state) {
+        this.state = state;
+    }
+    @Column(name = "grade")
+    public String getLevel() {
+        return level;
+    }
+    public void setLevel(String level) {
+        this.level = level;
     }
 }

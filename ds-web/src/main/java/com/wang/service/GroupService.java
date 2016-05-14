@@ -46,6 +46,14 @@ public class GroupService {
         }
         return 0;
     }
+    //获取课程组的信息
+    public String getGroupMessage(){
+        List<TGroup> groups = groupDao.findAll();
+        if(groups.size()>0){
+            return groups.get(0).getDescription();
+        }
+        return "课程组基本信息未添加";
 
+    }
 }
 

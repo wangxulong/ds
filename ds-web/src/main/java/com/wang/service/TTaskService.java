@@ -3,7 +3,6 @@ package com.wang.service;
 import com.wang.auth.sys.entity.SysUser;
 import com.wang.auth.sys.service.SecurityService;
 import com.wang.dao.*;
-import com.wang.dto.StudentDto;
 import com.wang.dto.StudentTaskDto;
 import com.wang.entity.*;
 import com.wang.form.TaskFormBean;
@@ -19,7 +18,6 @@ import javax.annotation.Resource;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
