@@ -1,15 +1,8 @@
 package com.wang.service;
 
 
-import com.wang.auth.sys.dao.SysRoleDao;
-import com.wang.auth.sys.dao.SysUserDao;
-import com.wang.auth.sys.entity.SysRole;
-import com.wang.auth.sys.entity.SysUser;
 import com.wang.dao.GroupDao;
-import com.wang.dao.TeacherDao;
 import com.wang.entity.TGroup;
-import com.wang.entity.TTeacher;
-import com.wang.util.PasswordHelper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -44,6 +37,23 @@ public class GroupService {
             group.setCreateTime(dbGroup.getCreateTime());
         }
         groupDao.save(group);
+    }
+    //获取第一条课程组id
+    public int getFirstGroup(){
+        List<TGroup> groups = groupDao.findAll();
+        if(groups.size()>0){
+            return groups.get(0).getId();
+        }
+        return 0;
+    }
+    //获取课程组的信息
+    public String getGroupMessage(){
+        List<TGroup> groups = groupDao.findAll();
+        if(groups.size()>0){
+            return groups.get(0).getDescription();
+        }
+        return "课程组基本信息未添加";
+
     }
 }
 

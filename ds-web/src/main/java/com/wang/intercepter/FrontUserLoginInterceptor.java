@@ -22,6 +22,7 @@ public class FrontUserLoginInterceptor extends HandlerInterceptorAdapter{
             //用户没有登陆
             session.setAttribute("login",true);
             response.sendRedirect(request.getServletContext().getContextPath()+"/front/index");
+            return false;
         }
 
         return super.preHandle(request, response, handler);

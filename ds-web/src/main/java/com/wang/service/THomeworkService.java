@@ -6,6 +6,7 @@ import com.wang.dao.THomeworkDao;
 import com.wang.dao.TTaskDao;
 import com.wang.entity.*;
 import com.wang.form.HomeworkFormBean;
+import com.wang.util.ConstantUtil;
 import com.wang.util.UpFilesUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -98,34 +100,40 @@ public class THomeworkService {
     }
 
     /*添加作业*/
-    public void addOneHomeWork(HomeworkFormBean homework){
+    public void addOneHomeWork(HomeworkFormBean homework,String path){
 
         THomework  homeworkTemp = new THomework();
+        homeworkTemp.setCreateTime(new Date());
         homeworkTemp.setTopic(homework.getTopic());
         homeworkTemp.setFinshTime(homework.getFinshTime());
         homeworkTemp.setDescription(homework.getDescription());
+        homeworkTemp.setStudentId(homework.getStudentId());
+        homeworkTemp.setTaskId(homework.getTaskId());
+        if(!homework.getPic().isEmpty()){
+            //获取上传的文件
+            MultipartFile file = homework.getPic();
+            //存储文件到指定的位置
+            String fileName = UpFilesUtils.saveUploadFile(file, path);
 
+            //保存附件基本信息到数据库
+            TAttachment attachment = new TAttachment();
+            attachment.setName(file.getOriginalFilename());
+            attachment.setFormat(file.getContentType());
+            attachment.setPath(ConstantUtil.STUDENT_HOMEWORK_PATH+"\\"+fileName);
+            tAttachmentService.addAttachment(attachment);
+            homeworkTemp.setAttachmentId(attachment.getId());
+        }
+        tHomeworkDao.save(homeworkTemp);
+        /*
         if (homework.getPic().isEmpty()){  //没有附件
 
             tHomeworkDao.save(homeworkTemp);
 
         }else {                         //有附件
-            //获取上传的文件
-            MultipartFile file = homework.getPic();
-            //存储文件到指定的位置
-            UpFilesUtils.saveFile(file);
 
-            //保存附件基本信息到数据库
-            TAttachment attachment = new TAttachment();
-            attachment.setName(UpFilesUtils.realName);
-            attachment.setFormat(UpFilesUtils.prefix);
-            attachment.setPath(UpFilesUtils.savePath);
-            tAttachmentService.addAttachment(attachment);
-
-            homeworkTemp.setAttachmentId(attachment.getId());
             tHomeworkDao.save(homeworkTemp);
 
-        }
+        }*/
 
     }
 
@@ -165,6 +173,12 @@ public class THomeworkService {
         }else {
             return null;
         }
+    }
+
+
+    //根据任务的ID获取我提交的作业
+    public List<THomework> getMyHomeworkByTaskId(Integer studentId,Integer taskId){
+        return tHomeworkDao.findByStudentIdAndTaskId(studentId,taskId);
     }
 
 }

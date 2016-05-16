@@ -22,6 +22,16 @@ public class THomework {
     protected Integer score;
     protected Integer taskId;
     protected Integer attachmentId;
+    protected Integer studentId;
+
+    @Column(name = "student_id")
+    public Integer getStudentId() {
+        return studentId;
+    }
+
+    public void setStudentId(Integer studentId) {
+        this.studentId = studentId;
+    }
 
     public THomework() {
     }

@@ -10,4 +10,6 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface TeacherDao extends BaseDao<TTeacher,Integer> {
+
+    TTeacher findByJobNumber(String jobNumber);
 }

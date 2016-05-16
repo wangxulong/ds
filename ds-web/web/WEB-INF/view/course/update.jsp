@@ -6,58 +6,58 @@
     <title></title>
 </head>
 <body>
-<div class="page-header">
-  <h1>
-    课程组管理
-    <small>
-      <i class="icon-double-angle-right"></i>
-      DS课程组信息
-    </small>
-  </h1>
-</div><!-- /.page-header -->
-<div class="row">
-  <div class="col-md-12">
-    <form:form class="form-horizontal form" role="form"  action="${ctx}/group/save">
-      <form:hidden path="id"/>
-      <div class="form-group">
-        <label class="col-sm-3 control-label no-padding-right"> 名称 </label>
-
-        <div class="col-sm-9">
-          <div class="col-sm-9">
-            <form:input path="name" placeholder="名称" class="form-control" />
-          </div>
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="col-sm-3 control-label no-padding-right"> 描述 </label>
-
-        <div class="col-sm-9">
-          <div class="col-sm-9">
-            <div class="wysiwyg-editor" id="editor" >${command.description}</div>
-            <form:hidden path="description"/>
-            <%--<form:textarea path="description" placeholder="课程组描述" style="resize:none;" rows="8" class="form-control wysiwyg-editor" />--%>
-          </div>
-        </div>
-      </div>
-
-
-    </form:form>
-    <div class="clearfix form-actions text-center">
-
-      <a class="btn btn-sm clear" href="${ctx}/course/index">
-        <i class="ace-icon fa fa-times"></i>
-        取消
-      </a>
-
-      <button class="btn btn-sm btn-primary btnSave">
-        <i class="ace-icon fa fa-check"></i>
-        保存
-      </button>
-    </div>
-  </div>
+<div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal">&times;</button>
+  <h4 class="blue bigger">修改课程</h4>
 </div>
 
 
+  <form:form class="form-horizontal" role="form" commandName="course" id="formSysRole" action="${ctx}/course/update" enctype="multipart/form-data">
+    <!-- #section:elements.form -->
+    <form:input path="id" type="hidden" value="${course.id}"/>
+    <div class="form-group">
+      <label class="col-sm-3 control-label no-padding-right"> 课程名字 </label>
+
+      <div class="col-sm-9">
+        <div class="col-sm-9">
+          <form:input path="name" placeholder="课程名字" class="form-control"  value="${course.name}"/>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-sm-3 control-label no-padding-right"> 课程简介 </label>
+
+      <div class="col-sm-9">
+        <div class="col-sm-9">
+          <div class="wysiwyg-editor" id="editor" >${course.outline}</div>
+          <form:hidden path="outline"  />
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-sm-3 control-label no-padding-right"  > 课程大纲 </label>
+
+      <div class="col-sm-9">
+        <div class="col-sm-9">
+          <form:input path="file" type="file"   class="form-control"/>
+        </div>
+      </div>
+    </div>
+  </form:form>
+
+
+<div class="modal-footer">
+  <a class="btn btn-sm clear" href="${ctx}/course/index">
+    <i class="ace-icon fa fa-times"></i>
+    取消
+  </a>
+  <button class="btn btn-sm btn-primary btnSave">
+    <i class="ace-icon fa fa-check"></i>
+    保存
+  </button>
+</div>
 
 <script src="${ctx}/static/js/ace/assets/js/bootstrap-wysiwyg.js"></script>
 <script src="${ctx}/static/js/ace/assets/js/markdown/bootstrap-markdown.js"></script>
@@ -68,15 +68,10 @@
   $(function(){
      $(".btnSave").on("click",function(){
        var d= $('#editor').html();
-       $("#description").val(d);
-
-       $(".form").submit();
+       $("#outline").val(d);
+       $("#formSysRole").submit();
      });
-    $(".clear").on("click",function () {
-        $(".form")[0].reset();
-    });
   });
-
   $('.date-picker').datepicker({autoclose:true}).next().on(ace.click_event, function(){
     $(this).prev().focus();
   });

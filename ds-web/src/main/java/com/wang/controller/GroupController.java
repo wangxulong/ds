@@ -1,14 +1,10 @@
 package com.wang.controller;
 
 import com.wang.entity.TGroup;
-import com.wang.entity.TTeacher;
 import com.wang.service.GroupService;
-import com.wang.service.TeacherService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.annotation.Resource;
 

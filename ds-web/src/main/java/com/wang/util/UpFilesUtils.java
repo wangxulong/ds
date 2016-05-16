@@ -24,6 +24,9 @@ public class UpFilesUtils {
     public static String getPath(){
         return filePath = UpFilesUtils.class.getClassLoader().getResource("/").getPath();
     }
+    public static String getRealPath(){
+        return filePath = UpFilesUtils.class.getClassLoader().getResource("/").getPath()+"/upload/";
+    }
     //存储上传文件到类路径下
     public static void saveFile(MultipartFile file) {
         if (null != file) {
@@ -39,6 +42,22 @@ public class UpFilesUtils {
             }
         }
     }
+
+    public static String saveUploadFile(MultipartFile file,String path) {
+
+            realName = file.getOriginalFilename();
+            prefix = realName.substring(realName.lastIndexOf("."));
+            fileName = new Date().getTime();
+            savePath =path+"/"+ fileName + prefix;
+            // 转存文件
+            try {
+                file.transferTo(new File(savePath));
+            } catch (IOException e) {
+                throw new RuntimeException("保存文件失败");
+            }
+            return fileName + prefix;
+    }
+
 
 
 

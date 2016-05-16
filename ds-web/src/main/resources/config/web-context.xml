@@ -57,7 +57,10 @@
         </mvc:interceptor>
         <mvc:interceptor>
             <mvc:mapping path="/front/**/**"/>
-            <mvc:exclude-mapping path="/front/*"/>
+            <mvc:exclude-mapping path="/front/index"/>
+            <mvc:exclude-mapping path="/front/index"/>
+            <mvc:exclude-mapping path="/front/login"/>
+            <mvc:exclude-mapping path="/front/logout"/>
             <bean class="com.wang.intercepter.FrontUserLoginInterceptor"/>
         </mvc:interceptor>
 
