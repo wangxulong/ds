@@ -30,13 +30,11 @@
     <div class="collapse navbar-collapse" id="nav-content">
       <ul class="nav navbar-nav navbar-right">
         <li ><a href="#home">首页 </a></li>
-        <li><a href="#course">课程信息</a></li>
+        <li><a href="#course">课程组信息</a></li>
         <li><a href="#teacher">教师信息</a></li>
         <li><a href="#outline">课程大纲</a></li>
         <c:choose>
           <c:when test="${ not empty sessionScope.loginStudent}">
-
-
             <li >
               <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
@@ -73,8 +71,8 @@
         <div class="flick-title">
           数据结构
         </div>
-        <div class="flick-sub-text">
-          数据结构是计算机存储、组织数据的方式。数据结构是指相互之间存在一种或多种特定关系的数据元素的集合。
+        <div >
+          ${course}
         </div>
       </li>
       <li data-background="${ctx}/static/front/js/libs/Flickerplate-2.1.1/img/flicker-2.jpg">
@@ -112,9 +110,7 @@
         <p class="main">
           ${group.description}
         </p>
-      <%--  <p >
-          本课程的先修课程：高级语言程序设计，离散数学， 后续课程：操作系统、编译原理、数据库系统等课程。
-        </p>--%>
+
       </div>
     </div>
   </div>
@@ -125,29 +121,63 @@
 <section id="teacher">
   <div class="container">
     <div class="row">
-      <div class="col-md-3 wow bounce">
-        <img src="${ctx}/static/front/images/teacher-1.png" class="img-responsive img-circle">
-        <h5>姓名1</h5>
-        <p>简单介绍</p>
-        <button class="btn btn-default">教学计划</button>
-      </div>
-      <div class="col-md-3 wow bounce" >
-        <img src="${ctx}/static/front/images/teacher-2.png" class="img-responsive img-circle">
-        <h5>姓名1</h5>
-        <p>简单介绍</p>
-        <button class="btn btn-default">教学计划</button>
-      </div>
-      <div class="col-md-3 wow bounce">
-        <img src="${ctx}/static/front/images/teacher-3.png" class="img-responsive img-circle">
-        <h5>姓名1</h5>
-        <p>简单介绍</p>
-        <button class="btn btn-default">教学计划</button>
-      </div>
-      <div class="col-md-3 wow bounce">
-        <img src="${ctx}/static/front/images/teacher-4.png" class="img-responsive img-circle">
-        <h5>姓名1</h5>
-        <p>简单介绍</p>
-        <button class="btn btn-default">教学计划</button>
+      <div id="teach">
+        <table id="sample-table-3" class="table table-striped table-bordered table-hover">
+          <thead>
+          <tr>
+            <th>名字</th>
+            <th>职称</th>
+            <th>性别</th>
+            <th>年龄</th>
+            <th>状态</th>
+          </tr>
+          </thead>
+
+          <tbody>
+
+          <c:forEach items="${teachers}" var="teacher" varStatus="s">
+            <tr>
+              <td class="font-style"><a href="${ctx}/course/check/${teacher.id}">${teacher.name}</a></td>
+              <td>${teacher.level}</td>
+              <td>
+                <c:choose>
+                  <c:when test="${teacher.sex eq 1}">
+                    男
+                  </c:when>
+                  <c:otherwise>
+                    女
+                  </c:otherwise>
+                </c:choose>
+              </td>
+              <input type="hidden" id="age${s.count}" name="birthDay" value="${teacher.birthDate}">
+              <td > <span id="ageValue${s.count-1}"  name="ageValue"> </span> </td>
+              <td>
+                <c:choose>
+                  <c:when test="${teacher.state eq 1}">
+                    教学中
+                  </c:when>
+                  <c:otherwise>
+                    未教学
+                  </c:otherwise>
+                </c:choose>
+              </td>
+            </tr>
+          </c:forEach>
+          <span style="font-size:20px;">
+            <c:forEach items="${levelNums}" var="levelNum">
+              <c:out value="${levelNum.key}"/>
+              <span style="color: #1165ff"><c:out value="${levelNum.value}"/></span>
+              <span>人;</span>&nbsp;&nbsp;
+            </c:forEach>
+          <c:forEach items="${sexStateNums}" var="sexStateNum">
+            <c:out value="${sexStateNum.key}"/>
+            <span style="color: #1165ff"><c:out value="${sexStateNum.value}"/></span>
+            <span>人;</span>&nbsp;&nbsp;
+          </c:forEach>
+          </span>
+
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
@@ -165,11 +195,35 @@
   </div>
 </section>
 
+
 <!--footer-->
  <%@include file="/include/frontFooter.jsp"%>
 <!--footer-->
 
+<script type="text/javascript">
 
+
+  function getAge(dateString) {
+    var today = new Date();
+    var birthDate = new Date(dateString);
+    var age = today.getFullYear() - birthDate.getFullYear();
+    var m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+    }
+    return age;
+  }
+  //    $("#ageValue").html(getAge($("#age").val()));
+  $(function(){
+    var brithDay=document.getElementsByName("birthDay");
+    var ageValue = document.getElementsByName("ageValue");
+    for(i=0;i<brithDay.length;i++){
+      ageValue[i].value=getAge(brithDay[i].value);
+      $("#ageValue"+i).html(ageValue[i].value);
+
+    }
+  });
+</script>
 
 
 

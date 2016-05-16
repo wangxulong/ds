@@ -18,14 +18,14 @@
             </tr>
         </thead>
     </table>
-    <div id="group">
+    <div id="group" style="height:251px;">
         <p id="description"> ${group}
             <a  href="${ctx}/group/index">
                 <i class="ace-icon fa fa-pencil bigger-120"></i>
             </a>
         </p>
     </div>
-    <div>
+    <div id="teach">
         <table id="sample-table-3" class="table table-striped table-bordered table-hover">
             <thead>
             <tr>
@@ -34,13 +34,12 @@
                 <th>性别</th>
                 <th>年龄</th>
                 <th>状态</th>
-                <th>总体介绍</th>
             </tr>
             </thead>
 
             <tbody>
 
-            <c:forEach items="${teachers}" var="teacher">
+            <c:forEach items="${teachers}" var="teacher" varStatus="s">
                 <tr>
                     <td>${teacher.name}</td>
                     <td>${teacher.level}</td>
@@ -54,7 +53,8 @@
                             </c:otherwise>
                         </c:choose>
                     </td>
-                    <td> ${teacher.age}</td>
+                    <input type="hidden" id="age${s.count}" name="birthDay" value="${teacher.birthDate}">
+                    <td > <span id="ageValue${s.count-1}"  name="ageValue"> </span> </td>
                     <td>
                         <c:choose>
                             <c:when test="${teacher.state eq 1}">
@@ -64,14 +64,21 @@
                                 未教学
                             </c:otherwise>
                         </c:choose>
-                        <a  href="">
-                            <i class="ace-icon fa fa-pencil bigger-120"></i>
-                        </a>
                     </td>
                 </tr>
             </c:forEach>
-
+            <c:forEach items="${levelNums}" var="levelNum">
+                <c:out value="${levelNum.key}"/>
+                <span style="color: #1165ff"><c:out value="${levelNum.value}"/></span>
+                <span>人;</span>&nbsp;&nbsp;
+            </c:forEach>
+            <c:forEach items="${sexStateNums}" var="sexStateNum">
+                <c:out value="${sexStateNum.key}"/>
+                <span style="color: #1165ff"><c:out value="${sexStateNum.value}"/></span>
+                <span>人;</span>&nbsp;&nbsp;
+            </c:forEach>
             </tbody>
+
         </table>
     </div>
 
@@ -126,19 +133,48 @@
                 </td>
             </tr>
         </c:forEach>
+
         </tbody>
     </table>
 </div>
 
 <script type="text/javascript">
-    $("#group").hide();
+//    $("#group").hide();
+    $("#teach").hide();
     $(document).ready(function(){
         $("#test").click(function () {
-                $("#group").show();
-//                $("#description").text("jkdfghf");
+            $("#group").show();
+            $("#teach").hide();
+        });
+        $("#teacher").click(function () {
+            $("#teach").show();
+            $("#group").hide();
         });
     });
+</script>
+<script type="text/javascript">
 
+
+    function getAge(dateString) {
+        var today = new Date();
+        var birthDate = new Date(dateString);
+        var age = today.getFullYear() - birthDate.getFullYear();
+        var m = today.getMonth() - birthDate.getMonth();
+        if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+            age--;
+        }
+        return age;
+    }
+//    $("#ageValue").html(getAge($("#age").val()));
+    $(function(){
+        var brithDay=document.getElementsByName("birthDay");
+        var ageValue = document.getElementsByName("ageValue");
+        for(i=0;i<brithDay.length;i++){
+            ageValue[i].value=getAge(brithDay[i].value);
+            $("#ageValue"+i).html(ageValue[i].value);
+
+        }
+    });
 </script>
 </body>
 </html>

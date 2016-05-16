@@ -41,7 +41,15 @@ public class CourseService {
     public  void deleteCourseById(int id){
         tCourseDao.delete(id);
     }
-
+    /*获取课程简介*/
+    public String getDescriptionOfCourse(){
+       List <TCourse> list= tCourseDao.findAll();
+        if(list.size()<1){
+            return "";
+        }else{
+            return list.get(0).getOutline();
+        }
+    }
     /*添加课程*/
     public void addCourse(CourseFormBean courseFormBean){
         TCourse course = new TCourse();
