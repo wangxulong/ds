@@ -35,7 +35,7 @@ public class CourseService {
     }
 
     public TCourse getCourseById(int id){
-        return tCourseDao.getOne(id);
+        return tCourseDao.findOne(id);
     }
 
     public  void deleteCourseById(int id){

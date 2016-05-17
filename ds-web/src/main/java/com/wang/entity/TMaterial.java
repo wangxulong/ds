@@ -12,7 +12,9 @@ public class TMaterial {
     private String name;
     private String desc;
     private Integer courseId;
-
+    private boolean isParent;
+    private Integer pid;
+    private Integer pId;
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,7 +37,7 @@ public class TMaterial {
     }
 
     @Basic
-    @Column(name = "desc")
+    @Column(name = "descp")
     public String getDesc() {
         return desc;
     }
@@ -76,5 +78,27 @@ public class TMaterial {
         result = 31 * result + (desc != null ? desc.hashCode() : 0);
         result = 31 * result + (courseId != null ? courseId.hashCode() : 0);
         return result;
+    }
+
+    @Basic
+    @Column(name = "is_parent")
+    public boolean isParent() {
+        return isParent;
+    }
+
+    public void setParent(boolean parent) {
+        isParent = parent;
+    }
+
+    @Basic
+    @Column(name = "p_id")
+    public Integer getPid() {
+        pId = pid;
+        return pid;
+    }
+
+    public void setPid(Integer pid) {
+        this.pId = pid;
+        this.pid = pid;
     }
 }
