@@ -64,4 +64,8 @@ public class MaterialService {
         return resultList;
     }
 
+    public TMaterial findOne(int id){
+        return materialDao.findOne(id);
+    }
+
 }

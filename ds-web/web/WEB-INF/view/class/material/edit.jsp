@@ -73,8 +73,14 @@
                 success:function(msg){
                     if(msg.status==100){
                         treeNode.id = msg.id;
+                    }else if(msg.status==101){
+                        var zTree = $.fn.zTree.getZTreeObj("treeDemo");
+                        var callbackFlag = $("#callbackTrigger").attr("checked");
+                        zTree.removeNode(treeNode, callbackFlag);
+                        alert("文件夹已存在!");
+
                     }else{
-                        alert("服务器错误!");
+                        alert("服务器出错!");
                     }
 
                 },
@@ -140,9 +146,17 @@
         var tid = treeNode.id;
 
         $('#myModal').modal('show');
-        $("#upload_btn").bind("click",function(){
-            $('#file_upload').uploadify('settings','formData',{"id":tid});
+       // $("#upload_btn").bind("click",function(){
+        $("#sub_btn").unbind("click");
+        $("#sub_btn").bind("click",function(){
+            $('#myModal').modal('hide');
+            var name = $("#name").val();
+            var desc = $("#desc").val();
+            alert(name+desc);
+            $('#file_upload').uploadify('settings','formData',{"id":tid,"name":name,"desc":desc});
             $('#file_upload').uploadify('upload', '*');
+
+            return;
         });
 
         if (treeNode) {
@@ -233,7 +247,7 @@
         </div>
 
 
-        <form:form class="form-horizontal" role="form" id="formSysRole" action="${ctx}/class/material/upload" enctype="multipart/form-data" >
+        <form:form class="form-horizontal" role="form" id="formSysRole" enctype="multipart/form-data" >
             <!-- #section:elements.form -->
 
            <div class="form-group">
@@ -263,7 +277,7 @@
                     <div class="col-sm-9">
 
                         <input type="file" name="fileName" id="file_upload" />
-                        <a href="javascript:;" id="upload_btn">上传文件</a> | <a href="javascript:$('#file_upload').uploadify('stop')">停止上传!</a>
+                      <%--  <a href="javascript:;" id="upload_btn">上传文件</a> | <a href="javascript:$('#file_upload').uploadify('stop')">停止上传!</a>--%>
                     </div>
                 </div>
             </div>
@@ -275,10 +289,10 @@
                 <i class="ace-icon fa fa-times"></i>
                 取消
             </a>
-            <button class="btn btn-sm btn-primary btnSave" id="sub_btn">
+            <a class="btn btn-sm btn-primary btnSave" href="javascript:;" id="sub_btn">
                 <i class="ace-icon fa fa-check"></i>
                 保存
-            </button>
+            </a>
         </div>
     </div>
 </div>

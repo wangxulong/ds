@@ -50,11 +50,10 @@ public class ClassController {
     }
 
     @RequestMapping(value="uploadFile",method= RequestMethod.POST)
-    public void uploadFile(@RequestParam("id") Integer id ,HttpServletResponse response, HttpServletRequest request, @RequestParam(value="file", required=false) MultipartFile file) throws IOException {
-        System.out.println(id);
+    public void uploadFile(@RequestParam("name") String name ,@RequestParam("desc") String desc ,@RequestParam("id") Integer id ,HttpServletResponse response, HttpServletRequest request, @RequestParam(value="file", required=false) MultipartFile file) throws IOException {
         byte[] bytes = file.getBytes();
         System.out.println(file.getOriginalFilename());
-        String uploadDir = request.getServletContext().getRealPath(File.separator)+"\\upload";
+        String uploadDir = request.getServletContext().getRealPath(File.separator)+"\\upload\\material\\"+id;
         System.out.println("uploadDir="+uploadDir);
         File dirPath = new File(uploadDir);
         if (!dirPath.exists()) {
@@ -70,16 +69,34 @@ public class ClassController {
         response.getWriter().write(msg);
     }
 
+    private String getParentPath(int id){
+        if(id==0) return "";
+        TMaterial material = materialService.findOne(id);
+        //parentPath+=File.separator+material.getName();
+        return File.separator+getParentPath(material.getPid())+File.separator+material.getName();
+    }
+
     @ResponseBody
     @RequestMapping("makedir")
-    public Map<String, Object> makeDir(@RequestParam("pid") Integer pid ,@RequestParam("name") String name ,@RequestParam("cid") Integer cid ,Model model){
+    public Map<String, Object> makeDir(HttpServletRequest request,@RequestParam("pid") Integer pid ,@RequestParam("name") String name ,@RequestParam("cid") Integer cid ,Model model){
         TMaterial materail = new TMaterial();
+        String uploadDir = request.getServletContext().getRealPath(File.separator)+"\\upload\\material";
+        //parentPath = "";
+        String newDir = uploadDir+File.separator+cid+getParentPath(pid)+File.separator+name;
+ System.out.println(newDir);
+        File dirPath = new File(newDir);
+        Map<String, Object> map = new HashMap<String,Object>();
+        if (dirPath.exists()) {
+            map.put("status",101);
+            return map;
+        }
+        dirPath.mkdirs();
         materail.setPid(pid);
         materail.setName(name);
         materail.setCourseId(cid);
         materail.setParent(true);
         int id = materialService.save(materail);
-        Map<String, Object> map = new HashMap<String,Object>();
+
         map.put("id",id);
         map.put("status",100);
         return map;
@@ -88,8 +105,6 @@ public class ClassController {
     @RequestMapping("getNode")
     public List<Map<String, Object>> getNode(@RequestParam("cid") Integer cid ,Model model){
         List<TMaterial> materials = materialService.getAllByCourse(cid);
-        System.out.println(materials.toString());
-        System.out.println(materials.toString());
         List<Map<String, Object>> res = new ArrayList<Map<String, Object>>();
         for(TMaterial material:materials){
             Map<String,Object> map = new HashMap<String, Object>();
