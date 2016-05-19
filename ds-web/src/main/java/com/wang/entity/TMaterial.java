@@ -15,6 +15,7 @@ public class TMaterial {
     private boolean isParent;
     private Integer pid;
     private Integer pId;
+    private String path;
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -100,5 +101,15 @@ public class TMaterial {
     public void setPid(Integer pid) {
         this.pId = pid;
         this.pid = pid;
+    }
+
+    @Basic
+    @Column(name = "path")
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
     }
 }

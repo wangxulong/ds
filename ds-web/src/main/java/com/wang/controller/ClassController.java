@@ -1,16 +1,16 @@
 package com.wang.controller;
 
+import com.alibaba.fastjson.JSONArray;
+import com.sun.corba.se.impl.orbutil.threadpool.ThreadPoolManagerImpl;
 import com.wang.entity.TMaterial;
 import com.wang.form.MaterialFormBean;
 import com.wang.service.CourseService;
 import com.wang.service.MaterialService;
+import org.springframework.core.env.SystemEnvironmentPropertySource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
@@ -35,6 +35,7 @@ public class ClassController {
 
     @RequestMapping("index")
     public void index(Model model){
+
     }
 
     @RequestMapping("material/index")
@@ -49,30 +50,41 @@ public class ClassController {
         model.addAttribute("command", command);
     }
 
+    @ResponseBody
     @RequestMapping(value="uploadFile",method= RequestMethod.POST)
-    public void uploadFile(@RequestParam("name") String name ,@RequestParam("desc") String desc ,@RequestParam("id") Integer id ,HttpServletResponse response, HttpServletRequest request, @RequestParam(value="file", required=false) MultipartFile file) throws IOException {
+    public Map<String,Object> uploadFile(@ModelAttribute TMaterial material, HttpServletResponse response, HttpServletRequest request, @RequestParam(value="file", required=false) MultipartFile file) throws IOException {
         byte[] bytes = file.getBytes();
-        System.out.println(file.getOriginalFilename());
-        String uploadDir = request.getServletContext().getRealPath(File.separator)+"\\upload\\material\\"+id;
-        System.out.println("uploadDir="+uploadDir);
-        File dirPath = new File(uploadDir);
+        String uploadDir = request.getServletContext().getRealPath(File.separator)+"\\upload\\material";
+        String newDir = uploadDir+File.separator+material.getCourseId()+getParentPath(material.getPid());
+        File dirPath = new File(newDir);
         if (!dirPath.exists()) {
             dirPath.mkdirs();
         }
         String sep = System.getProperty("file.separator");
-        File uploadedFile = new File(uploadDir + sep
-                + file.getOriginalFilename());
-        System.out.println(uploadDir + sep
+        File uploadedFile = new File(newDir + sep
                 + file.getOriginalFilename());
         FileCopyUtils.copy(bytes, uploadedFile);
-        String msg = "true";
-        response.getWriter().write(msg);
+        String path = "/class/upload/material/"+material.getCourseId()+getWebParentPath(material.getPid())+"/"+file.getOriginalFilename();
+        material.setPath(path);
+        int newId = materialService.save(material);
+
+        int status = 100;
+        String newName = material.getName();
+        Map<String,Object> map = new HashMap<String, Object>();
+        map.put("status",100);
+        map.put("name",newName);
+        map.put("id",newId);
+        return map;
     }
 
+    private String getWebParentPath(int id){
+        if(id==0) return "";
+        TMaterial material = materialService.findOne(id);
+        return "/"+getParentPath(material.getPid())+"/"+material.getName();
+    }
     private String getParentPath(int id){
         if(id==0) return "";
         TMaterial material = materialService.findOne(id);
-        //parentPath+=File.separator+material.getName();
         return File.separator+getParentPath(material.getPid())+File.separator+material.getName();
     }
 
@@ -81,9 +93,7 @@ public class ClassController {
     public Map<String, Object> makeDir(HttpServletRequest request,@RequestParam("pid") Integer pid ,@RequestParam("name") String name ,@RequestParam("cid") Integer cid ,Model model){
         TMaterial materail = new TMaterial();
         String uploadDir = request.getServletContext().getRealPath(File.separator)+"\\upload\\material";
-        //parentPath = "";
         String newDir = uploadDir+File.separator+cid+getParentPath(pid)+File.separator+name;
- System.out.println(newDir);
         File dirPath = new File(newDir);
         Map<String, Object> map = new HashMap<String,Object>();
         if (dirPath.exists()) {
@@ -129,5 +139,21 @@ public class ClassController {
 
     @RequestMapping("seminar/index")
     public void seminarIndex(Model model){
+    }
+
+    @ResponseBody
+    @RequestMapping("material/edit/delete")
+    public Map<String,Object> materialDelete(@RequestParam("id") Integer id,Model model){
+        materialDeleteFunc(id);
+        Map<String,Object> map = new HashMap<String, Object>();
+        map.put("status",100);
+        return map;
+    }
+
+    private void materialDeleteFunc(int id){
+        if(id==0) return;
+        TMaterial material = materialService.findOne(id);
+        materialService.delete(id);
+        materialDeleteFunc(material.getPid());
     }
 }

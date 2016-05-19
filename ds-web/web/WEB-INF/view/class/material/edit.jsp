@@ -73,6 +73,8 @@
                 success:function(msg){
                     if(msg.status==100){
                         treeNode.id = msg.id;
+                        zTree = $.fn.zTree.getZTreeObj("treeDemo");
+                        zTree.updateNode(treeNode);
                     }else if(msg.status==101){
                         var zTree = $.fn.zTree.getZTreeObj("treeDemo");
                         var callbackFlag = $("#callbackTrigger").attr("checked");
@@ -101,8 +103,26 @@
             alert("请先选择一个节点");
             return;
         }
-        var callbackFlag = $("#callbackTrigger").attr("checked");
-        zTree.removeNode(treeNode, callbackFlag);
+        var tar_id = treeNode.id;
+        $.ajax({
+            url:'/class/material/edit/delete',
+            type:'post',
+            dataType:'json',
+            data:{'id':tar_id},
+            success:function(msg){
+                if(msg.status==100) {
+                    alert("删除成功！");
+                    var callbackFlag = $("#callbackTrigger").attr("checked");
+                    zTree.removeNode(treeNode, callbackFlag);
+                }
+
+            },
+            error:function(msg){
+                alert(msg.status);
+            }
+
+        })
+
     };
 
     function add(e) {
@@ -152,8 +172,7 @@
             $('#myModal').modal('hide');
             var name = $("#name").val();
             var desc = $("#desc").val();
-            alert(name+desc);
-            $('#file_upload').uploadify('settings','formData',{"id":tid,"name":name,"desc":desc});
+            $('#file_upload').uploadify('settings','formData',{"pid":tid,"name":name,"desc":desc,"courseId":cid});
             $('#file_upload').uploadify('upload', '*');
 
             return;
@@ -185,14 +204,25 @@
             'fileObjName' : 'file',
             'fileSizeLimit' : '0',
             'onUploadSuccess' : function(file, data, response) {
+                var msg = strToJson(data);
+                var zTree = $.fn.zTree.getZTreeObj("treeDemo"),
+                        nodes = zTree.getSelectedNodes(),
+                        treeNode = nodes[0];
+                treeNode.name = msg.name;
+                treeNode.id = msg.id;
+                zTree.updateNode(treeNode);
 
-                alert( file.name + ' 上传成功！ ');
             }
+
 
         });
 
 
     });
+    function strToJson(str){
+        var json = eval('(' + str + ')');
+        return json;
+    }
     //-->
 </SCRIPT>
     <style>

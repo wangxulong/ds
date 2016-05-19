@@ -68,4 +68,8 @@ public class MaterialService {
         return materialDao.findOne(id);
     }
 
+    public void delete(int id){
+
+        materialDao.delete(id);
+    }
 }
