@@ -8,12 +8,7 @@
 <div class="container">
   <div class="row">
     <div class="col-md-2">
-      <div class="list-group">
-        <a href="user-leave.html" class="list-group-item ">
-          我的请假
-        </a>
-        <a href="user-leave-submit.html" class="list-group-item active">我要请假</a>
-      </div>
+      <%@include file="left.jsp"%>
     </div>
     <div class="col-md-10">
 
@@ -66,17 +61,53 @@
   </div>
 </div>
 
-<script>
-  $(function(){
-    //初始化上传控件
-    $("#input-dim-2").fileinput({
-      language: 'zh',
-      uploadUrl: "/file-upload-batch/2",
-      allowedFileExtensions: ["jpg", "png", "gif","doc","docx"],
-      maxImageWidth: 250,
-      maxImageHeight: 250
+  <script>
+    $(function(){
+
+      //时间控件
+      $('.form_date').datetimepicker({
+        language:  'zh-CN',
+        weekStart: 1,
+        todayBtn:  1,
+        autoclose: 1,
+        todayHighlight: 1,
+        startView: 2,
+        minView: 2,
+        forceParse: 0
+      });
+      //初始化上传控件
+      $("#input-dim-2").fileinput({
+        language: 'zh',
+        allowedFileExtensions: ["jpg", "png", "gif","doc","docx"],
+        showUpload:false,
+        autoReplace:true,
+      });
+      //验证插件
+      $(function(){
+        $('.form').bootstrapValidator({
+          feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+          },
+          fields: {
+            leaveDate:{
+              validators: {
+                notEmpty: {
+                }
+              }
+            },
+            content: {
+              validators: {
+                notEmpty: {
+                }
+              }
+            }
+          }
+        });
+      });
+
     });
-  });
 
 </script>
 </body>

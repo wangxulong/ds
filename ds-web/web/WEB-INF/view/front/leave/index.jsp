@@ -8,12 +8,7 @@
   <div class="container">
       <div class="row">
           <div class="col-md-2">
-              <div class="list-group">
-                  <a href="user-leave.html" class="list-group-item active">
-                      我的请假
-                  </a>
-                  <a href="user-leave-submit.html" class="list-group-item">我要请假</a>
-              </div>
+              <%@include file="left.jsp"%>
           </div>
           <div class="col-md-10">
 
