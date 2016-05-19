@@ -5,7 +5,6 @@ import com.wang.auth.sys.dao.SysRoleDao;
 import com.wang.auth.sys.dao.SysUserDao;
 import com.wang.auth.sys.entity.SysRole;
 import com.wang.auth.sys.entity.SysUser;
-import com.wang.auth.sys.service.SysUserService;
 import com.wang.dao.TCourseDao;
 import com.wang.dao.TeacherDao;
 import com.wang.entity.TCourse;
@@ -18,8 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by wxl on 2016/3/1.
@@ -96,6 +94,61 @@ public class TeacherService {
         sysUser.setRoleIds(sysRole.getId()+"");
         sysUserDao.save(sysUser);
     }
+    //获取各种职称的人数
+    public Map<String,Integer> getNumOfLevels(){
+        Map<String,Integer> map = new LinkedHashMap<String, Integer>();
+        List<TTeacher> list = teacherDao.findAll();
+        int sumTotal=0,preNum=0,vPreNum=0,lecNum=0,taNum=0;
+        sumTotal = list.size();
+        for(int i=0;i<sumTotal;i++){
+            if(list.get(i).getLevel().equals("教授")){
+                preNum++;
+                continue;
+            }
+            if(list.get(i).getLevel().equals("副教授")){
+                vPreNum++;
+                continue;
+            }
+            if(list.get(i).getLevel().equals("讲师")){
+                lecNum++;
+                continue;
+            }
+            if(list.get(i).getLevel().equals("助教")){
+                taNum++;
+                continue;
+            }
+        }
+        map.put("总人数:", sumTotal);
+        map.put("教授:",preNum);
+        map.put("副教授:",vPreNum);
+        map.put("讲师:",lecNum);
+        map.put("助教:",taNum);
+        return map;
+    }
 
+    //获取老师性别人数,教课中的人数
+    public Map<String,Integer> getNumOfSexState(){
+        Map<String,Integer> map = new LinkedHashMap<String, Integer>();
+        List<TTeacher> list = teacherDao.findAll();
+        int manNum=0,womenNum=0,inTech=0,outTeach=0;
+        for(int i=0;i<list.size();i++){
+            if(list.get(i).getSex()==1){
+                manNum++;
+            }else{
+                womenNum++;
+            }
+            if(list.get(i).getState()==1){
+                inTech++;
+            }else{
+                outTeach++;
+            }
+
+        }
+        map.put("男:",manNum);
+        map.put("女:",womenNum);
+        map.put("教课中:",inTech);
+        map.put("未教课:",outTeach);
+        return map;
+    }
 }
 

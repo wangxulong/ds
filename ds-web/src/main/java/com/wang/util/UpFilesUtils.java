@@ -27,6 +27,9 @@ public class UpFilesUtils {
     public static String getRealPath(){
         return filePath = UpFilesUtils.class.getClassLoader().getResource("/").getPath()+"/upload/";
     }
+//    public static String getRealPaths(){
+//        return  filePath = this.getServletContext().getRealPath("/WEB-INF/upload");
+//    }
     //存储上传文件到类路径下
     public static void saveFile(MultipartFile file) {
         if (null != file) {

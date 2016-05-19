@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.Resource;
+import java.util.Map;
 
 /**课程介绍
  * Created by Administrator on 2016/5/9 0009.
@@ -27,9 +28,13 @@ public class CourseController {
     @RequestMapping("index")
     public void index(Model model){
         String  messages = groupService.getGroupMessage();
+        Map<String,Integer> map1 = teacherService.getNumOfLevels();
+        Map<String,Integer> map2 = teacherService.getNumOfSexState();
         model.addAttribute("Course",courseService.getAllCourse());
         model.addAttribute("group",messages);
         model.addAttribute("teachers",teacherService.findAllTeacher());
+        model.addAttribute("levelNums",map1);
+        model.addAttribute("sexStateNums",map2);
     }
 
     //添加

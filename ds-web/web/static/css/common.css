@@ -19,3 +19,6 @@
     font-size: 16px;
     color: cornflowerblue;
 }
+.font-style a:hover{
+    text-decoration: none;
+}

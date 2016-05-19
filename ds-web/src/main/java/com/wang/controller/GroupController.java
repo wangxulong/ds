@@ -25,7 +25,7 @@ public class GroupController {
     @RequestMapping("save")
     public String save(TGroup group){
         groupService.saveOrUpdate(group);
-        return "redirect:/group/index";
+        return "redirect:/course/index";
     }
 
 }
