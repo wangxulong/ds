@@ -35,7 +35,6 @@ public class ClassController {
 
     @RequestMapping("index")
     public void index(Model model){
-
     }
 
     @RequestMapping("material/index")
@@ -53,6 +52,7 @@ public class ClassController {
     @ResponseBody
     @RequestMapping(value="uploadFile",method= RequestMethod.POST)
     public Map<String,Object> uploadFile(@ModelAttribute TMaterial material, HttpServletResponse response, HttpServletRequest request, @RequestParam(value="file", required=false) MultipartFile file) throws IOException {
+System.out.println("zjc"+file.isEmpty());
         byte[] bytes = file.getBytes();
         String uploadDir = request.getServletContext().getRealPath(File.separator)+"\\upload\\material";
         String newDir = uploadDir+File.separator+material.getCourseId()+getParentPath(material.getPid());
@@ -64,8 +64,9 @@ public class ClassController {
         File uploadedFile = new File(newDir + sep
                 + file.getOriginalFilename());
         FileCopyUtils.copy(bytes, uploadedFile);
-        String path = "/class/upload/material/"+material.getCourseId()+getWebParentPath(material.getPid())+"/"+file.getOriginalFilename();
+        String path = request.getContextPath()+"/upload/material/"+material.getCourseId()+getWebParentPath(material.getPid())+"/"+file.getOriginalFilename();
         material.setPath(path);
+
         int newId = materialService.save(material);
 
         int status = 100;
@@ -76,6 +77,8 @@ public class ClassController {
         map.put("id",newId);
         return map;
     }
+
+
 
     private String getWebParentPath(int id){
         if(id==0) return "";
@@ -133,6 +136,12 @@ public class ClassController {
         return  materialService.findAll();
     }
 
+    @ResponseBody
+    @RequestMapping("material/edit/getOneNode")
+    public TMaterial getNodeById(Integer id,Model model){
+        return  materialService.findOne(id);
+    }
+
     @RequestMapping("request/index")
     public void requestIndex(Model model){
     }
@@ -144,16 +153,16 @@ public class ClassController {
     @ResponseBody
     @RequestMapping("material/edit/delete")
     public Map<String,Object> materialDelete(@RequestParam("id") Integer id,Model model){
-        materialDeleteFunc(id);
+        materialService.materialDeleteFunc(id);
         Map<String,Object> map = new HashMap<String, Object>();
         map.put("status",100);
         return map;
     }
 
-    private void materialDeleteFunc(int id){
+    /*private void materialDeleteFunc(int id){
         if(id==0) return;
         TMaterial material = materialService.findOne(id);
         materialService.delete(id);
         materialDeleteFunc(material.getPid());
-    }
+    }*/
 }

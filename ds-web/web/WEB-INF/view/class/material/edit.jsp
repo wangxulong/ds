@@ -25,13 +25,14 @@
             beforeClick: beforeClick,
             onClick: onClick,
             beforeRename:beforeRename,
+
         }
     };
     var zNodes =[
     ];
     if(cid){
         $.ajax({
-            url:'/class/getNode',
+            url:'${ctx}/class/getNode',
             data:{
                 'cid':cid
             },
@@ -51,7 +52,13 @@
     function beforeClick(treeId, treeNode, clickFlag) {
     }
     function onClick(event, treeId, treeNode, clickFlag) {
-
+        if(!treeNode.isParent){
+            $("#detail").show(200);
+            $("#detail").attr("tid",treeNode.id);
+        }else{
+            $("#detail").hide(200);
+            $("#detail").attr("tid",0);
+        }
     }
     function beforeRename(treeId, treeNode,newName, isCancel){
         var pid;
@@ -61,7 +68,7 @@
         }
         if(treeNode!=null&&treeNode.isParent){
             $.ajax({
-                url:'/class/makedir',
+                url:'${ctx}/class/makedir',
                 data:{
                     'cid':cid,
                     'pid':pid,
@@ -105,15 +112,17 @@
         }
         var tar_id = treeNode.id;
         $.ajax({
-            url:'/class/material/edit/delete',
+            url:'${ctx}/class/material/edit/delete',
             type:'post',
             dataType:'json',
             data:{'id':tar_id},
             success:function(msg){
                 if(msg.status==100) {
                     alert("删除成功！");
-                    var callbackFlag = $("#callbackTrigger").attr("checked");
-                    zTree.removeNode(treeNode, callbackFlag);
+                    zTree.removeNode(treeNode);
+                    var parentNode = treeNode.getParentNode();
+                    parentNode.isParent=true;
+                    zTree.updateNode(parentNode);
                 }
 
             },
@@ -164,7 +173,9 @@
             return;
         }
         var tid = treeNode.id;
-
+        $("#sub_btn").show();
+        $("#sub_btn2").hide();
+        $("#uploaded_file").hide();
         $('#myModal').modal('show');
        // $("#upload_btn").bind("click",function(){
         $("#sub_btn").unbind("click");
@@ -198,12 +209,13 @@
         $("#remove").bind("click",remove);
 
         $('#file_upload').uploadify({
-            'swf'      : '/static/uploadify/uploadify.swf',
-            'uploader' : '/class/uploadFile',
+            'swf'      : '${ctx}/static/uploadify/uploadify.swf',
+            'uploader' : '${ctx}/class/uploadFile',
             'auto':false,
             'fileObjName' : 'file',
             'fileSizeLimit' : '0',
             'onUploadSuccess' : function(file, data, response) {
+
                 var msg = strToJson(data);
                 var zTree = $.fn.zTree.getZTreeObj("treeDemo"),
                         nodes = zTree.getSelectedNodes(),
@@ -215,6 +227,55 @@
             }
 
 
+
+
+        });
+
+        $("#detail").bind("click",function(){
+
+            var tid = $(this).attr("tid");
+            $.ajax({
+                url:"${ctx}/class/material/edit/getOneNode",
+                type:'post',
+                dataType:'json',
+                data:{
+                    'id':tid
+                },
+                success:function(msg){
+
+                    $("#name").val(msg.name);
+                    $("#desc").val(msg.desc);
+                    $("#uploaded_file a").attr("href",msg.path);
+                    var dirs = msg.path.split('/');
+                    var fileName = dirs[dirs.length-1];
+
+                    $("#uploaded_file a").text(fileName);
+                    $("#uploaded_file").show(100);
+                    $("#sub_btn").hide();
+                    $("#sub_btn2").show();
+                    $("#sub_btn2").unbind("click");
+                    $("#sub_btn2").bind("click",function(){
+
+                        $('#myModal').modal('hide');
+                        var name = $("#name").val();
+                        var desc = $("#desc").val();
+                        var zTree = $.fn.zTree.getZTreeObj("treeDemo"),
+                                nodes = zTree.getSelectedNodes(),
+                                treeNode = nodes[0];
+                        var pid = treeNode.getParentNode().id;
+                        var tid = treeNode.id;
+                        $('#file_upload').uploadify('settings','formData',{"id":tid,"pid":pid,"name":name,"desc":desc,"courseId":cid});
+                        $('#file_upload').uploadify('upload', '*');
+
+
+                        return;
+                    });
+                    $('#myModal').modal('show');
+                },
+                error:function(msg){
+                    alert("error");
+                }
+            })
         });
 
 
@@ -236,7 +297,8 @@
 </head>
 
 <BODY>
-<div class="page-header">
+
+    <div class="page-header">
     <h1 align="left">
         ${course.name}-资料管理
         <small>
@@ -244,11 +306,22 @@
         </small>
     </h1>
     </div>
+
+
+
+
+
     <div class="zTreeDemoBackground left" style="float:left;margin-left:50px;">
         <ul id="treeDemo" class="ztree"></ul>
     </div>
     <div class="right" style="float:left">
+
         <div style="margin-left:80px;margin-top: 100px">
+        <div class="op_btn">
+            <a class="btn btn-xs btn-primary " href="javascript:;" id="detail" style="display: none;" tid="0">
+                <i class="ace-icon fa fa-upload bigger-120"></i> 查看
+            </a>
+        </div>
         <div class="op_btn">
             <a class="btn btn-xs btn-success " href="javascript:;" id="create">
                 <i class="ace-icon fa fa-file bigger-120"></i> 新建文件夹
@@ -259,6 +332,7 @@
                 <i class="ace-icon fa fa-upload bigger-120"></i> 上传文件
             </a>
         </div>
+
         <div class="op_btn">
             <a class="btn btn-xs btn-danger " href="javascript:;" id="remove">
                 <i class="ace-icon fa fa-cut bigger-120"></i> 删除
@@ -281,7 +355,7 @@
             <!-- #section:elements.form -->
 
            <div class="form-group">
-                <label class="col-sm-3 control-label no-padding-right"> 附件标题 </label>
+                <label class="col-sm-3 control-label no-padding-right"> 附件名称 </label>
 
                 <div class="col-sm-9">
                     <div class="col-sm-9">
@@ -303,12 +377,18 @@
             <div class="form-group">
                 <label class="col-sm-3 control-label no-padding-right"  > 上传附件 </label>
 
+
+
                 <div class="col-sm-9">
                     <div class="col-sm-9">
 
                         <input type="file" name="fileName" id="file_upload" />
                       <%--  <a href="javascript:;" id="upload_btn">上传文件</a> | <a href="javascript:$('#file_upload').uploadify('stop')">停止上传!</a>--%>
                     </div>
+                </div>
+                <div id="uploaded_file" style="display:none">
+                    <img src="${ctx}/static/img/attachment.png" style="width:15px;height:15px;"/>
+                    <a href="javascript:;"></a>
                 </div>
             </div>
         </form:form>
@@ -322,6 +402,10 @@
             <a class="btn btn-sm btn-primary btnSave" href="javascript:;" id="sub_btn">
                 <i class="ace-icon fa fa-check"></i>
                 保存
+            </a>
+            <a class="btn btn-sm btn-primary btnSave" href="javascript:;" id="sub_btn2">
+                <i class="ace-icon fa fa-check"></i>
+                更新
             </a>
         </div>
     </div>

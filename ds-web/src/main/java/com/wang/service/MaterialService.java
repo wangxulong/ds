@@ -72,4 +72,24 @@ public class MaterialService {
 
         materialDao.delete(id);
     }
+
+    public void materialDeleteFunc(int id){
+        TMaterial material = findOne(id);
+        delete(id);
+        List<TMaterial> materials = getAllChild(id);
+        for(int i=0;i<materials.size();i++)
+            materialDeleteFunc(materials.get(i).getId());
+    }
+
+    public List<TMaterial> getAllChild(int id){
+
+        EntityManager em = managerFactory.createEntityManager();
+        String sql = "SELECT * FROM t_material AS m WHERE m.p_id ="+id;
+        Query query =  em.createNativeQuery(sql,TMaterial.class);
+        List<TMaterial>  resultList = query.getResultList();
+        em.close();
+        return resultList;
+    }
+
+
 }
