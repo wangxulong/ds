@@ -414,7 +414,6 @@
 <script>
     $(function(){
         $(".btnSave").on("click",function(){
-
             $("#formSysRole").submit();
         });
     });

@@ -1,6 +1,9 @@
 package com.wang.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
+import java.util.Date;
 
 /**
  * Created by wxl on 2016/5/8.
@@ -11,8 +14,13 @@ public class TNote {
     private Integer id;
     private String title;
     private String content;
-    private Integer studentId;
-    private Integer courseId;
+    //private Integer studentId;
+    private TStudent student;
+    //private Integer courseId;
+    private TCourse course;
+    private Integer status;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date time;
 
     @Id
     @Column(name = "id")
@@ -45,17 +53,38 @@ public class TNote {
         this.content = content;
     }
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "student_id", referencedColumnName = "id")
+    public TStudent getStudent() {
+        return student;
+    }
+
+    public void setStudent(TStudent student) {
+        this.student = student;
+    }
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "course_id", referencedColumnName = "id")
+    public TCourse getCourse() {
+        return course;
+    }
+
+    public void setCourse(TCourse course) {
+        this.course = course;
+    }
+
+    /*
     @Basic
     @Column(name = "student_id")
-    public Integer getStudentId() {
+   public Integer getStudentId() {
         return studentId;
     }
 
     public void setStudentId(Integer studentId) {
         this.studentId = studentId;
-    }
+    }*/
 
-    @Basic
+    /*@Basic
     @Column(name = "course_id")
     public Integer getCourseId() {
         return courseId;
@@ -63,31 +92,27 @@ public class TNote {
 
     public void setCourseId(Integer courseId) {
         this.courseId = courseId;
+    }*/
+
+    @Basic
+    @Column(name = "time")
+    public Date getTime() {
+        return time;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        TNote tNote = (TNote) o;
-
-        if (id != null ? !id.equals(tNote.id) : tNote.id != null) return false;
-        if (title != null ? !title.equals(tNote.title) : tNote.title != null) return false;
-        if (content != null ? !content.equals(tNote.content) : tNote.content != null) return false;
-        if (studentId != null ? !studentId.equals(tNote.studentId) : tNote.studentId != null) return false;
-        if (courseId != null ? !courseId.equals(tNote.courseId) : tNote.courseId != null) return false;
-
-        return true;
+    public void setTime(Date time) {
+        this.time = time;
     }
 
-    @Override
-    public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (title != null ? title.hashCode() : 0);
-        result = 31 * result + (content != null ? content.hashCode() : 0);
-        result = 31 * result + (studentId != null ? studentId.hashCode() : 0);
-        result = 31 * result + (courseId != null ? courseId.hashCode() : 0);
-        return result;
+    @Basic
+    @Column(name = "status")
+    public Integer getStatus() {
+        return status;
     }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+
 }

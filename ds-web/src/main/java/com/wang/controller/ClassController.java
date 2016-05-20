@@ -3,9 +3,12 @@ package com.wang.controller;
 import com.alibaba.fastjson.JSONArray;
 import com.sun.corba.se.impl.orbutil.threadpool.ThreadPoolManagerImpl;
 import com.wang.entity.TMaterial;
+import com.wang.entity.TNote;
+import com.wang.entity.enums.NoteState;
 import com.wang.form.MaterialFormBean;
 import com.wang.service.CourseService;
 import com.wang.service.MaterialService;
+import com.wang.service.NoteService;
 import org.springframework.core.env.SystemEnvironmentPropertySource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,6 +35,9 @@ public class ClassController {
 
     @Resource
     private MaterialService materialService;
+
+    @Resource
+    private NoteService noteService;
 
     @RequestMapping("index")
     public void index(Model model){
@@ -159,10 +165,37 @@ System.out.println("zjc"+file.isEmpty());
         return map;
     }
 
-    /*private void materialDeleteFunc(int id){
-        if(id==0) return;
-        TMaterial material = materialService.findOne(id);
-        materialService.delete(id);
-        materialDeleteFunc(material.getPid());
-    }*/
+
+
+    @RequestMapping("note/index")
+    public void noteIndex(Model model){
+        List<TNote> notes = noteService.findAll();
+
+        model.addAttribute("notes",notes);
+    }
+
+    @ResponseBody
+    @RequestMapping("note/get")
+    public TNote getOne(@RequestParam("id") Integer id){
+        return noteService.findOne(id);
+    }
+
+    @ResponseBody
+    @RequestMapping("note/approve")
+    public Map<String,Object> noteApprove(@RequestParam("id") Integer id){
+        noteService.appoveNote(id);
+        Map<String,Object> map = new HashMap<String, Object>();
+        map.put("status",100);
+        return map;
+    }
+
+    @ResponseBody
+    @RequestMapping("note/dismiss")
+    public Map<String,Object>  noteDismiss(@RequestParam("id") Integer id){
+        noteService.dismissNote(id);
+        Map<String,Object> map = new HashMap<String, Object>();
+        map.put("status",100);
+        return map;
+    }
+
 }
