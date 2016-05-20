@@ -54,7 +54,7 @@
             <div class="tab-content">
                 <!--上传试卷的tab-->
                 <div id="home" class="tab-pane in active">
-                    <p>试卷上传</p>
+                    <p><a href="${ctx}/exam/history">查看历史</a></p>
                     <div class="row">
                         <div class="col-xs-12">
                             <!-- PAGE CONTENT BEGINS -->
@@ -104,7 +104,7 @@
 
                                             <div class="col-sm-9">
                                                 <div class="col-sm-9">
-                                                    <form:input path="title" placeholder="作业主题" class="form-control" />
+                                                    <form:input path="title" placeholder="试卷主题" class="form-control" />
                                                 </div>
                                             </div>
                                         </div>
@@ -182,12 +182,12 @@
                                     </button>
                                 </div>
                                 <!--已经提交的组件-->
-                               <%-- <div class="center">
+                                <div class="center hidden" id="submited">
                                     <label class="control-label no-padding-right" onclick="call()"> 文件名 </label>
                                     <a class="btn btn-xs btn-success " href="#" >
                                         下载
                                     </a>
-                                </div>--%>
+                                </div>
                         </div><!-- /.col -->
                     </div><!-- /.row -->
                 </div>
@@ -266,14 +266,35 @@
         </div>
     </div><!-- /.page-content -->
     <script type="text/javascript">
+        function entity(year,term,type){
+            this.year=year;
+            this.term=term;
+            this.type=type;
+        };
         function selected(){
             var year=document.getElementById('year')
             var term=document.getElementById('term')
             var exemtype=document.getElementById('exemtype')
-            if(year.value&&term.value&&exemtype.value)
-                $("#form-content").removeClass('hidden')
-            else
-                $("#form-content").addClass('hidden')
+            if(year.value&&term.value&&exemtype.value) {
+                var JSONString =JSON.stringify(new entity(year.value,term.value,exemtype.value));
+                //alert(JSONString);
+                $.get("${ctx}/exam/search","jsonString="+JSONString,function(data){
+                    //alert("bofore"+data+data=="success");
+                   if(data=="success") {
+                       alert("该学期的试卷已上传过,可以在历史记录中查询");
+                       //$("#submited").removeClass('hidden');
+                       $("#form-content").addClass('hidden')
+                   }else{
+                       alert("请上传试卷");
+                       $("#form-content").removeClass('hidden');
+                       //$("#submited").addClass('hidden');
+                   }
+                });
+            }
+            else {
+                $("#form-content").addClass('hidden');
+                //$("#submited").addClass('hidden');
+            }
         };
         $(function(){
             var mydate = new Date();
@@ -281,7 +302,6 @@
             for(var i=year;i>=2010;i--) {
                 $("#year").append("<option>"+i+"</option>")
             }
-            $("#exemtitle").removeClass('hidden');
         });
         $(function(){
             $(".btnSave").on("click",function(){
@@ -294,11 +314,11 @@
         });
     </script>
     <script>
-        function call(){
-            alert("hah");
-            $.get("${ctx}/exam/search",function(data){
+        function call(year,term,type){
+            alert("before1");
+            $.get("${ctx}/exam/search?year="+year,function(data){
                     alert(data);
-            })
+            });
         };
     </script>
 </body>

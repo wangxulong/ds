@@ -85,7 +85,7 @@ public class TTaskService {
         SysUser sysUser = securityService.getLoginUser();
         String jobNumber = sysUser.getUserName();
         TTeacher tTeacher = teacherDao.findByJobNumber(jobNumber);
-        task.setTeacherId(tTeacher.getId());
+        //task.setTeacherId(tTeacher.getId());
         //TODO 李昌亚
         task.setCourseId(1);//设置课程ID
         if (taskFormBean.getFile().isEmpty()){  //没有附件

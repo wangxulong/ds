@@ -1,5 +1,6 @@
 package com.service;
 
+import com.wang.service.TExamService;
 import com.wang.service.TTaskService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,10 +18,12 @@ import java.util.List;
 public class TaskServiceTest {
     @Resource
     private TTaskService tTaskService;
-
+    @Resource
+    private TExamService tExamService;
     @Test
     public void getStudentTask(){
         List result = tTaskService.getTaskByStudentId(2);
         System.out.println(result.size());
+        System.out.println("test"+tExamService.searchExist(2016,1,1));
     }
 }
