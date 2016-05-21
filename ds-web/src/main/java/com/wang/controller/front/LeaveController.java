@@ -2,6 +2,7 @@ package com.wang.controller.front;
 
 import com.wang.controller.front.FrontController;
 import com.wang.entity.TLeave;
+import com.wang.entity.TNote;
 import com.wang.entity.TStudent;
 import com.wang.entity.enums.LeaveState;
 import com.wang.service.LeaveService;
@@ -9,6 +10,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.wang.service.NoteService;
 import com.wang.util.ConstantUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,15 +23,16 @@ import org.springframework.web.multipart.MultipartFile;
 public class LeaveController extends FrontController {
     @Resource
     private LeaveService leaveService;
-
+    @Resource
+    private NoteService noteService;
     public LeaveController() {
     }
 
     @RequestMapping("index")
     public void index(Model model, HttpSession session) {
         TStudent loginStudent = this.getLoginUser(session);
-        model.addAttribute("state", LeaveState.values());
-        model.addAttribute("leaves", this.leaveService.getMyLeaves(loginStudent.getId()));
+       //  model.addAttribute("state", LeaveState.values());
+        model.addAttribute("notes", noteService.getByStudentId(getLoginUser(session).getId()));
     }
 
     @RequestMapping(value = "submit",method = RequestMethod.GET)
@@ -37,9 +40,9 @@ public class LeaveController extends FrontController {
     }
 
     @RequestMapping(value = "submit",method = RequestMethod.POST)
-    public String doPost(MultipartFile file, TLeave leave, HttpSession session, HttpServletRequest request) {
+    public String doPost(MultipartFile file, TNote note, HttpSession session, HttpServletRequest request) {
         TStudent loginUser = getLoginUser(session);
-        leaveService.add(file, leave, loginUser.getId(), getContentRealPath(request) + ConstantUtil.LEAVE_PATH);
+        noteService.add(file, note, loginUser.getId(), getContentRealPath(request) + ConstantUtil.LEAVE_PATH);
         return "redirect:index";
     }
 }

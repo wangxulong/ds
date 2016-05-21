@@ -22,6 +22,17 @@ public class TNote {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date time;
 
+    private Integer attachId;
+
+    @Column(name = "attach_id")
+    public Integer getAttachId() {
+        return attachId;
+    }
+
+    public void setAttachId(Integer attachId) {
+        this.attachId = attachId;
+    }
+
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)

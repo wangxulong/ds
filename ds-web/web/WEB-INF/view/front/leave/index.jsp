@@ -26,49 +26,48 @@
                             <th>
                                 #
                             </th>
-                            <th>
-                                时间
-                            </th>
-                            <th>
-                                内容
-                            </th>
+                            <th>标题</th>
 
-                            <th>
-                                状态
-                            </th>
-                            <th>
-                                附件
-                            </th>
+                            <th>请假内容</th>
+                            <th>请假日期</th>
+                            <th>当前状态</th>
+                            <th>附件</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <c:choose>
-                            <c:when test="${empty leaves}">
+                        <c:forEach items="${notes}" var="note" varStatus="s">
+                            <tr nid="${note.id}">
+                                <td class="center">
+                                     ${s.count}
+                                </td>
+                                <td>${note.title}</td>
 
-                            </c:when>
-                            <c:otherwise>
-                                <c:forEach items="${leaves}" var="leave" varStatus="s">
-                                    <tr>
-                                        <td>${s.count}</td>
-                                        <td><fmt:formatDate value="${leave.leaveDate}" pattern="yyyy-MM-dd"/> </td>
-                                        <td>${leave.content} </td>
-                                        <td>
-                                                ${leave.state.description}
-                                        </td>
-                                        <td>
-                                            <c:choose>
-                                                <c:when test="${not empty leave.attachId}">
-                                                    <a class="btn btn-primary btn-sm" href="${ctx}/front/download/${leave.attachId}">下载</a>
-                                                </c:when>
-                                                <c:otherwise>
-                                                    没有附件
-                                                </c:otherwise>
-                                            </c:choose>
-                                        </td>
-                                    </tr>
-                                </c:forEach>
-                            </c:otherwise>
-                        </c:choose>
+                                <td> ${note.content}</td>
+                                <td><fmt:formatDate value="${note.time}" pattern="yyyy-MM-dd"></fmt:formatDate></td>
+                                <td>
+                                    <c:if test="${note.status == 0}">
+                                        <span class="label label-sm label-warning">待审核</span>
+                                    </c:if>
+                                    <c:if test="${note.status == 1}">
+                                        <span class="label label-sm label-success">已审核</span>
+                                    </c:if>
+                                    <c:if test="${note.status == 2}">
+                                        <span class="label label-sm label-danger">已拒绝</span>
+                                    </c:if>
+
+                                </td>
+                                <th>
+                                    <c:choose>
+                                        <c:when test="${empty note.attachId}">
+                                            <span class="label label-sm label-danger">没有附件</span>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <a href="${ctx}/front/download/${note.attachId}" class="btn btn-primary btn-sm"> 下载</a>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </th>
+                            </tr>
+                        </c:forEach>
                         </tbody>
                     </table>
                 </div>

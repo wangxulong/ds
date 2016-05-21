@@ -24,7 +24,7 @@
           <div class="row">
             <div class="col-md-12">
               <form class="form-horizontal form" method="post" enctype="multipart/form-data" action="${ctx}/front/leave/submit">
-                <div class="form-group">
+                <%--<div class="form-group">
                   <label  class="col-sm-2 control-label">请假时间</label>
                   <div class="col-sm-10">
 
@@ -34,6 +34,12 @@
                       <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
                     </div>
                     <input type="hidden" id="dtp_input2" value="" /><br/>
+                  </div>
+                </div>--%>
+                <div class="form-group">
+                  <label  class="col-sm-2 control-label">标题</label>
+                  <div class="col-sm-10">
+                    <input class="form-control" name="title" placeholder="标题" />
                   </div>
                 </div>
                 <div class="form-group">
@@ -67,7 +73,7 @@
 <script>
   $(function(){
 
-    //时间控件
+   /* //时间控件
     $('.form_date').datetimepicker({
       language:  'zh-CN',
       weekStart: 1,
@@ -77,13 +83,13 @@
       startView: 2,
       minView: 2,
       forceParse: 0
-    });
+    });*/
     //初始化上传控件
     $("#input-dim-2").fileinput({
       language: 'zh',
       allowedFileExtensions: ["jpg", "png", "gif","doc","docx"],
       showUpload:false,
-      autoReplace:true,
+      autoReplace:true
     });
     //验证插件
     $(function(){
@@ -94,7 +100,7 @@
           validating: 'glyphicon glyphicon-refresh'
         },
         fields: {
-          leaveDate:{
+          title:{
             validators: {
               notEmpty: {
               }
@@ -106,9 +112,6 @@
               }
             }
           }
-        },
-        file: {
-
         }
       });
     });
