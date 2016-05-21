@@ -21,6 +21,8 @@ public class TExam {
     private Integer year;
     private Integer term;
     private String score;
+    private Integer teacherId;
+    private Integer courseId;
 
     @Id
     @Column(name = "id")
@@ -98,6 +100,25 @@ public class TExam {
 
     public void setScore(String score) {
         this.score = score;
+    }
+
+    @Basic
+    @Column(name = "teacher_id")
+    public Integer getTeacherId() {
+        return teacherId;
+    }
+
+    public void setTeacherId(Integer teacherId) {
+        this.teacherId = teacherId;
+    }
+    @Basic
+    @Column(name = "course_id")
+    public Integer getCourseId() {
+        return courseId;
+    }
+
+    public void setCourseId(Integer courseId) {
+        this.courseId = courseId;
     }
 
     @Override

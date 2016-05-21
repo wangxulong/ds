@@ -8,6 +8,7 @@ import com.wang.form.HomeworkFormBean;
 import com.wang.service.TExamService;
 import com.wang.service.TStudetServeice;
 import com.wang.service.TTaskService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,13 +29,14 @@ public class ExamController {
     private TExamService tExamService;
     @Resource
     private TStudetServeice tStudentService;
-
+    //访问考试管理主页
     @RequestMapping("index")
     public void index(Model model){
         ExamFormBean command = new ExamFormBean();
         model.addAttribute("command", command);
         model.addAttribute("allStu",tStudentService.getAllStudent());
     }
+    //上传考试试卷
     @RequestMapping(value ="upload")
     public String save(ExamFormBean command){
         tExamService.uploadExam(command);
@@ -47,6 +49,7 @@ public class ExamController {
         model.addAttribute("exams",exams);
         return "exam/history";
     }
+    //验证考试是否上传
     @RequestMapping("search")
     @ResponseBody
     public String searchExam(String jsonString){
@@ -60,5 +63,30 @@ public class ExamController {
             return "success";
         }
         return "fail";
+    }
+
+    @RequestMapping("edit")
+    public String editExam(Integer id,Integer type,Model model){
+        TExam tExam=tExamService.getExamById(id);
+        ExamFormBean form=new ExamFormBean();
+        BeanUtils.copyProperties(tExam,form);
+        form.setExamTypeId(type);
+        model.addAttribute("exam",form);
+        return "exam/update";
+    }
+
+    @RequestMapping("update")
+    public String updateExam(ExamFormBean form,Model model){
+        tExamService.updateExam(form);
+        List<ExamFormBean> exams=tExamService.getAllExams();
+        model.addAttribute("exams",exams);
+        return "exam/history";
+    }
+    @RequestMapping("delete")
+    public String deleteExam(Integer id,Integer type,Model model){
+        tExamService.deletExam(id,type);
+        List<ExamFormBean> exams=tExamService.getAllExams();
+        model.addAttribute("exams",exams);
+        return "exam/history";
     }
 }

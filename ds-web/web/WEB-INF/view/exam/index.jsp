@@ -169,7 +169,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </form:form>
+
                                     <hr/>
                                     <button class="btn btn-sm" data-dismiss="modal">
                                         <i class="ace-icon fa fa-times"></i>
@@ -181,6 +181,7 @@
                                         保存
                                     </button>
                                 </div>
+                            </form:form>
                                 <!--已经提交的组件-->
                                 <div class="center hidden" id="submited">
                                     <label class="control-label no-padding-right" onclick="call()"> 文件名 </label>
