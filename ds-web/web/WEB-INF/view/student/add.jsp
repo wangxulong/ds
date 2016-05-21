@@ -90,6 +90,33 @@
 
         </div>
       </div>
+      <div class="form-group">
+        <label class="col-sm-3 control-label no-padding-right"> 课程 </label>
+
+        <div class="col-sm-9">
+          <div class="col-sm-9">
+            <c:choose>
+              <c:when test="${ empty command.id}">
+                <select name="courseId" class="form-control">
+                  <c:forEach items="${courses}" var="course">
+                    <option value="${course.courseId}"
+                            <c:if test="${myCourse.id eq course.courseId}"> selected</c:if>
+                            >${course.teacherName} --- ${course.courseName}  </option>
+                  </c:forEach>
+                </select>
+              </c:when>
+              <c:otherwise>
+                <c:forEach items="${courses}" var="course">
+                          <c:if test="${myCourse.id eq course.courseId}">
+                            <p   class="form-control-static"> ${course.teacherName} -- ${course.courseName}</p>
+                          </c:if>
+                </c:forEach>
+              </c:otherwise>
+            </c:choose>
+
+          </div>
+        </div>
+      </div>
      <%-- <div class="form-group ">
         <label class="col-sm-3 control-label no-padding-right"> 离职时间 </label>
         <div class="col-sm-9">

@@ -67,7 +67,7 @@ public class TeacherService {
             course.setName(ConstantUtil.DS);
             course.setTeacherId(teacher.getId());
             course.setGroupId(group.getId());
-            //courseDao.save(course);
+            courseDao.save(course);
             return;
 
         }else{
@@ -149,6 +149,15 @@ public class TeacherService {
         map.put("教课中:",inTech);
         map.put("未教课:",outTeach);
         return map;
+    }
+
+    /**
+     * 获取所有的授课老师信息（教学中的）
+     * 1 教课中
+     */
+
+    public List<TTeacher> getInTeachTeacher(){
+        return teacherDao.findByState(1);
     }
 }
 

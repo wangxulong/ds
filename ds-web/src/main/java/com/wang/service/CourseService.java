@@ -2,15 +2,23 @@ package com.wang.service;
 
 import com.wang.dao.TAttachmentDao;
 import com.wang.dao.TCourseDao;
+import com.wang.dto.StudentDto;
+import com.wang.dto.TeacherCourseDto;
 import com.wang.entity.TAttachment;
 import com.wang.entity.TCourse;
 import com.wang.form.CourseFormBean;
 import com.wang.util.UpFilesUtils;
+import org.hibernate.SQLQuery;
+import org.hibernate.transform.Transformers;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Query;
+import java.math.BigInteger;
 import java.util.List;
 
 /**
@@ -25,6 +33,8 @@ public class CourseService {
     private TAttachmentDao tAttachmentDao;
     @Resource
     private GroupService groupService;
+    @Resource
+    private EntityManagerFactory managerFactory;
 
     public List<TCourse> getAllCourse(){
         return tCourseDao.findAll();
@@ -127,5 +137,23 @@ public class CourseService {
         courseBean.setOutline(courseTemp.getOutline());
         courseBean.setFile(file);
         return  courseBean;
+    }
+
+
+    /**
+     * 查找所有的教学中的老师的课程
+     */
+    public List<TeacherCourseDto> getTeachingCourse(){
+        EntityManager entityManager = managerFactory.createEntityManager();
+        String sql = " select a.id as courseId,a.name courseName,b.id teacherId,b.name teacherName " +
+                " from t_course a  " +
+                "left join t_teacher b " +
+                "on a.teacher_id = b.id " +
+                "where b.state = 1 ";
+        Query query = entityManager.createNativeQuery(sql);
+        query.unwrap(SQLQuery.class).setResultTransformer(Transformers.aliasToBean(TeacherCourseDto.class));
+        List rows = query.getResultList();
+        entityManager.close();
+        return rows;
     }
 }
