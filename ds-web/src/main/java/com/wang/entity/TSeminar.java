@@ -1,6 +1,10 @@
 package com.wang.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
+import java.util.Date;
+import java.util.List;
 
 /**
  * Created by wxl on 2016/5/8.
@@ -12,6 +16,11 @@ public class TSeminar {
     private String name;
     private String desc;
     private Integer courseId;
+    private List<TSeminarTopic> seminarTopics;
+    @DateTimeFormat( pattern = "yyyy-MM-dd" )
+    private Date startTime;
+    @DateTimeFormat( pattern = "yyyy-MM-dd" )
+    private Date endTime;
 
     @Id
     @Column(name = "id")
@@ -54,27 +63,34 @@ public class TSeminar {
         this.courseId = courseId;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
 
-        TSeminar tSeminar = (TSeminar) o;
-
-        if (id != null ? !id.equals(tSeminar.id) : tSeminar.id != null) return false;
-        if (name != null ? !name.equals(tSeminar.name) : tSeminar.name != null) return false;
-        if (desc != null ? !desc.equals(tSeminar.desc) : tSeminar.desc != null) return false;
-        if (courseId != null ? !courseId.equals(tSeminar.courseId) : tSeminar.courseId != null) return false;
-
-        return true;
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name="seminar_id")
+    public List<TSeminarTopic> getSeminarTopics() {
+        return seminarTopics;
     }
 
-    @Override
-    public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (desc != null ? desc.hashCode() : 0);
-        result = 31 * result + (courseId != null ? courseId.hashCode() : 0);
-        return result;
+    public void setSeminarTopics(List<TSeminarTopic> seminarTopics) {
+        this.seminarTopics = seminarTopics;
+    }
+
+    @Basic
+    @Column(name = "start_time")
+    public Date getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(Date startTime) {
+        this.startTime = startTime;
+    }
+
+    @Basic
+    @Column(name = "end_time")
+    public Date getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(Date endTime) {
+        this.endTime = endTime;
     }
 }

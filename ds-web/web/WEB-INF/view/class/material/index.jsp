@@ -24,7 +24,7 @@
         </th>
         <th>课程名称</th>
         <th>开始时间</th>
-        <th>已上传资料</th>
+        <th>结束时间</th>
         <th class="hidden-480">操作</th>
 
 
@@ -41,13 +41,25 @@
                 </label>
             </td>
             <td>${course.name}</td>
-            <td> ${course.startTime}</td>
-            <td>1</td>
-            <td class="hidden-480">
+            <td>${course.startTime}</td>
+            <td>${course.endTime}</td>
+            <td width="200px">
                 <div class="hidden-sm hidden-xs btn-group">
-                    <a href="${ctx}/class/material/edit?id=${course.id}">
-                        <img src="${ctx}/static/img/add_file.png" style="width:20px;height:20px"/>
+                    <a class="btn btn-minier btn-info" href="${ctx}/class/material/edit?id=${course.id}">
+                        资料管理
+                        <i class="icon-print  align-top bigger-125 icon-on-right"></i>
                     </a>
+
+                    <a class="btn btn-minier btn-warning" href="${ctx}/class/material/edit?id=${course.id}">
+                        学生请假
+                        <i class="icon-print  align-top bigger-125 icon-on-right"></i>
+                    </a>
+
+                    <a class="btn btn-minier btn-success" href="${ctx}/class/material/edit?id=${course.id}">
+                        研讨课
+                        <i class="icon-print  align-top bigger-125 icon-on-right"></i>
+                    </a>
+
                 </div>
             </td>
         </tr>

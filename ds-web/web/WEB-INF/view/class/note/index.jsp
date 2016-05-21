@@ -9,13 +9,20 @@
 <body>
 <div class="page-header">
     <h1>
-        请假管理
+        ${course.name}-请假管理
         <small>
             <i class="icon-double-angle-right"></i>
         </small>
     </h1>
 </div>
-<table id="sample-table-1" class="table table-striped table-bordered table-hover">
+<select class="ui-pg-selbox" role="listbox" style="margin-bottom: 10px;" id="listtype">
+    <option role="option" value="-1" selected="selected">全部</option>
+    <option role="option" value="0">待审核</option>
+    <option role="option" value="1">已审核</option>
+    <option role="option" value="2">已拒绝</option>
+</select>
+
+<table id="sample-table-1" class="table table-striped table-bordered table-hover" listType="${type}">
     <thead>
     <tr>
         <th class="center">
@@ -123,6 +130,12 @@
     </div>
 <script>
     $(function(){
+        var type = ${type};
+        $("#listtype").find("option").each(function(){
+            if($(this).val()==type){
+                $(this).attr("selected",true);
+            }
+        })
         $("a[name='detail']").each(function(){
             $(this).unbind("click");
             $(this).bind("click",function(){
@@ -221,6 +234,10 @@
             })
         });
 
+        $("#listtype").change(function(){
+            var type = $(this).find("option:selected").val();
+            document.location.href='${ctx}/class/note/index?type='+type+'&cid='+${course.id};
+        })
     })
 </script>
 </body>

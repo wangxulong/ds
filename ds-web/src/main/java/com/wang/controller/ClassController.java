@@ -2,13 +2,16 @@ package com.wang.controller;
 
 import com.alibaba.fastjson.JSONArray;
 import com.sun.corba.se.impl.orbutil.threadpool.ThreadPoolManagerImpl;
+import com.wang.entity.TCourse;
 import com.wang.entity.TMaterial;
 import com.wang.entity.TNote;
+import com.wang.entity.TSeminar;
 import com.wang.entity.enums.NoteState;
 import com.wang.form.MaterialFormBean;
 import com.wang.service.CourseService;
 import com.wang.service.MaterialService;
 import com.wang.service.NoteService;
+import com.wang.service.SeminarService;
 import org.springframework.core.env.SystemEnvironmentPropertySource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -39,8 +42,12 @@ public class ClassController {
     @Resource
     private NoteService noteService;
 
+    @Resource
+    private SeminarService seminarService;
+
     @RequestMapping("index")
     public void index(Model model){
+        model.addAttribute("courseList",courseService.getAllCourse());
     }
 
     @RequestMapping("material/index")
@@ -152,9 +159,6 @@ System.out.println("zjc"+file.isEmpty());
     public void requestIndex(Model model){
     }
 
-    @RequestMapping("seminar/index")
-    public void seminarIndex(Model model){
-    }
 
     @ResponseBody
     @RequestMapping("material/edit/delete")
@@ -168,10 +172,12 @@ System.out.println("zjc"+file.isEmpty());
 
 
     @RequestMapping("note/index")
-    public void noteIndex(Model model){
-        List<TNote> notes = noteService.findAll();
-
+    public void noteIndex(@RequestParam(value="type", defaultValue="-1") Integer type,@RequestParam("cid") Integer cid,Model model){
+        TCourse course = courseService.getCourseById(cid);
+        List<TNote> notes = noteService.findByType(type,cid);
+        model.addAttribute("type",type);
         model.addAttribute("notes",notes);
+        model.addAttribute("course",course);
     }
 
     @ResponseBody
@@ -198,4 +204,12 @@ System.out.println("zjc"+file.isEmpty());
         return map;
     }
 
+
+    @RequestMapping("seminar/index")
+    public void  seminarIndex(@RequestParam("cid") Integer cid,Model model){
+        TCourse course = courseService.getCourseById(cid);
+        List<TSeminar> seminars =  seminarService.findByCourse(cid);
+        model.addAttribute("seminars",seminars);
+        model.addAttribute("course",course);
+    }
 }
