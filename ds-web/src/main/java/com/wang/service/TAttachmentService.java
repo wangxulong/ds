@@ -22,6 +22,6 @@ public class TAttachmentService {
     }
     /*获取附件*/
     public TAttachment getOneAttachment(int id){
-        return tAttachmentDao.getOne(id);
+        return tAttachmentDao.findOne(id);
     }
 }

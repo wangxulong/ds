@@ -9,7 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class ExamFormBean extends TExam{
     //文件
     private MultipartFile pic;
-    //附件类型
+    //试卷类型
     private Integer examTypeId;
     public MultipartFile getPic() {
         return pic;

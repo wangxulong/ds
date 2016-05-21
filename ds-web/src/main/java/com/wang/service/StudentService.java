@@ -3,11 +3,15 @@ package com.wang.service;
 import com.wang.auth.sys.dao.SysUserDao;
 import com.wang.auth.sys.entity.SysRole;
 import com.wang.auth.sys.entity.SysUser;
+import com.wang.dao.RcourseStudentDao;
 import com.wang.dao.StudentDao;
+import com.wang.dao.TCourseDao;
 import com.wang.dto.Pager;
 import com.wang.dto.QuestionDto;
 import com.wang.dto.ResultMessage;
 import com.wang.dto.StudentDto;
+import com.wang.entity.RCourseStudent;
+import com.wang.entity.TCourse;
 import com.wang.entity.TStudent;
 import com.wang.entity.TTeacher;
 import com.wang.util.PasswordHelper;
@@ -39,6 +43,10 @@ public class StudentService {
     private StudentDao studentDao;
     @Resource
     private SysUserDao sysUserDao;
+    @Resource
+    private RcourseStudentDao courseStudentDao;
+    @Resource
+    private TCourseDao courseDao;
 
     @Resource
     private EntityManagerFactory managerFactory;
@@ -65,12 +73,18 @@ public class StudentService {
         return pager;
     }
     //添加或修改
-    public void addOrUpdate(TStudent student){
+    public void addOrUpdate(TStudent student,Integer courseId){
         if(null == student.getId()){
             //新添加
             student.setCreateTime(new Date());
             student.setPassword(PasswordHelper.encrytBase64(student.getStudentNumber()));
-
+            studentDao.save(student);
+            //添加学生课程信息
+            RCourseStudent courseStudent = new RCourseStudent();
+            courseStudent.setStudentId(student.getId());
+            courseStudent.setCourseId(courseId);
+            courseStudentDao.save(courseStudent);
+            return;
         }else{
             TStudent dbStudent = studentDao.findOne(student.getId());
             if(null ==  dbStudent){
@@ -80,6 +94,7 @@ public class StudentService {
             student.setPassword(dbStudent.getPassword());
             student.setSeminarTopicId(dbStudent.getSeminarTopicId());
         }
+        //修改课程
         studentDao.save(student);
     }
 
@@ -114,5 +129,14 @@ public class StudentService {
         student.setPassword(PasswordHelper.encrytBase64(newPassword));
         studentDao.save(student);
         return resultMessage;
+    }
+
+    //获取我参与的课程
+    public TCourse getMyCourse(Integer studentId){
+        RCourseStudent courseStudent = courseStudentDao.findByStudentId(studentId);
+        if(null != courseStudent){
+            return courseDao.getOne(courseStudent.getCourseId());
+        }
+        return  null;
     }
 }

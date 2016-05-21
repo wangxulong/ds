@@ -1,7 +1,6 @@
 package com.service;
 
-import com.wang.service.TExamService;
-import com.wang.service.TTaskService;
+import com.wang.service.CourseService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -15,15 +14,12 @@ import java.util.List;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:config/spring-context.xml")
-public class TaskServiceTest {
+public class CourseServiceTest {
     @Resource
-    private TTaskService tTaskService;
-    @Resource
-    private TExamService tExamService;
+    private CourseService courseService;
     @Test
-    public void getStudentTask(){
-        List result = tTaskService.getTaskByStudentId(2);
+    public void getTeacherCourse(){
+        List result = courseService.getTeachingCourse();
         System.out.println(result.size());
-        System.out.println("test"+tExamService.searchExist(2016,1,1));
     }
 }

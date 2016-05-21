@@ -25,9 +25,9 @@
 <script type="text/javascript" src="${ctx}/static/js/bootstrapvalidator/dist/js/bootstrapValidator.js"></script>
 <script type="text/javascript" src="${ctx}/static/js/bootstrapvalidator/dist/js/language/zh_CN.js"></script>
 <%--date--%>
-<link href="${ctx}/static/js/libs/datetimepicker/css/bootstrap-datetimepicker.min.css" media="all" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="js/libs/datetimepicker/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
-<script type="text/javascript" src="js/libs/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+<link href="${ctx}/static/js/datetimepicker/css/bootstrap-datetimepicker.min.css" media="all" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="${ctx}/static/js/datetimepicker/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+<script type="text/javascript" src="${ctx}/static/js/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
 
 
 <html>
