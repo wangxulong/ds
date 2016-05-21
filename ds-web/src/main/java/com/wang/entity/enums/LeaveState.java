@@ -13,6 +13,9 @@ public enum LeaveState {
         this.description = description;
     }
 
+    public String getDescription(){
+        return this.description;
+    }
     public int getType() {
         return this.type;
     }

@@ -15,6 +15,6 @@ public interface TExamItemDao extends BaseDao<TExamItem,Integer> {
     @Query("From TExamItem a where a.examId=?1 and a.type=?2")
     public TExamItem getItemByExamIdAndType(int examid,int type);
 
-    @Query("From TExamItem a where a.examid=?1")
+    @Query("From TExamItem a where a.examId=?1")
     public List<TExamItem> getItemByExamId(int examid);
 }
