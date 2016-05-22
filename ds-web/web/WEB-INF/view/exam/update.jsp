@@ -97,10 +97,10 @@
     </div>
 
         <hr/>
-        <button class="btn btn-sm" data-dismiss="modal">
+        <a class="btn btn-sm" data-dismiss="modal" href="${ctx}/exam/history">
             <i class="ace-icon fa fa-times"></i>
             取消
-        </button>
+        </a>
 
         <button class="btn btn-sm btn-primary btnSave">
             <i class="ace-icon fa fa-check"></i>

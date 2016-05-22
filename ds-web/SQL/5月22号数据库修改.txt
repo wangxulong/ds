@@ -1,0 +1,1 @@
+t_exam中添加teacher_id和course_id字段类型为int
