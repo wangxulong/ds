@@ -72,9 +72,9 @@
                     <a class="btn btn-xs btn-info" href="javascirpt:;" name="detail" nid="${note.id}">
                         <i class="ace-icon fa fa-pencil bigger-120"></i>
                     </a>
-                        <c:if test="${not empty note.attachId}">
+                       <%-- <c:if test="${not empty note.attachId}">
                             <a href="${ctx}/download/${note.attachId}" class="btn btn-primary btn-xs"> 下载附件</a>
-                        </c:if>
+                        </c:if>--%>
 
                 </div>
             </td>

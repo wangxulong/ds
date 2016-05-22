@@ -43,21 +43,18 @@
             <td>${course.name}</td>
             <td>${course.startTime}</td>
             <td>${course.endTime}</td>
-            <td width="200px">
+            <td>
                 <div class="hidden-sm hidden-xs btn-group">
                     <a class="btn btn-minier btn-info" href="${ctx}/class/material/edit?id=${course.id}">
-                        资料管理
-                        <i class="icon-print  align-top bigger-125 icon-on-right"></i>
+                        <i class="ace-icon fa fa-book bigger-120"></i>资料管理
                     </a>
 
                     <a class="btn btn-minier btn-warning" href="${ctx}/class/note/index?cid=${course.id}">
-                        学生请假
-                        <i class="icon-print  align-top bigger-125 icon-on-right"></i>
+                        <i class="ace-icon fa fa-coffee bigger-120"></i>学生请假
                     </a>
 
                     <a class="btn btn-minier btn-success" href="${ctx}/class/seminar/index?cid=${course.id}">
-                        研讨课
-                        <i class="icon-print  align-top bigger-125 icon-on-right"></i>
+                        <i class="ace-icon fa fa-eraser bigger-120"></i>研讨课
                     </a>
 
                 </div>

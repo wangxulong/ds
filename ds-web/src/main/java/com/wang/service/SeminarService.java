@@ -35,5 +35,17 @@ public class SeminarService {
         return resultList;
     }
 
+    public TSeminar findById(int id){
+        return seminarDao.findOne(id);
+    }
+
+    public void save(TSeminar seminar){
+        seminarDao.save(seminar);
+    }
+
+    public void delete(int id){
+        seminarDao.delete(id);
+    }
+
 }
 

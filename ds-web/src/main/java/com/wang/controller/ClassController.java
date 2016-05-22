@@ -2,16 +2,10 @@ package com.wang.controller;
 
 import com.alibaba.fastjson.JSONArray;
 import com.sun.corba.se.impl.orbutil.threadpool.ThreadPoolManagerImpl;
-import com.wang.entity.TCourse;
-import com.wang.entity.TMaterial;
-import com.wang.entity.TNote;
-import com.wang.entity.TSeminar;
+import com.wang.entity.*;
 import com.wang.entity.enums.NoteState;
 import com.wang.form.MaterialFormBean;
-import com.wang.service.CourseService;
-import com.wang.service.MaterialService;
-import com.wang.service.NoteService;
-import com.wang.service.SeminarService;
+import com.wang.service.*;
 import org.springframework.core.env.SystemEnvironmentPropertySource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -44,6 +38,9 @@ public class ClassController {
 
     @Resource
     private SeminarService seminarService;
+
+    @Resource
+    private SeminarTopicService seminarTopicService;
 
     @RequestMapping("index")
     public void index(Model model){
@@ -209,7 +206,72 @@ System.out.println("zjc"+file.isEmpty());
     public void  seminarIndex(@RequestParam("cid") Integer cid,Model model){
         TCourse course = courseService.getCourseById(cid);
         List<TSeminar> seminars =  seminarService.findByCourse(cid);
+
         model.addAttribute("seminars",seminars);
         model.addAttribute("course",course);
+
+    }
+
+
+    @RequestMapping("seminar/add")
+    public void seminarAdd(Integer cid,Model model){
+        TSeminar command = new TSeminar();
+        model.addAttribute("command",command);
+        model.addAttribute("cid",cid);
+    }
+
+    @RequestMapping("seminar/update")
+    public String  seminarUpdate(Integer sid,Integer cid,Model model){
+        TSeminar command = seminarService.findById(sid);
+        model.addAttribute("command",command);
+        model.addAttribute("cid",cid);
+        return "/class/seminar/add";
+    }
+
+    @RequestMapping("seminar/save")
+    public String  seminarSave(TSeminar seminar){
+     //  System.out.println("name="+seminar.getName()+" desc="+seminar.getDesc()+" start_time="+seminar.getStartTime()+" end_time="+seminar.getEndTime());
+        seminarService.save(seminar);
+        return "redirect:/class/seminar/index?cid="+seminar.getCourseId();
+    }
+
+    @RequestMapping("seminar/delete")
+    public String  seminarDelete(Integer sid,Integer cid){
+        seminarService.delete(sid);
+        return "redirect:/class/seminar/index?cid="+cid;
+    }
+
+    @RequestMapping("seminarTopic/index")
+    public void  seminarTopicIndex(@RequestParam("sid") Integer sid,Model model){
+        TSeminar seminar = seminarService.findById(sid);
+        model.addAttribute("seminar",seminar);
+
+    }
+
+    @RequestMapping("seminarTopic/add")
+    public void  seminarTopicAdd(Integer sid,Model model){
+        TSeminarTopic command = new TSeminarTopic();
+        model.addAttribute("command",command);
+        model.addAttribute("sid",sid);
+    }
+
+    @RequestMapping("seminarTopic/save")
+    public String  seminarTopicSave(TSeminarTopic seminarTopic){
+        seminarTopicService.save(seminarTopic);
+        return "redirect:/class/seminarTopic/index?sid="+seminarTopic.getSeminarId();
+    }
+
+    @RequestMapping("seminarTopic/delete")
+    public String  seminarTopicDelete(Integer sid,Integer stid){
+        seminarTopicService.delete(stid);
+        return "redirect:/class/seminarTopic/index?sid="+sid;
+    }
+
+    @RequestMapping("seminarTopic/update")
+    public String  seminarTopicUpdate(Integer sid,Integer stid,Model model){
+        TSeminarTopic command = seminarTopicService.findById(stid);
+        model.addAttribute("command",command);
+        model.addAttribute("sid",sid);
+        return "/class/seminarTopic/add";
     }
 }

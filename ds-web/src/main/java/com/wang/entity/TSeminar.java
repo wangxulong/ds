@@ -44,7 +44,7 @@ public class TSeminar {
     }
 
     @Basic
-    @Column(name = "desc")
+    @Column(name = "descp")
     public String getDesc() {
         return desc;
     }
@@ -64,7 +64,7 @@ public class TSeminar {
     }
 
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name="seminar_id")
     public List<TSeminarTopic> getSeminarTopics() {
         return seminarTopics;

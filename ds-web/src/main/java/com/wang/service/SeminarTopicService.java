@@ -2,6 +2,7 @@ package com.wang.service;
 
 
 import com.wang.dao.SeminarDao;
+import com.wang.dao.SeminarTopicDao;
 import com.wang.entity.TSeminar;
 import com.wang.entity.TSeminarTopic;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,7 @@ import java.util.List;
 @Transactional
 public class SeminarTopicService {
     @Resource
-    private SeminarDao seminarDao;
+    private SeminarTopicDao seminarTopicDao;
 
     @Resource
     private EntityManagerFactory managerFactory;
@@ -32,6 +33,18 @@ public class SeminarTopicService {
         List<TSeminarTopic>  resultList = query.getResultList();
         em.close();
         return resultList;
+    }
+
+    public TSeminarTopic findById(int id){
+        return seminarTopicDao.findOne(id);
+    }
+
+    public void save(TSeminarTopic seminarTopic){
+        seminarTopicDao.save(seminarTopic);
+    }
+
+    public void delete(int id){
+        seminarTopicDao.delete(id);
     }
 
 }

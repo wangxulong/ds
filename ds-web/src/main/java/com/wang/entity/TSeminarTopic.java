@@ -1,6 +1,9 @@
 package com.wang.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
+import java.util.Date;
 
 /**
  * Created by wxl on 2016/5/8.
@@ -12,7 +15,12 @@ public class TSeminarTopic {
     private String name;
     private String desc;
     private String demand;
+    private Integer status = 0;
     private Integer seminarId;
+    @DateTimeFormat( pattern = "yyyy-MM-dd" )
+    private Date startTime;
+    @DateTimeFormat( pattern = "yyyy-MM-dd" )
+    private Date endTime;
 
     @Id
     @Column(name = "id")
@@ -36,7 +44,7 @@ public class TSeminarTopic {
     }
 
     @Basic
-    @Column(name = "desc")
+    @Column(name = "descp")
     public String getDesc() {
         return desc;
     }
@@ -63,6 +71,36 @@ public class TSeminarTopic {
 
     public void setSeminarId(Integer seminarId) {
         this.seminarId = seminarId;
+    }
+
+    @Basic
+    @Column(name = "status")
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    @Basic
+    @Column(name = "start_time")
+    public Date getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(Date startTime) {
+        this.startTime = startTime;
+    }
+
+    @Basic
+    @Column(name = "end_time")
+    public Date getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(Date endTime) {
+        this.endTime = endTime;
     }
 
     @Override
