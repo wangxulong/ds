@@ -7,7 +7,7 @@
 </head>
 <body>
 <div class="modal-header">
-  <h4 class="blue bigger">新增研讨课</h4>
+  <h4 class="blue bigger">研讨课</h4>
 </div>
 
 <div style="margin-top:20px;">
