@@ -1,3 +1,4 @@
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -8,13 +9,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-2">
-        <div class="list-group">
-          <a href="user-discuss-lession.html" class="list-group-item ">
-            我参与的研讨课
-          </a>
-          <a href="user-discuss-lession-upload.html" class="list-group-item ">上传研讨课作业</a>
-          <a href="user-discuss-lession-join.html " class=" active list-group-item">研讨课报名</a>
-        </div>
+        <%@include file="left.jsp"%>
       </div>
       <div class="col-md-10">
 
@@ -25,7 +20,38 @@
             </h3>
           </div>
           <div class="panel-body">
-            <div class="alert alert-info text-center" role="alert">
+            <c:forEach items="${seminars}" var="seminar">
+               <div class="alert alert-info text-center" role="alert">
+              <span class="glyphicon glyphicon-info-sign"></span>
+              ${seminar.name}  &nbsp;&nbsp;&nbsp; <span class="text-danger">截止时间:
+                 <fmt:formatDate value="${seminar.endTime}" pattern="yyyy-MM-dd"
+                       />  </span>
+            </div>
+            <div class="container-fluid">
+
+                  <c:forEach items="${seminar.seminarTopics}" var="topic">
+                    <div class="row panel "  >
+                      <div class="col-md-9">
+                        <blockquote>
+                          <p><strong>${topic.name}</strong></p>
+                          <p>${topic.desc}</p>
+                          <footer>${topic.demand}</footer>
+                        </blockquote>
+                      </div>
+                      <div class="col-md-3">
+                        <a href="#" class="btn btn-primary">立即参与</a>
+                      </div>
+
+                    </div>
+                  </c:forEach>
+
+              </div>
+
+            </div>
+
+            </c:forEach>
+
+           <%-- <div class="alert alert-info text-center" role="alert">
               <span class="glyphicon glyphicon-info-sign"></span>
               请选择感兴趣的研讨内容进行报名
             </div>
@@ -82,7 +108,7 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div>--%>
           </div>
 
         </div>

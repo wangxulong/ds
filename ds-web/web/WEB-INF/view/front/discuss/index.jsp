@@ -8,13 +8,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-2">
-        <div class="list-group">
-          <a href="user-discuss-lession.html" class="list-group-item active">
-            我参与的研讨课
-          </a>
-          <a href="user-discuss-lession-upload.html" class="list-group-item">上传研讨课作业</a>
-          <a href="user-discuss-lession-join.html" class="list-group-item">研讨课报名</a>
-        </div>
+        <%@include file="left.jsp"%>
       </div>
       <div class="col-md-10">
 

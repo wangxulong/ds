@@ -22,6 +22,27 @@ public class TSeminarTopic {
     @DateTimeFormat( pattern = "yyyy-MM-dd" )
     private Date endTime;
 
+
+    private boolean available; //是否可用
+
+    private Integer studentCount; //学生人数
+    @Transient
+    public boolean getAvailable() {
+        return available;
+    }
+
+    public void setAvailable(boolean available) {
+        this.available = available;
+    }
+    @Transient
+    public Integer getStudentCount() {
+        return studentCount;
+    }
+
+    public void setStudentCount(Integer studentCount) {
+        this.studentCount = studentCount;
+    }
+
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
