@@ -1,6 +1,7 @@
 package com.wang.entity;
 
 import javax.persistence.*;
+import java.util.Date;
 
 /**
  * Created by wxl on 2016/5/8.
@@ -12,6 +13,25 @@ public class TAttachment {
     private String path;
     private String name;
     private String format;
+    private String content;
+    private Date createTime;
+
+    @Column(name = "content")
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+    @Column(name = "create_time")
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
 
     @Id
     @Column(name = "id")

@@ -91,6 +91,9 @@
                     <a class="btn btn-xs btn-info "  href="${ctx}/teacher/edit/${teacher.id}"  >
                         <i class="ace-icon fa fa-pencil bigger-120"></i> 修改
                     </a>
+                            <a class="btn btn-xs btn-info "  href="${ctx}/teacher/${teacher.id}/plan"  >
+                                <i class="ace-icon fa fa-pencil bigger-120"></i> 教学计划
+                            </a>
                     <a class="btn btn-xs btn-danger delete"  data="${teacher.id}">
                         <i class="ace-icon fa fa-trash-o bigger-120"></i>
                     </a>

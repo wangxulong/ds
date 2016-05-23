@@ -119,7 +119,8 @@ public class THomeworkService {
             TAttachment attachment = new TAttachment();
             attachment.setName(file.getOriginalFilename());
             attachment.setFormat(file.getContentType());
-            attachment.setPath(ConstantUtil.STUDENT_HOMEWORK_PATH+"\\"+fileName);
+            attachment.setPath(ConstantUtil.STUDENT_HOMEWORK_PATH + "\\" + fileName);
+            attachment.setCreateTime(new Date());
             tAttachmentService.addAttachment(attachment);
             homeworkTemp.setAttachmentId(attachment.getId());
         }

@@ -5,16 +5,21 @@ import com.wang.auth.sys.dao.SysRoleDao;
 import com.wang.auth.sys.dao.SysUserDao;
 import com.wang.auth.sys.entity.SysRole;
 import com.wang.auth.sys.entity.SysUser;
+import com.wang.dao.TAttachmentDao;
 import com.wang.dao.TCourseDao;
 import com.wang.dao.TeacherDao;
+import com.wang.entity.TAttachment;
 import com.wang.entity.TCourse;
 import com.wang.entity.TGroup;
 import com.wang.entity.TTeacher;
 import com.wang.util.ConstantUtil;
 import com.wang.util.PasswordHelper;
+import com.wang.util.UpFilesUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import java.util.*;
@@ -38,6 +43,8 @@ public class TeacherService {
     @Qualifier("TCourseDao")
     @Resource
     private TCourseDao courseDao;
+    @Resource
+    private TAttachmentDao attachmentDao;
 
     public List<TTeacher> findAllTeacher(){
        return teacherDao.findAll();
@@ -121,8 +128,8 @@ public class TeacherService {
         map.put("总人数:", sumTotal);
         map.put("教授:",preNum);
         map.put("副教授:",vPreNum);
-        map.put("讲师:",lecNum);
-        map.put("助教:",taNum);
+        map.put("讲师:", lecNum);
+        map.put("助教:", taNum);
         return map;
     }
 
@@ -158,6 +165,49 @@ public class TeacherService {
 
     public List<TTeacher> getInTeachTeacher(){
         return teacherDao.findByState(1);
+    }
+
+
+    /**
+     * 获取上传的教学计划
+     */
+
+    public List<TAttachment> getMySchedule(Integer teacherId){
+        TCourse course =   courseDao.findByTeacherId(teacherId);
+        if(null == course){
+            throw new RuntimeException("没有对应的课程信息");
+        }
+        String schedule = course.getSchedule();
+        if(StringUtils.isNotEmpty(schedule)){
+            String[] attachIds = schedule.split(",");
+            Integer[] ids = new Integer[attachIds.length];
+            for(int i=0;i<attachIds.length;i++){
+                ids[i] = Integer.parseInt(attachIds[i]);
+            }
+            return attachmentDao.findByIds(ids);
+        }
+        return null;
+    }
+    //添加教学计划
+    public void addSchedule(Integer teacherId,String content,MultipartFile file,String path){
+        TCourse course =  courseDao.findByTeacherId(teacherId);
+        String schedule = course.getSchedule();
+        String fileName =  UpFilesUtils.saveUploadFile(file,path);
+        TAttachment attachment = new TAttachment();
+        attachment.setName(file.getOriginalFilename());
+        attachment.setFormat(file.getContentType());
+        attachment.setContent(content);
+        attachment.setPath(ConstantUtil.TEACH_PLAN_PATH + "\\" + fileName);
+        attachment.setCreateTime(new Date());
+        attachmentDao.save(attachment);
+        if(StringUtils.isNotEmpty(schedule)){
+            schedule =  attachment.getId()+","+schedule;
+        }else{
+            schedule = attachment.getId()+"";
+        }
+
+        course.setSchedule(schedule);
+        courseDao.save(course);
     }
 }
 

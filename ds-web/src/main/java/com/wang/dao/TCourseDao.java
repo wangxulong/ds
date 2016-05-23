@@ -9,4 +9,6 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface TCourseDao extends BaseDao<TCourse,Integer> {
+
+    TCourse findByTeacherId(Integer teacherId);
 }
