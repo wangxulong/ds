@@ -13,6 +13,11 @@
         </small>
     </h1>
 </div>
+<div style="padding:0px 10px 10px 10px;">
+<a class="btn btn-success btn-sm" href="${ctx}/class/seminar/add?cid=${course.id}" name="add_btn">
+    <i class="ace-icon fa fa-plus bigger-120 "></i>新增
+</a>
+</div>
 <table id="sample-table-1" class="table table-striped table-bordered table-hover">
     <thead>
     <tr>
@@ -50,9 +55,7 @@
                 <div class="hidden-sm hidden-xs btn-group">
 
 
-                    <a class="btn btn-xs btn-success " href="${ctx}/class/seminar/add?cid=${course.id}" name="add_btn">
-                        <i class="ace-icon fa fa-plus bigger-120 "></i>
-                    </a>
+
 
                     <a class="btn btn-xs btn-info " href="${ctx}/class/seminarTopic/index?sid=${seminar.id}">
                         <i class="ace-icon fa fa-book bigger-120"></i> 题目
