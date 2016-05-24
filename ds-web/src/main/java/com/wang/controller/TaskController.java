@@ -57,6 +57,11 @@ public class TaskController {
         tTaskService.deleteOneTask(id);
         return "redirect:/task/index";
     }
+    @RequestMapping(value = "assess/{id}")
+    public String assess(@PathVariable("id") Integer id){
+       //TODO
+        return "task/mark";
+    }
 
 
 }
