@@ -31,6 +31,16 @@
       </div>
     </div>
   </div>
+
+  <div class="form-group">
+    <label class="col-sm-3 control-label no-padding-right"> 人数 </label>
+
+    <div class="col-sm-9">
+      <div class="col-sm-9">
+        <form:input path="pnum" type="number" cols="3" placeholder="人数" class="form-control" />
+      </div>
+    </div>
+  </div>
   <div class="form-group">
     <label class="col-sm-3 control-label no-padding-right"> 要求 </label>
 
@@ -63,6 +73,7 @@
   </div>
   <form:input path="seminarId" type="hidden" cols="3" placeholder="课程编号" class="form-control" value="${sid}"/>
   <form:input path="id" type="hidden" class="form-control" />
+  <form:input path="status" type="hidden" class="form-control"/>
 </form:form>
 
 

@@ -15,12 +15,13 @@ public class TSeminarTopic {
     private String name;
     private String desc;
     private String demand;
-    private Integer status = 0;
+    private Integer status;
     private Integer seminarId;
     @DateTimeFormat( pattern = "yyyy-MM-dd" )
     private Date startTime;
     @DateTimeFormat( pattern = "yyyy-MM-dd" )
     private Date endTime;
+    private Integer pnum;
 
 
     private boolean available; //是否可用
@@ -123,6 +124,19 @@ public class TSeminarTopic {
     public void setEndTime(Date endTime) {
         this.endTime = endTime;
     }
+
+
+    @Basic
+    @Column(name = "pnum")
+    public Integer getPnum() {
+        return pnum;
+    }
+
+    public void setPnum(Integer pnum) {
+        this.pnum = pnum;
+    }
+
+
 
     @Override
     public boolean equals(Object o) {

@@ -47,5 +47,7 @@ public class SeminarTopicService {
         seminarTopicDao.delete(id);
     }
 
+
+
 }
 

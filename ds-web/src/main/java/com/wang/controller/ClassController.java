@@ -42,6 +42,9 @@ public class ClassController {
     @Resource
     private SeminarTopicService seminarTopicService;
 
+    @Resource
+    private StudentTopicService studentTopicService;
+
     @RequestMapping("index")
     public void index(Model model){
         model.addAttribute("courseList",courseService.getAllCourse());
@@ -245,7 +248,7 @@ System.out.println("zjc"+file.isEmpty());
     public void  seminarTopicIndex(@RequestParam("sid") Integer sid,Model model){
         TSeminar seminar = seminarService.findById(sid);
         model.addAttribute("seminar",seminar);
-
+        model.addAttribute("sid",sid);
     }
 
     @RequestMapping("seminarTopic/add")
@@ -274,4 +277,49 @@ System.out.println("zjc"+file.isEmpty());
         model.addAttribute("sid",sid);
         return "/class/seminarTopic/add";
     }
+
+
+    @ResponseBody
+    @RequestMapping("seminarTopic/students")
+    public List<TStudent> seminarTopicStudents(Integer stid,Model model){
+        List<TStudent> students = studentTopicService.getStudentsById(stid);
+        return students;
+    }
+
+    @ResponseBody
+    @RequestMapping("seminarTopic/scoreByLevel")
+    public Map<String,Object> seminarTopicStudentsLevel(Integer stid,Integer studentIds[], @RequestParam("levels[]") String[] levels,Model model){
+        int type = 2;
+        Map<String,Object> map = new HashMap<String, Object>();
+        map.put("status",100);
+        return map;
+    }
+
+    @ResponseBody
+    @RequestMapping("seminarTopic/scoreByNum")
+    public Map<String,Object> seminarTopicStudentsNum(Integer stid,Integer[] studentIds,Integer[] scores,Model model){
+        int type = 1;
+
+        Map<String,Object> map = new HashMap<String, Object>();
+        map.put("status",100);
+        return map;
+    }
+
+    @ResponseBody
+    @RequestMapping("seminarTopic/score")
+    public Map<String,Object> seminarTopicStudents(RStudentTopic studentTopic,Model model){
+        if(studentTopic.getType()==1){
+            studentTopicService.score(studentTopic.getTopicId(),studentTopic.getStudentId(),studentTopic.getScore(),1);
+        }else{
+            studentTopicService.score(studentTopic.getTopicId(),studentTopic.getStudentId(),studentTopic.getLevel(),2);
+        }
+
+        TSeminarTopic seminarTopic = seminarTopicService.findById(studentTopic.getTopicId());
+        seminarTopic.setStatus(4);
+        seminarTopicService.save(seminarTopic);
+        Map<String,Object> map = new HashMap<String, Object>();
+        map.put("status",100);
+        return map;
+    }
+
 }
