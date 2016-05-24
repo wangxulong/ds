@@ -6,10 +6,11 @@
 </head>
 <body>
 <div>
+    <!--布置作业-->
     <div class="flag-style">
-        <span>布置作业</span>
+        <span>作业管理</span>
 
-        <a class="btn btn-xs btn-success " href="${ctx}/task/add" >
+        <a class="btn btn-xs btn-success " title="布置作业" href="${ctx}/task/add" >
             <i class="ace-icon fa fa-plus bigger-120 "></i>
         </a>
 
@@ -17,12 +18,7 @@
     <table id="sample-table-1" class="table table-striped table-bordered table-hover">
         <thead>
         <tr>
-            <th class="center">
-                <label class="position-relative">
-                    <input type="checkbox" class="ace" />
-                    <span class="lbl"></span>
-                </label>
-            </th>
+
             <th>作业主题</th>
             <th>作业内容</th>
             <th>布置时间</th>
@@ -35,25 +31,22 @@
 
         <tbody>
 
-        <c:forEach items="${allTask}" var="task">
+        <c:forEach items="${allTask}" var="task" varStatus="vs">
             <tr>
-                <td class="center">
-                    <label class="position-relative">
-                        <input type="checkbox" class="ace" />
-                        <span class="lbl"></span>
-                    </label>
-                </td>
                 <td>${task.topic}</td>
                 <td> ${task.content}</td>
                 <td>${task.createTime}</td>
                 <td> ${task.endTime}</td>
                 <td class="hidden-480">
                     <div class="hidden-sm hidden-xs btn-group">
-                            <a class="btn btn-xs btn-success" href="${ctx}/task/edit/${task.id}">
+                            <a class="btn btn-xs btn-success" title="修改作业" href="${ctx}/task/edit/${task.id}">
                                 <i class="ace-icon fa fa-pencil bigger-120"></i>
                             </a>
-                            <a class="btn btn-xs btn-danger" href="${ctx}/task/delete/${task.id}">
+                            <a class="btn btn-xs btn-danger" title="删除作业" href="${ctx}/task/delete/${task.id}">
                                 <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                            </a>
+                            <a class="btn btn-xs btn-success" href="${ctx}/task/assess/${task.id}">
+                                <i class="ace-icon fa fa-icon-ok bigger-120"></i>批阅作业
                             </a>
                     </div>
                 </td>
@@ -61,7 +54,16 @@
         </c:forEach>
         </tbody>
     </table>
-</div>
 
+</div>
+<%--<script type="text/javascript">--%>
+    <%--$(function(){--%>
+        <%--$("#assess*").click(function(){--%>
+            <%--var tId= $("#taskId*").val();--%>
+            <%--alert(tId);--%>
+        <%--});--%>
+    <%--});--%>
+
+<%--</script>--%>
 </body>
 </html>
