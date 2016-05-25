@@ -238,7 +238,7 @@
                                     <td>
                                         <input class="hidden-480" id="avergeScore" name="types" value="${stu.sex}" disabled="true">
                                     </td>
-                                    <td><input class="hidden-480" id="avergeScore" name="types" value="${stu.sex}" disabled="true"></td>
+                                    <td><input class="hidden-480" id="avergeScore2" name="types" value="${stu.sex}" disabled="true"></td>
                                     <td class="hidden-480">
                                         <div class="hidden-sm hidden-xs btn-group">
                                             <a class="btn btn-xs btn-success" href="#">
