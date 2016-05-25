@@ -3,6 +3,7 @@ package com.wang.service;
 import com.wang.auth.sys.entity.SysUser;
 import com.wang.auth.sys.service.SecurityService;
 import com.wang.dao.*;
+import com.wang.dto.HomeworkStudentDto;
 import com.wang.dto.StudentTaskDto;
 import com.wang.entity.*;
 import com.wang.form.TaskFormBean;
@@ -43,7 +44,8 @@ public class TTaskService {
     @Resource
     private TCourseDao tCourseDao;
 
-
+    @Resource
+    private THomeworkDao tHomeworkDao;
     @Resource
     private TeacherDao teacherDao;
 
@@ -86,7 +88,6 @@ public class TTaskService {
         String jobNumber = sysUser.getUserName();
         TTeacher tTeacher = teacherDao.findByJobNumber(jobNumber);
         task.setTeacherId(tTeacher.getId());
-        //TODO 李昌亚
         task.setCourseId(1);//设置课程ID
         if (taskFormBean.getFile().isEmpty()){  //没有附件
 
@@ -175,8 +176,14 @@ public class TTaskService {
             return null;
         }
     }
-    public List<THomework> getHomeWork(){
-        List<THomework> list = null;
+
+    /**
+     * 根据任务id获取对应学生提交的作业
+     * @param id
+     * @return
+     */
+    public List<HomeworkStudentDto> getHomeWork(int id){
+        List<HomeworkStudentDto> list = tHomeworkDao.getByTaskId(id);
         return list;
     }
     /**
@@ -196,7 +203,7 @@ public class TTaskService {
      ORDER BY c.create_time desc
      */
 
-    public List<StudentTaskDto> getTaskByStudentId(Integer studentId){
+    public List<StudentTaskDto>     getTaskByStudentId(Integer studentId){
         EntityManager entityManager = managerFactory.createEntityManager();
         String sql = "SELECT  c.id,c.topic,c.content,c.create_time as createTime,c.end_time as endTime," +
                 "c.attachment_id attachId from r_course_student a " +

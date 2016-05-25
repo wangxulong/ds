@@ -1,5 +1,6 @@
 package com.wang.controller;
 
+import com.wang.dto.HomeworkStudentDto;
 import com.wang.entity.TTask;
 import com.wang.form.TaskFormBean;
 import com.wang.service.TTaskService;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**作业管理（李昌亚）
  * Created by Administrator on 2016/5/9 0009.
@@ -58,8 +60,9 @@ public class TaskController {
         return "redirect:/task/index";
     }
     @RequestMapping(value = "assess/{id}")
-    public String assess(@PathVariable("id") Integer id){
-       //TODO
+    public String assess(@PathVariable("id") Integer id,Model model){
+        List<HomeworkStudentDto> homeworkList = tTaskService.getHomeWork(id);
+        model.addAttribute("homeworkList",homeworkList);
         return "task/mark";
     }
 
