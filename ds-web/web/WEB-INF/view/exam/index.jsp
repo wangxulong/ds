@@ -235,8 +235,10 @@
                                     </td>
                                     <td>${stu.studentNumber}</td>
                                     <td> ${stu.name}</td>
-                                    <td>${stu.sex}</td>
-                                    <td> ${stu.age}</td>
+                                    <td>
+                                        <input class="hidden-480" id="avergeScore" name="types" value="${stu.sex}" disabled="true">
+                                    </td>
+                                    <td><input class="hidden-480" id="avergeScore" name="types" value="${stu.sex}" disabled="true"></td>
                                     <td class="hidden-480">
                                         <div class="hidden-sm hidden-xs btn-group">
                                             <a class="btn btn-xs btn-success" href="#">

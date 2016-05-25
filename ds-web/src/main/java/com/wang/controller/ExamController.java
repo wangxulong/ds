@@ -34,7 +34,7 @@ public class ExamController {
     public void index(Model model){
         ExamFormBean command = new ExamFormBean();
         model.addAttribute("command", command);
-        model.addAttribute("allStu",tStudentService.getAllStudent());
+        model.addAttribute("allStu",tStudentService.getAllStudentInCourse());
     }
     //上传考试试卷
     @RequestMapping(value ="upload")
