@@ -1,5 +1,7 @@
 package com.wang.service;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.wang.auth.sys.entity.SysUser;
 import com.wang.auth.sys.service.SecurityService;
 import com.wang.dao.*;
@@ -19,6 +21,7 @@ import javax.annotation.Resource;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -48,7 +51,8 @@ public class TTaskService {
     private THomeworkDao tHomeworkDao;
     @Resource
     private TeacherDao teacherDao;
-
+    @Resource
+    private StudentDao studentDao;
 
     /*获取所有的任务*/
     public List<TTask> getAllTask(){
@@ -183,8 +187,30 @@ public class TTaskService {
      * @return
      */
     public List<HomeworkStudentDto> getHomeWork(int id){
-        List<HomeworkStudentDto> list = tHomeworkDao.getByTaskId(id);
-        return list;
+        List<HomeworkStudentDto> listHomework = new ArrayList<HomeworkStudentDto>();
+        List<THomework> list1 = tHomeworkDao.findByTaskId(id);
+        for(int i=0;i<list1.size();i++){
+            HomeworkStudentDto  tempHomeworkStudentDto = new HomeworkStudentDto();
+            tempHomeworkStudentDto.setStudentName(studentDao.getOne(list1.get(i).getStudentId()).getName());
+            tempHomeworkStudentDto.setStudentCard(studentDao.getOne(list1.get(i).getStudentId()).getStudentNumber());
+            tempHomeworkStudentDto.setFinishTime(list1.get(i).getCreateTime());
+            tempHomeworkStudentDto.setHomeworkScore(list1.get(i).getScore());
+            tempHomeworkStudentDto.setHomeworkId(list1.get(i).getId());
+            listHomework.add(tempHomeworkStudentDto);
+        }
+        return listHomework;
+    }
+
+    public void saveHomeworkScore(String temp){
+        JSONArray jsonArray = JSONArray.parseArray(temp);
+        for(int i =0;i<jsonArray.size();i++){
+            JSONObject jsonObj = jsonArray.getJSONObject(i);
+            int id=jsonObj.getInteger("id");
+            int score = jsonObj.getInteger("value");
+            THomework homework =tHomeworkDao.getOne(id);
+            homework.setScore(score);
+            tHomeworkDao.saveAndFlush(homework);
+        }
     }
     /**
      * 根据学生的ID获取关于课程的任务

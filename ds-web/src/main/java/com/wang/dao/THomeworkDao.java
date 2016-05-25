@@ -26,5 +26,8 @@ public interface THomeworkDao extends BaseDao<THomework,Integer> {
             "where a.task_id=?1",nativeQuery = true)
     public List<HomeworkStudentDto> getByTaskId(Integer taskId);
 
+    @Query("FROM THomework a WHERE  a.taskId=?1")
+    public List<THomework> findByTaskId(Integer taskId);
+
 
 }

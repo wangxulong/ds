@@ -6,8 +6,7 @@ import com.wang.form.TaskFormBean;
 import com.wang.service.TTaskService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -61,10 +60,18 @@ public class TaskController {
     }
     @RequestMapping(value = "assess/{id}")
     public String assess(@PathVariable("id") Integer id,Model model){
-        List<HomeworkStudentDto> homeworkList = tTaskService.getHomeWork(id);
+
+        List <HomeworkStudentDto> homeworkList = tTaskService.getHomeWork(id);
         model.addAttribute("homeworkList",homeworkList);
+        model.addAttribute("nowTask",tTaskService.getOnetask(id).getTopic());
         return "task/mark";
     }
+    @RequestMapping(value = "saveScore",method = {RequestMethod.POST })
+    @ResponseBody
+    public String saveScore(@RequestBody String stringtest){
 
-
+        System.out.println(stringtest);
+       tTaskService.saveHomeworkScore(stringtest);
+        return "success";
+    }
 }

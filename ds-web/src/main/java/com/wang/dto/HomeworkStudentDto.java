@@ -9,8 +9,25 @@ public class HomeworkStudentDto {
     private Integer taskId;
     private Date finishTime;
     private Integer homeworkScore;
-    private Integer studentId;
     private String studentName;
+    private String studentCard;
+    private Integer homeworkId;
+
+    public Integer getHomeworkId() {
+        return homeworkId;
+    }
+
+    public void setHomeworkId(Integer homeworkId) {
+        this.homeworkId = homeworkId;
+    }
+
+    public String getStudentCard() {
+        return studentCard;
+    }
+
+    public void setStudentCard(String studentCard) {
+        this.studentCard = studentCard;
+    }
 
     public Integer getTaskId() {
         return taskId;
@@ -36,13 +53,7 @@ public class HomeworkStudentDto {
         this.homeworkScore = homeworkScore;
     }
 
-    public Integer getStudentId() {
-        return studentId;
-    }
 
-    public void setStudentId(Integer studentId) {
-        this.studentId = studentId;
-    }
 
     public String getStudentName() {
         return studentName;
