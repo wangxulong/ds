@@ -1,5 +1,6 @@
 package com.wang.controller.front;
 
+import com.alibaba.fastjson.JSON;
 import com.wang.dto.ResultMessage;
 import com.wang.entity.TStudent;
 import com.wang.service.CourseService;
@@ -39,6 +40,8 @@ public class IndexController {
         model.addAttribute("teachers",teacherService.findAllTeacher());
         model.addAttribute("levelNums",map1);
         model.addAttribute("sexStateNums",map2);
+        model.addAttribute("teacherLevel", JSON.toJSONString(teacherService.teacherLeave()));
+        model.addAttribute("teachState", JSON.toJSONString(teacherService.teachState()));
         model.addAttribute("course",courseService.getDescriptionOfCourse());
         model.addAttribute("group",groupService.getDsGroup());
 

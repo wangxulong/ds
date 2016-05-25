@@ -33,9 +33,19 @@
 
         <div class="col-sm-9">
           <div class="col-sm-9">
-            <div class="wysiwyg-editor" id="editor" >${command.description}</div>
+            <div class="wysiwyg-editor editor" id="descEditor" >${command.description}</div>
             <form:hidden path="description"/>
             <%--<form:textarea path="description" placeholder="课程组描述" style="resize:none;" rows="8" class="form-control wysiwyg-editor" />--%>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-3 control-label no-padding-right"> 课程大纲 </label>
+
+        <div class="col-sm-9">
+          <div class="col-sm-9">
+            <div class="wysiwyg-editor editor"  id="outlineEditor" >${command.outline}</div>
+            <form:hidden path="outline"/>
           </div>
         </div>
       </div>
@@ -67,9 +77,10 @@
 <script>
   $(function(){
      $(".btnSave").on("click",function(){
-       var d= $('#editor').html();
+       var d= $('#descEditor').html();
        $("#description").val(d);
-
+      var outline =  $('#outlineEditor').html();
+       $("#outline").val(outline);
        $(".form").submit();
      });
     $(".clear").on("click",function () {
@@ -81,7 +92,7 @@
     $(this).prev().focus();
   });
 
-  $('#editor').ace_wysiwyg({
+  $('.editor').ace_wysiwyg({
     toolbar:
             [
               'font',
