@@ -6,8 +6,8 @@ import com.wang.dao.StudentDao;
 import com.wang.dao.TCourseDao;
 import com.wang.dao.TCourseStudentDao;
 import com.wang.dao.TeacherDao;
+import com.wang.entity.RCourseStudent;
 import com.wang.entity.TCourse;
-import com.wang.entity.TCourseStudent;
 import com.wang.entity.TStudent;
 import com.wang.entity.TTeacher;
 import org.springframework.stereotype.Service;
@@ -45,7 +45,7 @@ public class TStudetServeice {
         String jobNumber = sysUser.getUserName();
         TTeacher tTeacher = teacherDao.findByJobNumber(jobNumber);
         TCourse tCourse=tCourseDao.findByTeacherId(tTeacher.getId());
-        List<TCourseStudent> courseStudents=tCourseStudent.getCourseStudentBycourseId(tCourse.getId());
+        List<RCourseStudent> courseStudents=tCourseStudent.getCourseStudentBycourseId(tCourse.getId());
         int len =courseStudents.size();
         if(len!=0) {
             Integer[] ids = new Integer[len];
