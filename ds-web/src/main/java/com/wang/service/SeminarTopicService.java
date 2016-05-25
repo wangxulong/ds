@@ -12,6 +12,7 @@ import javax.annotation.Resource;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -48,6 +49,13 @@ public class SeminarTopicService {
     }
 
 
+    /**
+     * 查找可以结束的话题，进行排序，列出选中的
+     */
+    public List<TSeminarTopic> getClosedTopic(){
+        List<TSeminarTopic> results =  seminarTopicDao.findByStatusAndEndTime(1,new Date());
+        return results;
+    }
 
 }
 

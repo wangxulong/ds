@@ -1,9 +1,7 @@
 package com.service;
 
-import com.wang.dao.StudentTopicDao;
-import com.wang.service.CourseService;
 import com.wang.service.SeminarService;
-import com.wang.service.SeminarTopicService;
+import com.wang.service.StudentTopicService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -17,16 +15,12 @@ import java.util.List;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:config/spring-context.xml")
-public class SeminaServiceTest {
+public class StudentTopicServiceTest {
     @Resource
-    private SeminarService seminarService;
-    @Resource
-    private SeminarTopicService topicService;
-    @Resource
-    private StudentTopicDao studentTopicDao;
+    private StudentTopicService studentTopicService;
     @Test
     public void getAvailableSeminar(){
-        List r = topicService.getClosedTopic();
-        System.out.println(r.size());
+        List result = studentTopicService.getJoinedTopic(7);
+        System.out.println(result.size());
     }
 }
