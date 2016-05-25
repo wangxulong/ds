@@ -26,6 +26,7 @@ public class ConstantUtil {
     public static final String TASK_PATH="upload\\task";//教学任务
     public static final String LEAVE_PATH="upload\\leave";//学生请假
     public static final String TEACH_PLAN_PATH="upload\\teachPlan";//教学计划
+    public static final String STUDENT_TOPIC_PATH="upload\\studentTopic";//研讨课作业
     //数据结构
     public static final String DS = "数据结构";
 }

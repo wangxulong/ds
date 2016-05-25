@@ -64,7 +64,7 @@
                             <td>${exam.endTime}</td>
 
                             <td class="hidden-480">
-                                <span class="label label-sm label-warning" id="download">下载</span>
+                                <span class="label label-sm label-warning" id="download"><a href="${ctx}/download/27">下载</a></span>
                             </td>
 
                             <td>

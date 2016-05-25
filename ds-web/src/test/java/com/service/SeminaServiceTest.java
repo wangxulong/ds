@@ -1,7 +1,9 @@
 package com.service;
 
+import com.wang.dao.StudentTopicDao;
 import com.wang.service.CourseService;
 import com.wang.service.SeminarService;
+import com.wang.service.SeminarTopicService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -18,8 +20,13 @@ import java.util.List;
 public class SeminaServiceTest {
     @Resource
     private SeminarService seminarService;
+    @Resource
+    private SeminarTopicService topicService;
+    @Resource
+    private StudentTopicDao studentTopicDao;
     @Test
     public void getAvailableSeminar(){
-
+        List r = topicService.getClosedTopic();
+        System.out.println(r.size());
     }
 }

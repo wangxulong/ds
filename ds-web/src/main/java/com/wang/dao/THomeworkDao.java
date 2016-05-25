@@ -30,4 +30,7 @@ public interface THomeworkDao extends BaseDao<THomework,Integer> {
     public List<THomework> findByTaskId(Integer taskId);
 
 
+    @Query("From THomework t WHERE t.studentId=?1")
+    public List<THomework> getAllStudentHomeWork(int studentId);
+
 }

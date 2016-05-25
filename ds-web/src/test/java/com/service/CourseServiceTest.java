@@ -1,6 +1,8 @@
 package com.service;
 
+import com.wang.dao.TCourseStudentDao;
 import com.wang.service.CourseService;
+import com.wang.service.ScoreService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -17,9 +19,15 @@ import java.util.List;
 public class CourseServiceTest {
     @Resource
     private CourseService courseService;
+    @Resource
+    private ScoreService scoreService;
     @Test
     public void getTeacherCourse(){
         List result = courseService.getTeachingCourse();
         System.out.println(result.size());
+    }
+    @Test
+    public void setScore(){
+        scoreService.setStydentUsualScore(2,3,7);
     }
 }

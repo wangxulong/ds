@@ -1,6 +1,9 @@
 package com.wang.entity;
 
+import com.wang.entity.enums.StudentTopicState;
+
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -15,7 +18,37 @@ public class RStudentTopic {
     private Integer type;
     private Integer score;
     private String level;
-    private List<TStudent> students;
+    private StudentTopicState state;
+    private Integer attachId;
+
+    @Column(name = "attach_id")
+    public Integer getAttachId() {
+        return attachId;
+    }
+
+    public void setAttachId(Integer attachId) {
+        this.attachId = attachId;
+    }
+
+    private Date createTime;
+
+    @Column(name = "create_time")
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    @Column(name = "state")
+    public StudentTopicState getState() {
+        return state;
+    }
+
+    public void setState(StudentTopicState state) {
+        this.state = state;
+    }
 
     @Id
     @Column(name = "id")

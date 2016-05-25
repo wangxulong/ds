@@ -21,23 +21,12 @@
           <div class="panel-body">
             <div class="row">
               <div class="col-md-12">
-                <form class="form-horizontal">
-                  <div class="form-group">
-                    <label   class="col-sm-2 control-label">研讨课</label>
-                    <div class="col-sm-10">
-                      <p class="form-control-static">链表的操作</p>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label  class="col-sm-2 control-label">内容描述</label>
-                    <div class="col-sm-10">
-                      <textarea rows="3" class="form-control" placeholder="内容描述"></textarea>
-                    </div>
-                  </div>
+                <form class="form-horizontal form" method="post" enctype="multipart/form-data" action="${ctx}/front/discuss/${id}/upload">
+
                   <div class="form-group">
                     <label   class="col-sm-2 control-label">附件</label>
                     <div class="col-sm-10">
-                      <input id="input-dim-2" name="homework" type="file" multiple class="file-loading" >
+                      <input id="input-dim-2" name="file" type="file" multiple class="file-loading" >
                     </div>
                   </div>
                   <div class="form-group">
@@ -61,10 +50,24 @@
       //初始化上传控件
       $("#input-dim-2").fileinput({
         language: 'zh',
-        uploadUrl: "/file-upload-batch/2",
-        allowedFileExtensions: ["jpg", "png", "gif","doc","docx"],
-        maxImageWidth: 250,
-        maxImageHeight: 250
+        allowedFileExtensions: ["jpg", "png", "gif","doc","docx","txt"],
+        showUpload:false,
+        autoReplace:true
+      });
+      $('.form').bootstrapValidator({
+        feedbackIcons: {
+          valid: 'glyphicon glyphicon-ok',
+          invalid: 'glyphicon glyphicon-remove',
+          validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+          file:{
+            validators: {
+              notEmpty: {
+              }
+            }
+          }
+        }
       });
     });
 

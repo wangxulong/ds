@@ -4,10 +4,8 @@ package com.wang.service;
 import com.wang.dao.NoteDao;
 import com.wang.dao.RcourseStudentDao;
 import com.wang.dao.SeminarDao;
-import com.wang.entity.RCourseStudent;
-import com.wang.entity.TNote;
-import com.wang.entity.TSeminar;
-import com.wang.entity.TSeminarTopic;
+import com.wang.dao.StudentTopicDao;
+import com.wang.entity.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -32,6 +30,9 @@ public class SeminarService {
 
     @Resource
     private RcourseStudentDao rcourseStudentDao;
+
+    @Resource
+    private StudentTopicDao studentTopicDao;
 
     public List<TSeminar> findByCourse(int cid){
         EntityManager em = managerFactory.createEntityManager();
@@ -58,9 +59,23 @@ public class SeminarService {
         List<TSeminar> seminars =seminarDao.getBeforeEndTime(new Date(), courseStudent.getCourseId());
         for(TSeminar seminar : seminars){
             List<TSeminarTopic> topics = seminar.getSeminarTopics();
+            boolean flag = false;
             for(TSeminarTopic topic:topics){
                 //判断人数，并设置是否可用 TODO
+                RStudentTopic studentTopic = studentTopicDao.findByStudentIdAndTopicId(studentId, topic.getId());
+                if(null != studentTopic){
+                    topic.setJoined(true);
+                    flag =true;
+                    topic.setAvailable(false);
+                    continue;
+                }
+
                 topic.setAvailable(true);
+            }
+            if(flag){
+                for(TSeminarTopic topic:topics){
+                    topic.setAvailable(false);
+                }
             }
         }
         return seminars;

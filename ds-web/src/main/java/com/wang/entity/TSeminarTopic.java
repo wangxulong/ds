@@ -27,6 +27,18 @@ public class TSeminarTopic {
     private boolean available; //是否可用
 
     private Integer studentCount; //学生人数
+
+    private boolean joined;
+
+    @Transient
+    public boolean getJoined() {
+        return joined;
+    }
+
+    public void setJoined(boolean joined) {
+        this.joined = joined;
+    }
+
     @Transient
     public boolean getAvailable() {
         return available;

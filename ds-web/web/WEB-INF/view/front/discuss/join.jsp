@@ -31,15 +31,33 @@
 
                   <c:forEach items="${seminar.seminarTopics}" var="topic">
                     <div class="row panel "  >
+
+
                       <div class="col-md-9">
+
                         <blockquote>
-                          <p><strong>${topic.name}</strong></p>
+                          <p class="countDownText" data="${topic.endTime}"></p>
+                          <p><strong>${topic.name}</strong>
+                          </p>
                           <p>${topic.desc}</p>
+
                           <footer>${topic.demand}</footer>
                         </blockquote>
                       </div>
                       <div class="col-md-3">
-                        <a href="#" class="btn btn-primary">立即参与</a>
+                        <c:choose>
+                          <c:when test="${topic.joined}">
+                            <a   class="btn btn-info btnJoin disabled">参与中</a>
+                          </c:when>
+                          <c:when test="${!topic.available}">
+                            <a  class="btn btn-default btnJoin disabled">无效</a>
+                          </c:when>
+                          <c:otherwise>
+                            <a href="${ctx}/front/discuss/${topic.id}/join" class="btn btn-primary btnJoin">立即参与</a>
+                          </c:otherwise>
+                        </c:choose>
+
+
                       </div>
 
                     </div>
@@ -116,5 +134,30 @@
       </div>
     </div>
   </div>
+<script>
+  $(function(){
+    $(".btnJoin").on("click",function(){
+      $(this).addClass("disabled");
+      $(this).text("已经提交");
+    });
+
+     $(".countDownText").each(function(i,v){
+       var endTime = $(this).attr('data');
+       $(this).countdown({
+         date: endTime,
+         render:function(data){
+           //$(this.el).html("<div>" +  this.leadingZeros(data.days, 3) + " <span>天</span></div><div>" + this.leadingZeros(data.hours, 2) + " <span>小时</span></div><div>" + this.leadingZeros(data.min, 2) + " <span>分钟</span></div><div>" + this.leadingZeros(data.sec, 2) + " <span>秒</span></div>");
+           return  $(this.el).html('<span class="text-danger"> 剩余：'+ data['days']+'天'+data['hours']+'小时'+data['min']+'分'+data['sec']+'秒 </span>');
+         }
+       });
+     });
+
+  });
+</script>
+  <script type="text/javascript" src="${ctx}/static/js/jquery-countdown/jquery.countdown.min.js" charset="UTF-8"></script>
+
+  <%--<script type="text/javascript" src="${ctx}/static/js/jquery-countdown/countdown.min.js" charset="UTF-8"></script>--%>
+
+
 </body>
 </html>

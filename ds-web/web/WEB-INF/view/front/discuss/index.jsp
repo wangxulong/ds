@@ -1,3 +1,4 @@
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -26,14 +27,13 @@
                   #
                 </th>
                 <th>
-                  研讨课内容
+                  研讨课主题
+                </th>
+                <th>
+                  课题内容
                 </th>
                 <th>
                   时间
-                </th>
-
-                <th>
-                  成员
                 </th>
                 <th>
                   状态
@@ -44,76 +44,64 @@
               </tr>
               </thead>
               <tbody>
-              <tr  class="success">
-                <td>
-                  1
-                </td>
-                <td>
-                  链表作业
-                </td>
-                <td>
-                  2016-04-12
-                </td>
+                <c:forEach items="${myTopics}" var="myTopic" varStatus="s">
+                  <tr>
+                    <td>${s.count}</td>
+                    <td>${myTopic.seminarName}</td>
+                    <td>${myTopic.topicName}</td>
+                    <td><fmt:formatDate value="${myTopic.joinTime}" pattern="yyyy-MM-dd HH:mm:ss"/> </td>
+                    <td >
+                      <c:choose>
+                        <c:when test="${myTopic.state eq 0}">
+                          <span class="label label-info ">已提交</span>
+                        </c:when>
+                        <c:when test="${myTopic.state eq 1}">
+                          <span class="label label-success">已选择</span>
+                          </c:when>
+                        <c:when test="${myTopic.state eq 2}">
+                          <span class="label label-danger">选择失败</span>
+                          选择失败</c:when>
+                      </c:choose>
 
-                <td>
-                  王旭龙、李长雅
-                </td>
-                <td>参与中</td>
-                <td>
-                  <a class="btn btn-primary btn-sm">退选</a>
-                  <a class="btn btn-default btn-sm"  >下载</a>
-                </td>
-              </tr>
-              <tr >
-                <td>
-                  2
-                </td>
-                <td>
-                  图操作作业
-                </td>
-                <td>
-                  2016-08-12
-                </td>
 
-                <td>
-                  王旭龙、李长雅
-                </td>
-                <td>已结束</td>
-                <td>
-                  <a class="btn btn-default btn-sm"  >下载</a>
-                </td>
-              </tr>
+                    </td>
+                    <td>
+                      <a href="#" class="btn btn-primary btn-sm">详情</a>
+                      <c:if test="${myTopic.state eq 0}">
+                        <button data="${myTopic.studentTopicId}" class="btn btn-danger btn-sm delete">退选</button>
+                      </c:if>
+                      <c:if test="${myTopic.state eq 1}">
+                        <a href="${ctx}/front/discuss/${myTopic.studentTopicId}/upload" class="btn btn-info btn-sm">提交作业</a>
+                      </c:if>
+                      <c:if test="${not empty myTopic.attachId}">
+                        <a href="${ctx}/front/download/${myTopic.attachId}" class="btn btn-info btn-sm">下载作业</a>
+                      </c:if>
+                    </td>
+
+                    </c:forEach>
+                  </tr>
+
+
               </tbody>
-            </table>
-            <ul class="pagination">
-              <li>
-                <a href="#">上一页</a>
-              </li>
-              <li>
-                <a href="#">1</a>
-              </li>
-              <li>
-                <a href="#">2</a>
-              </li>
-              <li>
-                <a href="#">3</a>
-              </li>
-              <li>
-                <a href="#">4</a>
-              </li>
-              <li>
-                <a href="#">5</a>
-              </li>
-              <li>
-                <a href="#">下一页</a>
-              </li>
-            </ul>
+                </table>
           </div>
 
         </div>
 
       </div>
     </div>
+
   </div>
+<script>
+  $(function(){
+    $(".delete").on("click",function(){
+      var r = confirm("确定要退选吗");
+      if(r){
+        var id = $(this).attr("data");
+        window.location.href="${ctx}/front/discuss/"+id+"/delete";
+      }
+    });
+  });
+</script>
 </body>
 </html>
