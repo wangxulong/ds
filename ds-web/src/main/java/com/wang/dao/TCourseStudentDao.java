@@ -14,6 +14,7 @@ public interface TCourseStudentDao extends BaseDao<RCourseStudent,Integer> {
     @Query("FROM RCourseStudent a WHERE  a.courseId=?1")
     public List<RCourseStudent> getCourseStudentBycourseId(int courseId);
 
+
     @Query("From RCourseStudent a WHERE a.studentId=?1")
     public RCourseStudent getCourseStudent(int studentId);
 }

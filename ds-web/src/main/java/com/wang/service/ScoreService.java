@@ -29,6 +29,7 @@ public class ScoreService {
     private TStudetServeice tStudetServeice;
 
     public  int getStudentTopicScore(int studentId){
+
         int result;
         List<RStudentTopic> studentTopics=studentTopicDao.getAllStudentTopic(studentId);
         int len=studentTopics.size();

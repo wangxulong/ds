@@ -22,4 +22,7 @@ public interface StudentTopicDao extends BaseDao<RStudentTopic,Integer>{
     @Modifying
     @Query("update RStudentTopic r set r.state=?2 where r.id=?1")
     void updateStateById(Integer id,StudentTopicState state);
+
+    @Query("From RStudentTopic t where t.studentId=?1")
+    List<RStudentTopic> getAllStudentTopic(int studentId);
 }
