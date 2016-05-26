@@ -94,6 +94,8 @@ public class RStudentTopic {
     @Basic
     @Column(name = "score")
     public Integer getScore() {
+        if(null==this.score)
+            return 0;
         return score;
     }
 
