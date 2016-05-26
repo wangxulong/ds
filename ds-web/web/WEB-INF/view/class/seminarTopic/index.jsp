@@ -66,6 +66,7 @@
                 $("#studentList").empty();
                 var stid = $(this).parents("tr").attr("stid");
                 $("#inner_thead").attr("stid",stid);
+
                 $.ajax({
                     url:'${ctx}/class/seminarTopic/students',
                     type:'post',

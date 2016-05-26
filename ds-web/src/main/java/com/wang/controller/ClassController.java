@@ -284,7 +284,9 @@ System.out.println("zjc"+file.isEmpty());
     @ResponseBody
     @RequestMapping("seminarTopic/students")
     public List<TStudent> seminarTopicStudents(Integer stid,Model model){
+System.out.println("+++++++++++++++++++++++++");
         List<TStudent> students = studentTopicService.getStudentsById(stid);
+        System.out.println(students);
         return students;
     }
 

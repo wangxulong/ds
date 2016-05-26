@@ -78,6 +78,7 @@
                 type:'post',
                 dataType:'json',
                 success:function(msg){
+                    window.setInterval(200);
                     if(msg.status==100){
                         treeNode.id = msg.id;
                         zTree = $.fn.zTree.getZTreeObj("treeDemo");
