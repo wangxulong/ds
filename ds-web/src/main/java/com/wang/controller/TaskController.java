@@ -68,9 +68,8 @@ public class TaskController {
     }
     @RequestMapping(value = "saveScore",method = {RequestMethod.POST })
     @ResponseBody
-    public String saveScore(@RequestBody String stringtest){
+    public String saveScore(String stringtest){
 
-        System.out.println(stringtest);
        tTaskService.saveHomeworkScore(stringtest);
         return "success";
     }

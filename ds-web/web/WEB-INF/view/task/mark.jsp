@@ -45,8 +45,8 @@
 
                     <td class="hidden-480">
                         <div class="hidden-sm hidden-xs btn-group">
-                            <input id="homework${ss.count}" name="homeworkNum"type="hidden" value="${hl.homeworkId}">
-                            <input class="input-sm" type="text" id="markValue${ss.count}"/>
+                            <%--<input id="homework${ss.count}" name="homeworkNum"type="hidden" value="${hl.homeworkId}">--%>
+                            <input class="input-sm homeworkScore" type="text" data="${hl.homeworkId}" id="markValue${ss.count}"/>
                         </div>
                     </td>
                 </tr>
@@ -67,16 +67,38 @@
 
 </div>
 <script>
+    function getScore(){
+        var scoreList = new Array();
+        $(".homeworkScore").each(function(){
+            var homeworkId = $(this).attr("data");
+            var homeworkScore = $(this).val() || "0";
+            var result = {id:homeworkId,value:homeworkScore};
+            scoreList.push(result);
+        });
+         return JSON.stringify(scoreList);
+    }
+
+
+
     $("#submit").click(function(){
-        var brithDay=document.getElementsByName("homeworkNum");
+
+       var data = getScore();
+        /*var brithDay=document.getElementsByName("homeworkNum");
         var saveDataAry=[];
         for(var i=0;i<brithDay.length;i++){
             var tempData = {"id":$("#homework"+(i+1)).val(),"value":$("#markValue"+(i+1)).val()};
             saveDataAry.push(tempData);
         }
+
+        var stringtest =JSON.stringify(saveDataAry);*/
         var url ="${ctx}/task/saveScore";
-        var stringtest =JSON.stringify(saveDataAry)
-        $.ajax({
+        $.post(url,{stringtest:data},function(result){
+            if(result){
+                alert("提交成功！");
+                window.location.href = "${ctx}/task/index";
+            }
+        });
+       /* $.ajax({
             url:url,
             type:"POST",
             dataType:"json",
@@ -89,9 +111,8 @@
                 if(msg.status==200||msg.status==4){
                     alert("提交成功！");
                 }
-
             }
-        });
+        });*/
     });
 
 </script>

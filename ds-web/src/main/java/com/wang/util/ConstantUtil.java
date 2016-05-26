@@ -29,4 +29,7 @@ public class ConstantUtil {
     public static final String STUDENT_TOPIC_PATH="upload\\studentTopic";//研讨课作业
     //数据结构
     public static final String DS = "数据结构";
+    //
+    public static final String ADMIN = "admin";
+
 }

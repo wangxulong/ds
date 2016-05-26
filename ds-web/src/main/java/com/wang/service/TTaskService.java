@@ -9,7 +9,9 @@ import com.wang.dto.HomeworkStudentDto;
 import com.wang.dto.StudentTaskDto;
 import com.wang.entity.*;
 import com.wang.form.TaskFormBean;
+import com.wang.util.ConstantUtil;
 import com.wang.util.UpFilesUtils;
+import org.apache.shiro.SecurityUtils;
 import org.hibernate.SQLQuery;
 import org.hibernate.transform.Transformers;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -56,7 +58,23 @@ public class TTaskService {
 
     /*获取所有的任务*/
     public List<TTask> getAllTask(){
-        return tTaskDao.findAll();
+        boolean flag = SecurityUtils.getSubject().hasRole(ConstantUtil.ADMIN);
+        List<TTask> list= tTaskDao.findAll();
+        if(flag){
+            return list;
+
+        }else{
+           TTeacher tTeacher =   securityService.getLoginTeacher();
+            List<TTask> taskList = new ArrayList<TTask>();
+            for(int i=0;i<list.size();i++){
+                if(list.get(i).getTeacherId()==tTeacher.getId())
+                    taskList.add(list.get(i));
+            }
+            return taskList;
+        }
+
+
+
     }
     /*获取某一次任务*/
     public TTask getOnetask(int id){
