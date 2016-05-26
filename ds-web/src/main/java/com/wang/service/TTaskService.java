@@ -99,7 +99,7 @@ public class TTaskService {
         tTaskDao.delete(id);
     }
     /*添加任务*/
-    public void addOneTask(TaskFormBean taskFormBean){
+    public void addOneTask(TaskFormBean taskFormBean,String path){
 
         TTask task = new TTask();
         task.setTopic(taskFormBean.getTopic());
@@ -110,7 +110,7 @@ public class TTaskService {
         String jobNumber = sysUser.getUserName();
         TTeacher tTeacher = teacherDao.findByJobNumber(jobNumber);
         task.setTeacherId(tTeacher.getId());
-        task.setCourseId(1);//设置课程ID
+        task.setCourseId( tCourseDao.findByTeacherId(tTeacher.getId()).getId());//设置课程ID
         if (taskFormBean.getFile().isEmpty()){  //没有附件
 
             tTaskDao.save(task);
@@ -119,15 +119,15 @@ public class TTaskService {
             //获取上传的文件
             MultipartFile file = taskFormBean.getFile();
             //存储文件到指定的位置
-            UpFilesUtils.saveFile(file);
+            String fileName = UpFilesUtils.saveUploadFile(file, path);
 
             //保存附件基本信息到数据库
             TAttachment attachment = new TAttachment();
-            attachment.setName(UpFilesUtils.realName);
-            attachment.setFormat(UpFilesUtils.prefix);
-            attachment.setPath(UpFilesUtils.savePath);
+            attachment.setName(file.getOriginalFilename());
+            attachment.setFormat(file.getContentType());
+            attachment.setPath(ConstantUtil.TASK_PATH + "\\" + fileName);
+            attachment.setCreateTime(new Date());
             tAttachmentDao.save(attachment);
-
             task.setAttachmentId(attachment.getId());
             tTaskDao.save(task);
 
@@ -135,9 +135,10 @@ public class TTaskService {
 
     }
     /*更新任务*/
-    public void updateOneTask(TaskFormBean taskFormBean){
+    public void updateOneTask(TaskFormBean taskFormBean,String path){
 
-        TTask task = new TTask();
+        TTask task = tTaskDao.findOne(taskFormBean.getId());
+
         task.setId(taskFormBean.getId());
         task.setTopic(taskFormBean.getTopic());
         task.setEndTime(taskFormBean.getEndTime());
@@ -145,20 +146,20 @@ public class TTaskService {
 
 
         if (taskFormBean.getFile().isEmpty()){  //没有附件
-            tTaskDao.saveAndFlush(task);
+            tTaskDao.save(task);
         }else {
             //获取上传的文件
             MultipartFile file = taskFormBean.getFile();
             //存储文件到指定的位置
-            UpFilesUtils.saveFile(file);
+            String fileName = UpFilesUtils.saveUploadFile(file, path);
 
             //保存附件基本信息到数据库
             TAttachment attachment = new TAttachment();
-            attachment.setName(UpFilesUtils.realName);
-            attachment.setFormat(UpFilesUtils.prefix);
-            attachment.setPath(UpFilesUtils.savePath);
+            attachment.setName(file.getOriginalFilename());
+            attachment.setFormat(file.getContentType());
+            attachment.setPath(ConstantUtil.TASK_PATH + "\\" + fileName);
+            attachment.setCreateTime(new Date());
             tAttachmentDao.save(attachment);
-
             task.setAttachmentId(attachment.getId());
             tTaskDao.save(task);
         }

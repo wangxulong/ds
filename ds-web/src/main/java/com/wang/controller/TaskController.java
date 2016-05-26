@@ -4,11 +4,13 @@ import com.wang.dto.HomeworkStudentDto;
 import com.wang.entity.TTask;
 import com.wang.form.TaskFormBean;
 import com.wang.service.TTaskService;
+import com.wang.util.ConstantUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**作业管理（李昌亚）
@@ -34,9 +36,9 @@ public class TaskController {
     }
     //保存记录到数据库
     @RequestMapping(value = "save")
-    public String save(TaskFormBean form){
+    public String save(TaskFormBean form,HttpServletRequest request){
 
-        tTaskService.addOneTask(form);
+        tTaskService.addOneTask(form,request.getServletContext().getRealPath("/") + ConstantUtil.TASK_PATH);
         return "redirect:/task/index";
     }
     @RequestMapping("edit/{id}")
@@ -48,8 +50,8 @@ public class TaskController {
     }
 
     @RequestMapping("update")
-    public String update(TaskFormBean form){
-        tTaskService.updateOneTask(form);
+    public String update(TaskFormBean form,HttpServletRequest request){
+        tTaskService.updateOneTask(form,request.getServletContext().getRealPath("/") + ConstantUtil.TASK_PATH);
         return "redirect:/task/index";
     }
 
