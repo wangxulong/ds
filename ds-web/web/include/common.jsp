@@ -90,3 +90,9 @@ window.jQuery || document.write("<script src='${ctx}/static/js/ace/assets/js/jqu
 <script src="${ctx}/static/js/ace/assets/js/jquery.inputlimiter.1.3.1.js"></script>
 <script src="${ctx}/static/js/ace/assets/js/jquery.maskedinput.js"></script>
 <script src="${ctx}/static/js/ace/assets/js/bootstrap-tag.js"></script>
+
+
+<%--validator--%>
+<link rel="stylesheet" href="${ctx}/static/js/bootstrapvalidator/dist/css/bootstrapValidator.css"/>
+<script type="text/javascript" src="${ctx}/static/js/bootstrapvalidator/dist/js/bootstrapValidator.js"></script>
+<script type="text/javascript" src="${ctx}/static/js/bootstrapvalidator/dist/js/language/zh_CN.js"></script>

@@ -27,7 +27,7 @@
         <!-- /section:basics/sidebar.mobile.toggle -->
         <div class="navbar-header pull-left">
             <!-- #section:basics/navbar.layout.brand -->
-            <a href="#" class="navbar-brand">
+            <a href="${ctx}/admin/index" class="navbar-brand">
                 <small>
                     <i class="fa fa-leaf"></i>
                     DS课程管理平台
@@ -44,7 +44,7 @@
         <!-- #section:basics/navbar.dropdown -->
         <div class="navbar-buttons navbar-header pull-right" role="navigation">
             <ul class="nav ace-nav">
-                <li class="grey">
+               <%-- <li class="grey">
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                         <i class="ace-icon fa fa-tasks"></i>
                         <span class="badge badge-grey">4</span>
@@ -119,9 +119,9 @@
                             </a>
                         </li>
                     </ul>
-                </li>
+                </li>--%>
 
-                <li class="purple">
+               <%-- <li class="purple">
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                         <i class="ace-icon fa fa-bell icon-animated-bell"></i>
                         <span class="badge badge-important">8</span>
@@ -187,9 +187,9 @@
                             </a>
                         </li>
                     </ul>
-                </li>
+                </li>--%>
 
-                <li class="green">
+                <%--<li class="green">
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                         <i class="ace-icon fa fa-envelope icon-animated-vertical"></i>
                         <span class="badge badge-success">5</span>
@@ -297,7 +297,7 @@
                             </a>
                         </li>
                     </ul>
-                </li>
+                </li>--%>
 
                 <!-- #section:basics/navbar.user_menu -->
                 <li class="light-blue">
@@ -313,18 +313,18 @@
 
                     <ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
                         <li>
-                            <a href="#">
+                            <a href="${ctx}/admin/password">
                                 <i class="ace-icon fa fa-cog"></i>
-                                Settings
+                                修改密码
                             </a>
-                        </li>
+                        </li><%--
 
                         <li>
                             <a href="profile.html">
                                 <i class="ace-icon fa fa-user"></i>
                                 Profile
                             </a>
-                        </li>
+                        </li>--%>
 
                         <li class="divider"></li>
 

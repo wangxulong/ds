@@ -8,21 +8,24 @@
 <body>
 <div class="modal-header">
   <button type="button" class="close" data-dismiss="modal">&times;</button>
-  <h4 class="blue bigger">添加用户信息</h4>
+  <h4 class="blue bigger">编辑用户信息</h4>
 </div>
 
 <div class="modal-body">
   <form:form class="form-horizontal" role="form" id="formSysUser" action="${ctx}/sys/user/save">
     <!-- #section:elements.form -->
-    <div class="form-group">
-      <label class="col-sm-3 control-label no-padding-right"> 用户名 </label>
-
-      <div class="col-sm-9">
+    <form:hidden path="id"/>
+    <c:if test="${empty command.id}">
+      <div class="form-group">
+        <label class="col-sm-3 control-label no-padding-right"> 用户名 </label>
         <div class="col-sm-9">
-          <form:input path="userName" placeholder="用户名" class="form-control" />
+          <div class="col-sm-9">
+            <form:input path="userName" placeholder="用户名" class="form-control" />
+          </div>
         </div>
       </div>
-    </div>
+    </c:if>
+
     <div class="form-group">
       <label class="col-sm-3 control-label no-padding-right"> 密码 </label>
 

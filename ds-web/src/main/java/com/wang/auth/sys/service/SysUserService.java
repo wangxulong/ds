@@ -38,6 +38,9 @@ public class SysUserService {
     public SysUser getByName(String name){
         return  sysUserDao.getByUserName(name);
     }
+    public SysUser getById(Long id){
+        return  sysUserDao.findOne(id);
+    }
 
     public SysUser getCurrentUser(){
         Subject subject = SecurityUtils.getSubject();
@@ -127,5 +130,16 @@ public class SysUserService {
         }
         if(isLoginUser) return sysUser;
         return null;
+    }
+
+    public void updateUser(Long id, String userName, String password) {
+        SysUser sysUser = sysUserDao.findOne(id);
+        if(null == sysUser)
+            throw new RuntimeException("用户不存在");
+
+            SysUser user = PasswordHelper.md5Password(sysUser.getUserName(),password);
+            sysUser.setPassword(user.getPassword());
+            sysUser.setSalt(user.getSalt());
+            sysUserDao.save(sysUser);
     }
 }

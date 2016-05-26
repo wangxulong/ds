@@ -40,13 +40,19 @@ public class SysUserController {
         SysUser command = new SysUser();
         if(null!=id){
             //command =查询数据库
+          command =  sysUserService.getById(id);
         }
         model.addAttribute("command",command);
     }
 
     @RequestMapping(value = "save")
-    public String save(String userName,String password){
-        sysUserService.addUser(userName, password);
+    public String save(Long id ,String userName,String password){
+        if(null == id ){
+            sysUserService.addUser(userName, password);
+        }
+        else{
+            sysUserService.updateUser(id,userName,password);
+        }
         return "redirect:/sys/user/index";
     }
     @RequestMapping(value = "delete")
