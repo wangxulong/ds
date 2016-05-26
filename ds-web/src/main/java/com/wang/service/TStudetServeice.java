@@ -55,8 +55,10 @@ public class TStudetServeice {
                 ids[i] = courseStudents.get(i).getStudentId();
             }
             students = studentDao.findAllStudentInCourse(ids);
-        }else
-            return null;
+        }else {
+            students=new ArrayList<TStudent>();
+            return students;
+        }
         return students;
     }
     public TStudent getStudentByStudentId(int studentId){

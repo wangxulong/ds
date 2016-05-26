@@ -94,7 +94,7 @@ public class ScoreService {
             }
             return  stuScores;
         }
-        return null;
+        return stuScores;
     }
     public void saveOneStudentScore(int studentId,int courseId,double usualScore,double examScore,double finalScore){
         RCourseStudent rCourseStudent=tCourseStudentDao.getCourseStudent(studentId,courseId);
