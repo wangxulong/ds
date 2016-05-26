@@ -22,18 +22,16 @@
                     <a data-toggle="tab" href="#home">
                         <i class="green icon-home bigger-110"></i>
                         上传试卷
-                        <span class="badge badge-danger">2</span>
                     </a>
                 </li>
 
                 <li>
                     <a data-toggle="tab" href="#profile">
                         成绩提交
-                        <span class="badge badge-danger">99+</span>
                     </a>
                 </li>
 
-                <li class="dropdown">
+               <%-- <li class="dropdown">
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                        计算与统计 &nbsp;
                         <i class="icon-caret-down bigger-110 width-auto"></i>
@@ -48,7 +46,7 @@
                             <a data-toggle="tab" href="#dropdown2">等级制</a>
                         </li>
                     </ul>
-                </li>
+                </li>--%>
             </ul>
 
             <div class="tab-content">
