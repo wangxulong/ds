@@ -5,12 +5,15 @@ import com.wang.form.CourseFormBean;
 import com.wang.service.CourseService;
 import com.wang.service.GroupService;
 import com.wang.service.TeacherService;
+import com.wang.util.ConstantUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.Map;
 
 /**课程介绍
@@ -46,9 +49,9 @@ public class CourseController {
     }
     //保存记录到数据库
     @RequestMapping(value = "save")
-    public String save(CourseFormBean form){
+    public String save(CourseFormBean form,HttpServletRequest request){
 
-        courseService.addCourse(form);
+        courseService.addCourse(form,request.getServletContext().getRealPath("/") + ConstantUtil.TEACH_PLAN_PATH);
         return "redirect:/course/index";
     }
     @RequestMapping("edit/{id}")
@@ -59,8 +62,8 @@ public class CourseController {
         return "course/update";
     }
     @RequestMapping("update")
-    public String update(CourseFormBean form){
-        courseService.updateCourse(form);
+    public String update(CourseFormBean form,HttpServletRequest request){
+        courseService.updateCourse(form,request.getServletContext().getRealPath("/") + ConstantUtil.TEACH_PLAN_PATH);
         return "redirect:/course/index";
     }
     @RequestMapping(value = "delete/{id}")

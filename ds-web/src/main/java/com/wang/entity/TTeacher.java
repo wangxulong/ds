@@ -30,15 +30,18 @@ public class TTeacher {
     private Integer state;
 
 
-    private List<TAttachment> teacherPlan;
+    private Integer teacherPlan;
     @Transient
-    public List<TAttachment> getTeacherPlan() {
+    public Integer getTeacherPlan() {
         return teacherPlan;
     }
 
-    public void setTeacherPlan(List<TAttachment> teacherPlan) {
+    public void setTeacherPlan(Integer teacherPlan) {
         this.teacherPlan = teacherPlan;
     }
+
+
+
 
     @Id
     @Column(name = "id")

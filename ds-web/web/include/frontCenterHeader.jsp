@@ -63,7 +63,7 @@
         <li <c:if test="${fn:contains(headerUri,'/front/homework/')}">class="active" </c:if>><a href="${ctx}/front/homework/index" ><span class="glyphicon glyphicon-tasks"></span> 作业&资料</a></li>
         <li <c:if test="${fn:contains(headerUri,'/front/discuss/')}">class="active" </c:if> ><a href="${ctx}/front/discuss/index" ><span class="glyphicon glyphicon-comment"></span> 研讨课</a></li>
         <li <c:if test="${fn:contains(headerUri,'/front/leave/')}">class="active" </c:if> ><a href="${ctx}/front/leave/index" ><span class="glyphicon glyphicon-tags "></span> 请假</a></li>
-        <li <c:if test="${fn:contains(headerUri,'/front/exam/')}">class="active" </c:if>><a href="${ctx}/front/exam/index"><span class="glyphicon glyphicon-bookmark"></span> 考试</a></li>
+        <li <c:if test="${fn:contains(headerUri,'/front/exam/')}">class="active" </c:if>><a href="${ctx}/front/exam/index"><span class="glyphicon glyphicon-bookmark"></span> 成绩</a></li>
       </ul>
 
       <ul class="nav navbar-nav navbar-right">

@@ -5,14 +5,9 @@ import com.wang.auth.sys.dao.SysRoleDao;
 import com.wang.auth.sys.dao.SysUserDao;
 import com.wang.auth.sys.entity.SysRole;
 import com.wang.auth.sys.entity.SysUser;
-import com.wang.dao.TAttachmentDao;
-import com.wang.dao.TCourseDao;
-import com.wang.dao.TeacherDao;
+import com.wang.dao.*;
 import com.wang.dto.EchartDto;
-import com.wang.entity.TAttachment;
-import com.wang.entity.TCourse;
-import com.wang.entity.TGroup;
-import com.wang.entity.TTeacher;
+import com.wang.entity.*;
 import com.wang.util.ConstantUtil;
 import com.wang.util.PasswordHelper;
 import com.wang.util.UpFilesUtils;
@@ -46,11 +41,19 @@ public class TeacherService {
     private TCourseDao courseDao;
     @Resource
     private TAttachmentDao attachmentDao;
+    @Resource
+    private RcourseStudentDao rcourseStudentDao;
+    @Resource
+    private StudentDao studentDao;
 
     public List<TTeacher> findAllTeacher(){
         List<TTeacher> teachers = teacherDao.findAll();
         for(TTeacher teacher:teachers){
-            teacher.setTeacherPlan(getMySchedule(teacher.getId()));
+            TCourse course =   courseDao.findByTeacherId(teacher.getId());
+            if(null != course){
+                teacher.setTeacherPlan(course.getAttachmentId());
+            }
+
          }
        return teachers;
     }
@@ -292,5 +295,20 @@ public class TeacherService {
         course.setSchedule(schedule);
         courseDao.save(course);
     }
+
+    public List<TStudent> getMyStudents(Integer teacherId){
+        if(null == teacherId){
+            return studentDao.findAll();
+        }
+        TCourse course = courseDao.findByTeacherId(teacherId);
+        List<RCourseStudent> courseStudents = rcourseStudentDao.findByCourseId(course.getId());
+        List<Integer> studentIds = new ArrayList<Integer>();
+        for(RCourseStudent courseStudent : courseStudents){
+            studentIds.add(courseStudent.getId());
+        }
+        List<TStudent> students =studentDao.findAllStudentInCourse((Integer[]) studentIds.toArray());
+        return students;
+    }
+
 }
 

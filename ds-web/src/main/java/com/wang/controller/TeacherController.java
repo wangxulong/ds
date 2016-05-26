@@ -1,5 +1,7 @@
 package com.wang.controller;
 
+import com.wang.auth.sys.entity.SysUser;
+import com.wang.auth.sys.service.SecurityService;
 import com.wang.entity.TTeacher;
 import com.wang.service.TeacherService;
 import com.wang.util.ConstantUtil;
@@ -23,7 +25,8 @@ import java.util.Date;
 public class TeacherController {
     @Resource
     private TeacherService teacherService;
-
+    @Resource
+    private SecurityService securityService;
 
     @RequestMapping("index")
     public void index(Model model){
@@ -60,13 +63,25 @@ public class TeacherController {
     @RequestMapping(value = "{id}/plan",method = RequestMethod.GET)
     public String plan(@PathVariable Integer id,Model model){
         model.addAttribute("schedules", teacherService.getMySchedule(id));
-        model.addAttribute("teacherId",id);
+        model.addAttribute("teacherId", id);
         return "teacher/plan";
     }
 
     @RequestMapping(value = "{id}/plan",method = RequestMethod.POST)
     public String addPlan(@PathVariable("id") Integer teacherId,String content,MultipartFile file,HttpServletRequest request){
-        teacherService.addSchedule(teacherId,content,file,request.getServletContext().getRealPath("/")+ ConstantUtil.TEACH_PLAN_PATH);
+        teacherService.addSchedule(teacherId, content, file, request.getServletContext().getRealPath("/") + ConstantUtil.TEACH_PLAN_PATH);
         return "redirect:/teacher/"+teacherId+"/plan";
     }
+    
+    @RequestMapping("student")
+    public void myStudent(Model model){
+        TTeacher loginUser =  securityService.getLoginTeacher();
+        if(null == loginUser){
+            model.addAttribute("myStudents", teacherService.getMyStudents(null));
+        }else{
+            model.addAttribute("myStudents", teacherService.getMyStudents(loginUser.getId()));
+        }
+
+    }
+
 }

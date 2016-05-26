@@ -71,7 +71,7 @@ public class THomeworkService {
     }
 
     /*保存并更新*/
-    public void updateOneHomeWork(HomeworkFormBean homework){
+    public void updateOneHomeWork(HomeworkFormBean homework,String path){
         THomework  homeworkTemp = new THomework();
         homeworkTemp.setId(homework.getId());
         homeworkTemp.setTopic(homework.getTopic());
@@ -84,16 +84,16 @@ public class THomeworkService {
             //获取上传的文件
             MultipartFile file = homework.getPic();
             //存储文件到指定的位置
-            UpFilesUtils.saveFile(file);
+            //存储文件到指定的位置
+            String fileName = UpFilesUtils.saveUploadFile(file, path);
 
             //保存附件基本信息到数据库
             TAttachment attachment = new TAttachment();
-            attachment.setName(UpFilesUtils.realName);
-            attachment.setFormat(UpFilesUtils.prefix);
-            attachment.setPath(UpFilesUtils.savePath);
+            attachment.setName(file.getOriginalFilename());
+            attachment.setFormat(file.getContentType());
+            attachment.setPath(ConstantUtil.STUDENT_HOMEWORK_PATH + "\\" + fileName);
+            attachment.setCreateTime(new Date());
             tAttachmentService.addAttachment(attachment);
-
-            homeworkTemp.setAttachmentId(attachment.getId());
             tHomeworkDao.save(homeworkTemp);
         }
 

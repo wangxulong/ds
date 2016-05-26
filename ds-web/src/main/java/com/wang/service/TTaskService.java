@@ -58,7 +58,7 @@ public class TTaskService {
 
     /*获取所有的任务*/
     public List<TTask> getAllTask(){
-        boolean flag = SecurityUtils.getSubject().hasRole(ConstantUtil.ADMIN);
+        boolean flag = securityService.getLoginTeacher() == null?true:false;
         List<TTask> list= tTaskDao.findAll();
         if(flag){
             return list;

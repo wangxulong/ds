@@ -6,9 +6,13 @@
     <title></title>
 </head>
 <body>
-<div class="modal-header">
-  <button type="button" class="close" data-dismiss="modal">&times;</button>
-  <h4 class="blue bigger">修改课程</h4>
+<div class="page-header">
+  <h1>
+    课程管理
+    <small>
+      >> 修改课程信息
+    </small>
+  </h1>
 </div>
 
 
@@ -37,7 +41,7 @@
     </div>
 
     <div class="form-group">
-      <label class="col-sm-3 control-label no-padding-right"  > 课程大纲 </label>
+      <label class="col-sm-3 control-label no-padding-right"  > 教学计划 </label>
 
       <div class="col-sm-9">
         <div class="col-sm-9">

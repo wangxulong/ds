@@ -14,19 +14,19 @@
     <table id="sample-table-2" class="table table-striped table-bordered table-hover flag">
         <thead>
             <tr>
-                <th><button id="test" class="button-style">课程组介绍</button></th>
+                <%--<th><button id="test" class="button-style">课程组介绍</button></th>--%>
                 <th><button id="teacher" class="button-style">课程组老师</button></th>
 
             </tr>
         </thead>
     </table>
-    <div id="group" style="height:251px;">
+    <%--<div id="group" style="height:251px;">
         <p id="description"> ${group}
             <a  href="${ctx}/group/index">
                 <i class="ace-icon fa fa-pencil bigger-120"></i>
             </a>
         </p>
-    </div>
+    </div>--%>
     <div id="teach">
         <table id="sample-table-3" class="table table-striped table-bordered table-hover">
             <thead>
@@ -87,9 +87,9 @@
     <div class="flag-style">
         <span>课程信息</span>
 
-        <a class="btn btn-xs btn-success " href="${ctx}/course/add" >
+        <%--<a class="btn btn-xs btn-success " href="${ctx}/course/add" >
             <i class="ace-icon fa fa-plus bigger-120 "></i>
-        </a>
+        </a>--%>
 
     </div>
     <table id="sample-table-1" class="table table-striped table-bordered table-hover">
@@ -118,9 +118,9 @@
                         <a class="btn btn-xs btn-success" href="${ctx}/course/edit/${course.id}">
                             <i class="ace-icon fa fa-pencil bigger-120"></i>
                         </a>
-                        <a class="btn btn-xs btn-danger" href="${ctx}/course/delete/${course.id}">
+                      <%--  <a class="btn btn-xs btn-danger" href="${ctx}/course/delete/${course.id}">
                             <i class="ace-icon fa fa-trash-o bigger-120"></i>
-                        </a>
+                        </a>--%>
                     </div>
                 </td>
             </tr>
@@ -132,16 +132,16 @@
 
 <script type="text/javascript">
 //    $("#group").hide();
-    $("#teach").hide();
+    //$("#teach").hide();
     $(document).ready(function(){
-        $("#test").click(function () {
+       /* $("#test").click(function () {
             $("#group").show();
             $("#teach").hide();
         });
         $("#teacher").click(function () {
             $("#teach").show();
             $("#group").hide();
-        });
+        });*/
     });
 </script>
 <script type="text/javascript">

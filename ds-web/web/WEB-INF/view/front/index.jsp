@@ -176,11 +176,7 @@
               <td>
                 <c:choose>
                   <c:when test="${not empty teacher.teacherPlan}">
-                    <c:forEach items="${teacher.teacherPlan}" var="plan" varStatus="s">
-                      <c:if test="${s.count eq 1}">
-                        <a href="${ctx}/front/download/${plan.id}" class="btn btn-primary btn-sm">下载</a>
-                      </c:if>
-                    </c:forEach>
+                    <a href="${ctx}/front/download/${teacher.teacherPlan}" class="btn btn-primary btn-sm">下载</a>
                   </c:when>
                   <c:otherwise>
                     <span class="label label-danger">暂无教学计划</span>

@@ -18,4 +18,6 @@ public interface StudentDao  extends BaseDao<TStudent,Integer> {
 
     @Query("FROM TStudent t where t.id in (?1) order by t.id desc")
     List<TStudent> findAllStudentInCourse(Integer[] ids);
+
+
 }

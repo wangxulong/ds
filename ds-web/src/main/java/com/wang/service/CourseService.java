@@ -26,6 +26,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -48,7 +49,7 @@ public class CourseService {
     private SecurityService securityService;
 
     public List<TCourse> getAllCourse(){
-        boolean flag = SecurityUtils.getSubject().hasRole(ConstantUtil.ADMIN);
+        boolean flag = securityService.getLoginTeacher() == null?true:false;
         List<TCourse> list = tCourseDao.findAll();
         if(flag){
             return list;
@@ -86,7 +87,7 @@ public class CourseService {
         }
     }
     /*添加课程*/
-    public void addCourse(CourseFormBean courseFormBean){
+    public void addCourse(CourseFormBean courseFormBean,String path){
         TCourse course = new TCourse();
 
         course.setName(courseFormBean.getName());
@@ -101,13 +102,14 @@ public class CourseService {
             //获取上传的文件
             MultipartFile file = courseFormBean.getFile();
             //存储文件到指定的位置
-            UpFilesUtils.saveFile(file);
+            String fileName = UpFilesUtils.saveUploadFile(file, path);
 
             //保存附件基本信息到数据库
             TAttachment attachment = new TAttachment();
-            attachment.setName(UpFilesUtils.realName);
-            attachment.setFormat(UpFilesUtils.prefix);
-            attachment.setPath(UpFilesUtils.savePath);
+            attachment.setName(file.getOriginalFilename());
+            attachment.setFormat(file.getContentType());
+            attachment.setPath(ConstantUtil.TEACH_PLAN_PATH + "\\" + fileName);
+            attachment.setCreateTime(new Date());
             tAttachmentDao.save(attachment);
 
             course.setAttachmentId(attachment.getId());
@@ -118,7 +120,7 @@ public class CourseService {
     }
 
     /*更新任务*/
-    public void updateCourse(CourseFormBean courseFormBean){
+    public void updateCourse(CourseFormBean courseFormBean,String path){
 
         TCourse course = tCourseDao.findOne(courseFormBean.getId());
 
@@ -131,13 +133,15 @@ public class CourseService {
             //获取上传的文件
             MultipartFile file = courseFormBean.getFile();
             //存储文件到指定的位置
-            UpFilesUtils.saveFile(file);
+            //存储文件到指定的位置
+            String fileName = UpFilesUtils.saveUploadFile(file, path);
 
             //保存附件基本信息到数据库
             TAttachment attachment = new TAttachment();
-            attachment.setName(UpFilesUtils.realName);
-            attachment.setFormat(UpFilesUtils.prefix);
-            attachment.setPath(UpFilesUtils.savePath);
+            attachment.setName(file.getOriginalFilename());
+            attachment.setFormat(file.getContentType());
+            attachment.setPath(ConstantUtil.TEACH_PLAN_PATH + "\\" + fileName);
+            attachment.setCreateTime(new Date());
             tAttachmentDao.save(attachment);
 
             course.setAttachmentId(attachment.getId());

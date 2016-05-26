@@ -13,12 +13,21 @@
               <div class="panel panel-default">
                   <div class="panel-heading">
                       <h3 class="panel-title">
-                          考试成绩
+                          综合成绩
                       </h3>
                   </div>
                   <div class="panel-body">
-                      <div class="alert alert-success" role="alert">
-                          <h2>考试成绩：80</h2>
+                      <div class="alert alert-success " role="alert">
+                          <h2 class="text-center">
+                              <c:choose>
+                                  <c:when test="${empty score}">
+                                      暂无成绩
+                                  </c:when>
+                                  <c:otherwise>
+                                      考试成绩：${score}
+                                  </c:otherwise>
+                              </c:choose>
+                          </h2>
                       </div>
                   </div>
 
