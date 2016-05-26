@@ -52,19 +52,22 @@
                         <c:set var="now" value="<%= new Date()%>" />
                           <c:choose>
                             <c:when test="${task.endTime gt now}">
-                               <span class="text-success">已开始</span>
+                               <span class="label label-success">已开始</span>
                             </c:when>
                             <c:otherwise>
-                              <span class="text-danger">已结束</span>
+                              <span class="label label-danger">已结束</span>
                             </c:otherwise>
                           </c:choose>
                           
                       </td>
                       <td>
                         <a href="${ctx}/front/homework/${task.id}/my" class="btn btn-success btn-sm" >我的提交</a>
-                        <a href="${ctx}/front/homework/upload/${task.id}" class="btn btn-success btn-sm" >提交作业</a>
+                        <c:if test="${task.endTime gt now}">
+                          <a href="${ctx}/front/homework/upload/${task.id}" class="btn btn-success btn-sm" >提交作业</a>
+                        </c:if>
+
                         <c:if test="${not empty task.attachId}">
-                          <a href="#" class="btn btn-primary btn-sm" >下载</a>
+                          <a href="${ctx}/front/download/${task.attachId}" class="btn btn-primary btn-sm" >下载</a>
                         </c:if>
 
 

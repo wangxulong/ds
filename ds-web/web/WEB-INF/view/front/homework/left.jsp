@@ -7,7 +7,7 @@
 <body>
 <div class="list-group">
   <a href="${ctx}/front/homework/index" class="list-group-item
-  <c:if test="${fn:contains(headerUri,'front/homework/index')}">
+  <c:if test="${!fn:contains(headerUri,'front/homework/material')}">
        active
     </c:if>
     ">
