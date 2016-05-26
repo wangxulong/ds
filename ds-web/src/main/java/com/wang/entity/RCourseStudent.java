@@ -14,6 +14,7 @@ public class RCourseStudent {
     private Double score;
     private Double usualScore;
 
+
     @Basic
     @Column(name = "score")
     public Double getScore() {

@@ -29,6 +29,7 @@ public class ExamController {
     private TExamService tExamService;
     @Resource
     private TStudetServeice tStudentService;
+
     //访问考试管理主页
     @RequestMapping("index")
     public void index(Model model){
@@ -36,6 +37,7 @@ public class ExamController {
         model.addAttribute("command", command);
         model.addAttribute("allStu",tStudentService.getAllStudentInCourse());
     }
+
     //上传考试试卷
     @RequestMapping(value ="upload")
     public String save(ExamFormBean command){

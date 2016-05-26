@@ -24,6 +24,7 @@ public class SecurityService {
         String loginName = (String)subject.getPrincipal();
         return sysUserService.getByName(loginName);
     }
+
     public TTeacher getLoginTeacher(){
         TTeacher tTeacher;
         SysUser sysUser=getLoginUser();
