@@ -6,10 +6,10 @@
 </head>
 <body>
 <div>
-    <!--布置作业-->
+
     <div class="page-header">
         <h1>
-            课堂教学
+            作业管理
             <a class="btn btn-xs btn-success " title="布置作业" href="${ctx}/task/add" >
                 <i class="ace-icon fa fa-plus bigger-120 "></i>
             </a>

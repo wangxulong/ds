@@ -6,8 +6,10 @@
 </head>
 <body>
 <div>
-    <div class="flag-style">
-       <span>课程组管理</span>
+    <div class="page-header">
+        <h1>
+            课程组管理
+        </h1>
     </div>
     <table id="sample-table-2" class="table table-striped table-bordered table-hover flag">
         <thead>
@@ -93,12 +95,7 @@
     <table id="sample-table-1" class="table table-striped table-bordered table-hover">
         <thead>
         <tr>
-            <th class="center">
-                <label class="position-relative">
-                    <input type="checkbox" class="ace" />
-                    <span class="lbl"></span>
-                </label>
-            </th>
+
             <th>课程名字</th>
             <th>设立时间</th>
             <th style="width:50%;" >课程简介</th>
@@ -112,12 +109,7 @@
 
         <c:forEach items="${Course}" var="course">
             <tr>
-                <td class="center">
-                    <label class="position-relative">
-                        <input type="checkbox" class="ace" />
-                        <span class="lbl"></span>
-                    </label>
-                </td>
+
                 <td>${course.name}</td>
                 <td>${course.startTime}</td>
                 <td> ${course.outline}</td>

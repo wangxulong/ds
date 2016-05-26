@@ -1,15 +1,21 @@
 package com.wang.service;
 
+import com.wang.auth.sys.service.SecurityService;
 import com.wang.dao.TAttachmentDao;
 import com.wang.dao.TCourseDao;
 import com.wang.dto.StudentDto;
 import com.wang.dto.TeacherCourseDto;
 import com.wang.entity.TAttachment;
 import com.wang.entity.TCourse;
+import com.wang.entity.TTask;
+import com.wang.entity.TTeacher;
 import com.wang.form.CourseFormBean;
+import com.wang.util.ConstantUtil;
 import com.wang.util.UpFilesUtils;
+import org.apache.shiro.SecurityUtils;
 import org.hibernate.SQLQuery;
 import org.hibernate.transform.Transformers;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -19,6 +25,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -27,17 +34,35 @@ import java.util.List;
 @Service
 @Transactional
 public class CourseService {
+    @Qualifier("TCourseDao")
     @Resource
     private TCourseDao tCourseDao;
+    @Qualifier("TAttachmentDao")
     @Resource
     private TAttachmentDao tAttachmentDao;
     @Resource
     private GroupService groupService;
     @Resource
     private EntityManagerFactory managerFactory;
+    @Resource
+    private SecurityService securityService;
 
     public List<TCourse> getAllCourse(){
-        return tCourseDao.findAll();
+        boolean flag = SecurityUtils.getSubject().hasRole(ConstantUtil.ADMIN);
+        List<TCourse> list = tCourseDao.findAll();
+        if(flag){
+            return list;
+
+        }else{
+            TTeacher tTeacher =   securityService.getLoginTeacher();
+            List<TCourse> taskList = new ArrayList<TCourse>();
+            for(int i=0;i<list.size();i++){
+                if(list.get(i).getTeacherId()==tTeacher.getId())
+                    taskList.add(list.get(i));
+            }
+            return taskList;
+        }
+
     }
 
     public void saveCoures(TCourse course){
