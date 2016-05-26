@@ -10,10 +10,16 @@
 
 <div>
     <!--批阅作业-->
-    <div class="flag-style">
-        <span>批阅作业</span>
-        <span style="margin-left: 20px;font-size: 12px;">当前正在批阅的作业批次：</span><span style="color: blue;font-size: 12px;">${nowTask}</span>
+    <div class="page-header">
+        <h1 style="margin-bottom: 10px;">
+            批阅作业
+        </h1>
+        <span class="logo-style2">当前正在批阅的作业批次：</span><span class="logo-style3">${nowTask}</span>
     </div>
+    <%--<div class="flag-style">--%>
+        <%--<span>批阅作业</span>--%>
+
+    <%--</div>--%>
 
         <table id="sample-table-1" class="table table-striped table-bordered table-hover">
             <thead>

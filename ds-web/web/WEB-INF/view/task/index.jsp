@@ -7,13 +7,13 @@
 <body>
 <div>
     <!--布置作业-->
-    <div class="flag-style">
-        <span>作业管理</span>
-
-        <a class="btn btn-xs btn-success " title="布置作业" href="${ctx}/task/add" >
-            <i class="ace-icon fa fa-plus bigger-120 "></i>
-        </a>
-
+    <div class="page-header">
+        <h1>
+            课堂教学
+            <a class="btn btn-xs btn-success " title="布置作业" href="${ctx}/task/add" >
+                <i class="ace-icon fa fa-plus bigger-120 "></i>
+            </a>
+        </h1>
     </div>
     <table id="sample-table-1" class="table table-striped table-bordered table-hover">
         <thead>

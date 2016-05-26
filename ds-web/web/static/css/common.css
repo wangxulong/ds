@@ -22,4 +22,15 @@
 .font-style a:hover{
     text-decoration: none;
 }
-
+/*批阅作业*/
+.logo-style1{
+    margin-bottom: 10px;
+}
+.logo-style2{
+     margin-left: 10px;
+     font-size: 10px;
+}
+.logo-style3{
+    color: blue;
+    font-size: 12px;
+}
