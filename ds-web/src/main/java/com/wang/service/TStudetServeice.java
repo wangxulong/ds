@@ -59,4 +59,7 @@ public class TStudetServeice {
             return null;
         return students;
     }
+    public TStudent getStudentByStudentId(int studentId){
+        return studentDao.findOne(studentId);
+    }
 }

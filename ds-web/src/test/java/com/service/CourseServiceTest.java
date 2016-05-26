@@ -1,6 +1,7 @@
 package com.service;
 
 import com.wang.dao.TCourseStudentDao;
+import com.wang.form.RCourseStudentFormBean;
 import com.wang.service.CourseService;
 import com.wang.service.ScoreService;
 import org.junit.Test;
@@ -29,5 +30,15 @@ public class CourseServiceTest {
     @Test
     public void setScore(){
         scoreService.setStydentUsualScore(2,3,7);
+    }
+    @Test
+    public void getRcourseStudent(){
+        List<RCourseStudentFormBean> students=scoreService.getRCourseStudentInfo();
+        int len=students.size();
+        if(len!=0){
+            for(int i=0;i<len;i++){
+                System.out.println(students.get(i));
+            }
+        }
     }
 }

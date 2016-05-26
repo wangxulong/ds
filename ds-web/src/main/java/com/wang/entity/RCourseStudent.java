@@ -13,7 +13,17 @@ public class RCourseStudent {
     private Integer studentId;
     private Double score;
     private Double usualScore;
+    private Double examScore;
 
+    @Basic
+    @Column(name = "exam_Score")
+    public Double getExamScore() {
+        return examScore;
+    }
+
+    public void setExamScore(Double examScore) {
+        this.examScore = examScore;
+    }
 
     @Basic
     @Column(name = "score")

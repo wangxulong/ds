@@ -15,10 +15,10 @@
 <修改界面>
 <form:form class="form-horizontal" role="form"  commandName="exam" action="${ctx}/exam/update" enctype="multipart/form-data">
     <!--隐藏的提交组件-->
-        <form:input path="id"   />
-        <form:input path="year" />
-        <form:input path="term" />
-        <form:input path="examTypeId" />
+        <form:input path="id" class="hidden"/>
+        <form:input path="year" class="hidden"/>
+        <form:input path="term" class="hidden"/>
+        <form:input path="examTypeId" class="hidden"/>
     <div class="center" id="form-content">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
