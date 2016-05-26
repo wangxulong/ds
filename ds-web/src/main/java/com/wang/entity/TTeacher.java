@@ -4,6 +4,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by wxl on 2016/5/8.
@@ -28,6 +29,16 @@ public class TTeacher {
     private String level;
     private Integer state;
 
+
+    private List<TAttachment> teacherPlan;
+    @Transient
+    public List<TAttachment> getTeacherPlan() {
+        return teacherPlan;
+    }
+
+    public void setTeacherPlan(List<TAttachment> teacherPlan) {
+        this.teacherPlan = teacherPlan;
+    }
 
     @Id
     @Column(name = "id")

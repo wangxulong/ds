@@ -28,12 +28,12 @@
     <div class="main-content">
       <div class="main-content-inner">
         <!-- #section:basics/content.breadcrumbs -->
-        <jsp:include page="../include/breadcrumbs.jsp"/>
+        <%--<jsp:include page="../include/breadcrumbs.jsp"/>--%>
 
         <!-- /section:basics/content.breadcrumbs -->
         <div class="page-content">
           <!-- #section:settings.box -->
-          <div class="ace-settings-container" id="ace-settings-container">
+        <%--  <div class="ace-settings-container" id="ace-settings-container">
             <div class="btn btn-app btn-xs btn-warning ace-settings-btn" id="ace-settings-btn">
               <i class="ace-icon fa fa-cog bigger-130"></i>
             </div>
@@ -119,11 +119,35 @@
                 <!-- /section:basics/sidebar.options -->
               </div><!-- /.pull-left -->
             </div><!-- /.ace-settings-box -->
-          </div><!-- /.ace-settings-container -->
+          </div>--%><!-- /.ace-settings-container -->
 
           <!-- /section:settings.box -->
           <div class="row">
             <div class="col-xs-12">
+              <div class="alert  alert-dismissible text-center
+                <c:choose>
+                    <c:when test="${empty resultMessage}">
+                      hidden
+                    </c:when>
+                    <c:otherwise>
+                      <c:choose>
+                        <c:when test="${resultMessage.status eq 'success'}">
+                            alert-success
+                          </c:when>
+                          <c:otherwise>
+                            alert-danger
+</c:otherwise>
+                      </c:choose>
+                    </c:otherwise>
+                </c:choose>
+              " role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span></button>
+                <c:if test="${not empty resultMessage}">
+                  <strong>${resultMessage.message}</strong>
+                </c:if>
+
+              </div>
               <sitemesh:write property='body' />
             </div><!-- /.col -->
           </div><!-- /.row -->

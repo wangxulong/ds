@@ -10,7 +10,7 @@
     try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
   </script>
 
-  <ul class="breadcrumb">
+ <%-- <ul class="breadcrumb">
     <li>
       <i class="ace-icon fa fa-home home-icon"></i>
       <a href="#">Home</a>
@@ -20,7 +20,7 @@
       <a href="#">Other Pages</a>
     </li>
     <li class="active">Blank Page</li>
-  </ul><!-- /.breadcrumb -->
+  </ul>--%><!-- /.breadcrumb -->
 
   <!-- #section:basics/content.searchbox
   <div class="nav-search" id="nav-search">

@@ -3,9 +3,18 @@
 <html>
 <head>
 
-    <title></title>
+    <title>用户信息管理</title>
 </head>
 <body>
+<div class="page-header">
+    <h1>
+        用户管理
+        <small>
+            <i class="icon-double-angle-right"></i>
+            用户信息列表
+        </small>
+    </h1>
+</div><!-- /.page-header -->
 <table id="sample-table-1" class="table table-striped table-bordered table-hover">
     <thead>
     <tr>
@@ -51,56 +60,26 @@
                             </button>
                         </shiro:hasPermission>
                         <shiro:hasPermission name="sysUser:edit">
-                            <button class="btn btn-xs btn-info">
+                            <button class="btn btn-xs btn-info edit" data="${sysUser.id}">
                                 <i class="ace-icon fa fa-pencil bigger-120"></i>
                             </button>
                         </shiro:hasPermission>
                         <shiro:hasPermission name="sysUser:delete">
-                            <a class="btn btn-xs btn-danger" href="${ctx}/sys/user/delete?id=${sysUser.id}">
-                                <i class="ace-icon fa fa-trash-o bigger-120"></i>
-                            </a>
+                            <c:if test="${sysUser.userName ne 'admin'}">
+                                <a class="btn btn-xs btn-danger delete" data="${sysUser.id}" >
+                                    <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                                </a>
+                            </c:if>
+
                         </shiro:hasPermission>
                         <shiro:hasPermission name="sysUser:allotRole">
                             <button class="btn btn-xs btn-warning addRole" data="${sysUser.id}">
-                                <i class="ace-icon fa fa-flag bigger-120"></i>
+                                <i class="ace-icon fa fa-flag bigger-120">分配角色</i>
                             </button>
                         </shiro:hasPermission>
 
                 </div>
 
-                    <div class="hidden-md hidden-lg">
-                        <div class="inline position-relative">
-                            <button class="btn btn-minier btn-primary dropdown-toggle" data-toggle="dropdown" data-position="auto">
-                                <i class="ace-icon fa fa-cog icon-only bigger-110"></i>
-                            </button>
-
-                            <ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
-                                <li>
-                                    <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
-                                                                                <span class="blue">
-                                                                                    <i class="ace-icon fa fa-search-plus bigger-120"></i>
-                                                                                </span>
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
-                                                                                <span class="green">
-                                                                                    <i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
-                                                                                </span>
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
-                                                                                <span class="red">
-                                                                                    <i class="ace-icon fa fa-trash-o bigger-120"></i>
-                                                                                </span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
                 </td>
          </tr>
         </c:forEach>
@@ -118,6 +97,21 @@
                 $("#modal-form").modal("show");
             });
         });
+        $(".edit").on("click",function(){
+            var id = $(this).attr("data");
+            $("#modal-form .modal-content").load("${ctx}/sys/user/add",{id:id},function(){
+                $("#modal-form").modal("show");
+            });
+        });
+        $(".delete").on("click",function(){
+            var r = confirm("确定要删除吗");
+            if(r){
+                var id = $(this).attr("data");
+                window.location.href="${ctx}/sys/user/delete?id="+id;
+            }
+        });
+
+
         $(".addRole").on("click",function(){
             var userId = $(this).attr("data");
             $("#modal-form .modal-content").load("${ctx}/sys/user/addRole",{id:userId},function(){

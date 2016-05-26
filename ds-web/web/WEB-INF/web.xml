@@ -7,7 +7,7 @@
     <!--spring配置-->
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>classpath:config/*-context.xml</param-value>
+        <param-value>classpath:config/*-context.xml,classpath:config/task.xml</param-value>
     </context-param>
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>

@@ -22,18 +22,16 @@
                     <a data-toggle="tab" href="#home">
                         <i class="green icon-home bigger-110"></i>
                         上传试卷
-                        <span class="badge badge-danger">2</span>
                     </a>
                 </li>
 
                 <li>
                     <a data-toggle="tab" href="#profile">
                         成绩提交
-                        <span class="badge badge-danger">99+</span>
                     </a>
                 </li>
 
-                <li class="dropdown">
+               <%-- <li class="dropdown">
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                        计算与统计 &nbsp;
                         <i class="icon-caret-down bigger-110 width-auto"></i>
@@ -48,7 +46,7 @@
                             <a data-toggle="tab" href="#dropdown2">等级制</a>
                         </li>
                     </ul>
-                </li>
+                </li>--%>
             </ul>
 
             <div class="tab-content">
@@ -194,14 +192,47 @@
                 </div>
                 <!--成绩提交的tab-->
                 <div id="profile" class="tab-pane">
-                    <p>成绩提交界面</p>
-                    <div>
+                    <p><a href="#">打平时分</a></p>
+                    <div class="row">
+                        <div class="form-group col-md-2">
+                            <p >研讨课成绩比重</p>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <p>课堂作业比重</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-2">
+                            <select id="topicPercent" onchange="percent()">
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <p id="homeworkPercent">10</p>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <button onclick="setUsualScore()">确定</button>
+                        </div>
+                    </div>
+                <div class="hidden" id="scoreSubmit">
+                    <p><a href="${ctx}/score/list">考试成绩提交</a></p>
+                    <%--<div>
                         <div class="flag-style">
                             <span>成绩提交</span>
 
-                        <%--    <a class="btn btn-xs btn-success " href="${ctx}/task/add" >
+                        &lt;%&ndash;    <a class="btn btn-xs btn-success " href="${ctx}/task/add" >
                                 <i class="ace-icon fa fa-plus bigger-120 "></i>
-                            </a>--%>
+                            </a>&ndash;%&gt;
 
                         </div>
                         <table id="sample-table-1" class="table table-striped table-bordered table-hover">
@@ -217,6 +248,7 @@
                                 <th>姓名</th>
                                 <th>平时成绩</th>
                                 <th>考试成绩</th>
+                                <th>总成绩</th>
                                 <th class="hidden-480">操作</th>
 
 
@@ -225,18 +257,21 @@
 
                             <tbody>
 
-                            <c:forEach items="${allStu}" var="stu">
+                            <c:forEach items="${allStuScore}" var="stu">
                                 <tr>
                                     <td class="center">
                                         <label class="position-relative">
-                                            <input type="checkbox" class="ace" />
+                                            t          <inpu type="checkbox" class="ace" />
                                             <span class="lbl"></span>
                                         </label>
                                     </td>
                                     <td>${stu.studentNumber}</td>
                                     <td> ${stu.name}</td>
-                                    <td>${stu.sex}</td>
-                                    <td> ${stu.age}</td>
+                                    <td>
+                                        <input class="hidden-480" id="avergeScore" name="types" value="${stu.usualScore}" disabled="true">
+                                    </td>
+                                    <td><input class="hidden-480" id="avergeScore2" name="types" value="${stu.examScore}"></td>
+                                    <td><input class="hidden-480" id="avergeScore2" name="types" value="${stu.score}"></td>
                                     <td class="hidden-480">
                                         <div class="hidden-sm hidden-xs btn-group">
                                             <a class="btn btn-xs btn-success" href="#">
@@ -251,7 +286,8 @@
                             </c:forEach>
                             </tbody>
                         </table>
-                    </div>
+                    </div>--%>
+                </div>
                 </div>
                 <!--计算统计的tab-->
                 <div id="dropdown1" class="tab-pane">
@@ -271,6 +307,10 @@
             this.year=year;
             this.term=term;
             this.type=type;
+        };
+        function entity2(topicPercent,homeworkPercent){
+            this.topicPercent=topicPercent;
+            this.homeworkPercent=homeworkPercent;
         };
         function selected(){
             var year=document.getElementById('year')
@@ -297,6 +337,27 @@
                 //$("#submited").addClass('hidden');
             }
         };
+        function percent(){
+            var topicPercent=document.getElementById("topicPercent");
+            var homeworkPercent=document.getElementById("homeworkPercent");
+            //alert("first"+homeworkPercent.value);获取homePercent初始值出错
+            homeworkPercent.value=10-topicPercent.value;
+            $("#homeworkPercent").html(homeworkPercent.value);
+        };
+        function setUsualScore() {
+            var topicPercent=document.getElementById("topicPercent");
+            var homeworkPercent=document.getElementById("homeworkPercent");
+            var JSONString =JSON.stringify(new entity2(topicPercent.value,10-topicPercent.value));
+            $.get("${ctx}/score/usual","jsonString="+JSONString,function(data){
+                if(data=="success") {
+                    alert("平时成绩录入成功");
+                    $("#scoreSubmit").removeClass('hidden')
+                }else{
+                    alert("很抱歉还没有学生选您的课");
+                    $("#scoreSubmit").addClass('hidden');
+                }
+            });
+        }
         $(function(){
             var mydate = new Date();
             var year=mydate.getFullYear();

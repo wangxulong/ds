@@ -75,21 +75,21 @@
 
                                 </div><!-- /.widget-main -->
 
-                                <div class="toolbar clearfix">
-                                    <div>
-                                        <a href="#" data-target="#forgot-box" class="forgot-password-link">
-                                            <i class="ace-icon fa fa-arrow-left"></i>
-                                            忘记密码
-                                        </a>
-                                    </div>
+                                <%--<div class="toolbar clearfix">--%>
+                                    <%--<div>--%>
+                                        <%--<a href="#" data-target="#forgot-box" class="forgot-password-link">--%>
+                                            <%--<i class="ace-icon fa fa-arrow-left"></i>--%>
+                                            <%--忘记密码--%>
+                                        <%--</a>--%>
+                                    <%--</div>--%>
 
-                                    <div>
-                                        <a href="#" data-target="#signup-box" class="user-signup-link">
-                                            用户注册
-                                            <i class="ace-icon fa fa-arrow-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
+                                    <%--<div>--%>
+                                        <%--<a href="#" data-target="#signup-box" class="user-signup-link">--%>
+                                            <%--用户注册--%>
+                                            <%--<i class="ace-icon fa fa-arrow-right"></i>--%>
+                                        <%--</a>--%>
+                                    <%--</div>--%>
+                                <%--</div>--%>
                             </div><!-- /.widget-body -->
                         </div><!-- /.login-box -->
 
@@ -258,21 +258,36 @@
             $('.widget-box.visible').removeClass('visible');//hide others
             $(target).addClass('visible');//show target
         });
-
+        $(document).keyup(function(event){
+            if(event.keyCode ==13){
+               $("button.login").trigger("click");
+            }
+        });
         $("button.login").on("click",function(){
+
             var userName = $("#loginUserName").val();
             var password =$("#loginPassword").val();
             if(userName!==""&&password!==""){
+                $(this).addClass("disabled");
+                $("button.login > span").text("登录中...");
                 $.post("${ctx}/admin/login",{
                     name:userName,
                     password:password
                 },function(data){
                     if(data.status=="error"){
                         $(".errorInfo").text(data.message);
+                        $('button.login').removeClass("disabled");
+                        $("button.login > span").text("登录");
                         return;
+
                     }
                     window.location.href="${ctx}/admin/index";
                 },"JSON");
+            }else{
+                $(".errorInfo").text("用户名或密码不能为空");
+                $(this).removeClass("disabled");
+                $("button.login > span").text("登录");
+                return;
             }
 
         });

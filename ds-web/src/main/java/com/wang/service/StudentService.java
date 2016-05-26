@@ -135,7 +135,7 @@ public class StudentService {
     public TCourse getMyCourse(Integer studentId){
         RCourseStudent courseStudent = courseStudentDao.findByStudentId(studentId);
         if(null != courseStudent){
-            return courseDao.getOne(courseStudent.getCourseId());
+            return courseDao.findOne(courseStudent.getCourseId());
         }
         return  null;
     }

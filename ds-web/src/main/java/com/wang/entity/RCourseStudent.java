@@ -11,6 +11,38 @@ public class RCourseStudent {
     private int id;
     private Integer courseId;
     private Integer studentId;
+    private Double score;
+    private Double usualScore;
+    private Double examScore;
+
+    @Basic
+    @Column(name = "exam_Score")
+    public Double getExamScore() {
+        return examScore;
+    }
+
+    public void setExamScore(Double examScore) {
+        this.examScore = examScore;
+    }
+
+    @Basic
+    @Column(name = "score")
+    public Double getScore() {
+        return score;
+    }
+
+    public void setScore(Double score) {
+        this.score = score;
+    }
+    @Basic
+    @Column(name = "usual_score")
+    public Double getUsualScore() {
+        return usualScore;
+    }
+
+    public void setUsualScore(Double usualScore) {
+        this.usualScore = usualScore;
+    }
 
     @Id
     @Column(name = "id")

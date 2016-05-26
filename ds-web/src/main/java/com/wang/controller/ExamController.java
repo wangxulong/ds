@@ -5,6 +5,8 @@ import com.wang.entity.TExam;
 import com.wang.entity.THomework;
 import com.wang.form.ExamFormBean;
 import com.wang.form.HomeworkFormBean;
+import com.wang.form.RCourseStudentFormBean;
+import com.wang.service.ScoreService;
 import com.wang.service.TExamService;
 import com.wang.service.TStudetServeice;
 import com.wang.service.TTaskService;
@@ -29,13 +31,19 @@ public class ExamController {
     private TExamService tExamService;
     @Resource
     private TStudetServeice tStudentService;
+    @Resource
+    private ScoreService scoreService;
+
     //访问考试管理主页
     @RequestMapping("index")
     public void index(Model model){
         ExamFormBean command = new ExamFormBean();
         model.addAttribute("command", command);
-        model.addAttribute("allStu",tStudentService.getAllStudent());
+       /* List<RCourseStudentFormBean> allStuScore=scoreService.getRCourseStudentInfo();
+        model.addAttribute("allStuScore",scoreService.getRCourseStudentInfo());*/
+
     }
+
     //上传考试试卷
     @RequestMapping(value ="upload")
     public String save(ExamFormBean command){

@@ -15,6 +15,17 @@ public class TGroup {
 
     private Date createTime;
 
+
+    private String outline;
+    @Column(name = "outline")
+    public String getOutline() {
+        return outline;
+    }
+
+    public void setOutline(String outline) {
+        this.outline = outline;
+    }
+
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)

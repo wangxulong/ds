@@ -37,7 +37,7 @@
                                 <i class="icon-time bigger-110 hidden-480"></i>
                                 截止时间
                             </th>
-                            <th class="hidden-480">附件</th>
+                          <%--  <th class="hidden-480">附件</th>--%>
 
                             <th>操作</th>
                         </tr>
@@ -63,10 +63,10 @@
                             <td class="hidden-480">${exam.description}</td>
                             <td>${exam.endTime}</td>
 
-                            <td class="hidden-480">
-                                <span class="label label-sm label-warning" id="download">下载</span>
+                          <%--  <td class="hidden-480">
+                                <span class="label label-sm label-warning" id="download"><a href="${ctx}/download/27">下载</a></span>
                             </td>
-
+--%>
                             <td>
                                 <div class="hidden-sm hidden-xs btn-group">
                                     <a class="btn btn-xs btn-success update" href="${ctx}/exam/edit?id=${exam.id}&type=${exam.examTypeId}">

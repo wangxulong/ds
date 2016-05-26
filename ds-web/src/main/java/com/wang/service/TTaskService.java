@@ -1,12 +1,17 @@
 package com.wang.service;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.wang.auth.sys.entity.SysUser;
 import com.wang.auth.sys.service.SecurityService;
 import com.wang.dao.*;
+import com.wang.dto.HomeworkStudentDto;
 import com.wang.dto.StudentTaskDto;
 import com.wang.entity.*;
 import com.wang.form.TaskFormBean;
+import com.wang.util.ConstantUtil;
 import com.wang.util.UpFilesUtils;
+import org.apache.shiro.SecurityUtils;
 import org.hibernate.SQLQuery;
 import org.hibernate.transform.Transformers;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -18,6 +23,7 @@ import javax.annotation.Resource;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -43,14 +49,32 @@ public class TTaskService {
     @Resource
     private TCourseDao tCourseDao;
 
-
+    @Resource
+    private THomeworkDao tHomeworkDao;
     @Resource
     private TeacherDao teacherDao;
-
+    @Resource
+    private StudentDao studentDao;
 
     /*获取所有的任务*/
     public List<TTask> getAllTask(){
-        return tTaskDao.findAll();
+        boolean flag = SecurityUtils.getSubject().hasRole(ConstantUtil.ADMIN);
+        List<TTask> list= tTaskDao.findAll();
+        if(flag){
+            return list;
+
+        }else{
+           TTeacher tTeacher =   securityService.getLoginTeacher();
+            List<TTask> taskList = new ArrayList<TTask>();
+            for(int i=0;i<list.size();i++){
+                if(list.get(i).getTeacherId()==tTeacher.getId())
+                    taskList.add(list.get(i));
+            }
+            return taskList;
+        }
+
+
+
     }
     /*获取某一次任务*/
     public TTask getOnetask(int id){
@@ -86,7 +110,6 @@ public class TTaskService {
         String jobNumber = sysUser.getUserName();
         TTeacher tTeacher = teacherDao.findByJobNumber(jobNumber);
         task.setTeacherId(tTeacher.getId());
-        //TODO 李昌亚
         task.setCourseId(1);//设置课程ID
         if (taskFormBean.getFile().isEmpty()){  //没有附件
 
@@ -175,9 +198,37 @@ public class TTaskService {
             return null;
         }
     }
-    public List<THomework> getHomeWork(){
-        List<THomework> list = null;
-        return list;
+
+    /**
+     * 根据任务id获取对应学生提交的作业
+     * @param id
+     * @return
+     */
+    public List<HomeworkStudentDto> getHomeWork(int id){
+        List<HomeworkStudentDto> listHomework = new ArrayList<HomeworkStudentDto>();
+        List<THomework> list1 = tHomeworkDao.findByTaskId(id);
+        for(int i=0;i<list1.size();i++){
+            HomeworkStudentDto  tempHomeworkStudentDto = new HomeworkStudentDto();
+            tempHomeworkStudentDto.setStudentName(studentDao.getOne(list1.get(i).getStudentId()).getName());
+            tempHomeworkStudentDto.setStudentCard(studentDao.getOne(list1.get(i).getStudentId()).getStudentNumber());
+            tempHomeworkStudentDto.setFinishTime(list1.get(i).getCreateTime());
+            tempHomeworkStudentDto.setHomeworkScore(list1.get(i).getScore());
+            tempHomeworkStudentDto.setHomeworkId(list1.get(i).getId());
+            listHomework.add(tempHomeworkStudentDto);
+        }
+        return listHomework;
+    }
+
+    public void saveHomeworkScore(String temp){
+        JSONArray jsonArray = JSONArray.parseArray(temp);
+        for(int i =0;i<jsonArray.size();i++){
+            JSONObject jsonObj = jsonArray.getJSONObject(i);
+            int id=jsonObj.getInteger("id");
+            int score = jsonObj.getInteger("value");
+            THomework homework =tHomeworkDao.getOne(id);
+            homework.setScore(score);
+            tHomeworkDao.saveAndFlush(homework);
+        }
     }
     /**
      * 根据学生的ID获取关于课程的任务
@@ -196,7 +247,7 @@ public class TTaskService {
      ORDER BY c.create_time desc
      */
 
-    public List<StudentTaskDto> getTaskByStudentId(Integer studentId){
+    public List<StudentTaskDto>     getTaskByStudentId(Integer studentId){
         EntityManager entityManager = managerFactory.createEntityManager();
         String sql = "SELECT  c.id,c.topic,c.content,c.create_time as createTime,c.end_time as endTime," +
                 "c.attachment_id attachId from r_course_student a " +

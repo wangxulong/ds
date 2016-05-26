@@ -48,13 +48,9 @@ public class TExamService {
         examTemp.setYear(form.getYear());
         examTemp.setTerm(form.getTerm());
         //绑定老师以及课程的id
-        SysUser sysUser = securityService.getLoginUser();
-        String jobNumber = sysUser.getUserName();
-        TTeacher tTeacher = teacherDao.findByJobNumber(jobNumber);
-        examTemp.setTeacherId(tTeacher.getId());
-        //TODO 刘建军（待修改）
-        examTemp.setCourseId(1);
-
+        TTeacher tTeacher=securityService.getLoginTeacher();
+        if(tTeacher!=null)
+            examTemp.setTeacherId(tTeacher.getId());
         tExamDao.save(examTemp);
         texamItem.setExamId(examTemp.getId());
         texamItem.setType(form.getExamTypeId());
@@ -77,7 +73,8 @@ public class TExamService {
     //查找试卷是否存在
     public boolean searchExist(int year,int term,int type){
         boolean flag=false;
-        List<TExam> exams=tExamDao.isExamExist(year,term);
+        TTeacher tTeacher=securityService.getLoginTeacher();
+        List<TExam> exams=tExamDao.isExamExist(year,term,tTeacher.getId());
         int len=exams.size();
         if(len!=0) {
             for(int i=0;i<len;i++) {
@@ -89,12 +86,12 @@ public class TExamService {
         }
         return flag;
     }
-    //查找该门课程该老师所有布置的试卷
+    //查找该老师所有布置的试卷
     public List<ExamFormBean> getAllExams(){
         List<ExamFormBean> examFormBeans = new ArrayList<ExamFormBean>();
         List<TExam> exams;
-        //TODO 刘建军（完善设计）
-        exams=tExamDao.findAll();
+        TTeacher tTeacher=securityService.getLoginTeacher();
+        exams=tExamDao.findTeacherExam(tTeacher.getId());
         if(exams.size()!=0) {
             for (int i = 0; i < exams.size(); i++) {
                 TExam exam=exams.get(i);
@@ -133,12 +130,13 @@ public class TExamService {
         examTemp.setTerm(form.getTerm());
         //绑定老师以及课程的id
         SysUser sysUser = securityService.getLoginUser();
-        String jobNumber = sysUser.getUserName();
+        String jobNumber =  sysUser.getUserName();
         TTeacher tTeacher = teacherDao.findByJobNumber(jobNumber);
-        examTemp.setTeacherId(tTeacher.getId());
-        //TODO 刘建军（待修改）
+        if(tTeacher!=null)
+            examTemp.setTeacherId(tTeacher.getId());
+        /*一个老师对应一门课程
         examTemp.setCourseId(1);
-
+        */
         tExamDao.saveAndFlush(examTemp);
         if (!form.getPic().isEmpty()){  //有附件
             TExamItem texamItem=tExamItemDao.getItemByExamIdAndType(form.getId(),form.getExamTypeId());
@@ -162,4 +160,5 @@ public class TExamService {
         tExamItemDao.delete(texamItem);
         tExamDao.delete(id);
     }
+
 }

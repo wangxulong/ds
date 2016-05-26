@@ -8,6 +8,7 @@ import com.wang.auth.sys.entity.SysUser;
 import com.wang.dao.TAttachmentDao;
 import com.wang.dao.TCourseDao;
 import com.wang.dao.TeacherDao;
+import com.wang.dto.EchartDto;
 import com.wang.entity.TAttachment;
 import com.wang.entity.TCourse;
 import com.wang.entity.TGroup;
@@ -47,7 +48,11 @@ public class TeacherService {
     private TAttachmentDao attachmentDao;
 
     public List<TTeacher> findAllTeacher(){
-       return teacherDao.findAll();
+        List<TTeacher> teachers = teacherDao.findAll();
+        for(TTeacher teacher:teachers){
+            teacher.setTeacherPlan(getMySchedule(teacher.getId()));
+         }
+       return teachers;
     }
     public TTeacher findById(Integer id){
        return teacherDao.findOne(id);
@@ -100,6 +105,83 @@ public class TeacherService {
         }
         sysUser.setRoleIds(sysRole.getId()+"");
         sysUserDao.save(sysUser);
+    }
+    public EchartDto teacherLeave(){
+        List<String> legendData = new ArrayList<String>();
+        legendData.add("教授");
+        legendData.add("副教授");
+        legendData.add("讲师");
+        legendData.add("助教");
+        List<Map<String,Object>> seriesData = new ArrayList<Map<String, Object>>();
+        List<TTeacher> list = teacherDao.findAll();
+        int sumTotal=0,preNum=0,vPreNum=0,lecNum=0,taNum=0;
+        sumTotal = list.size();
+        for(int i=0;i<sumTotal;i++){
+            if(list.get(i).getLevel().equals("教授")){
+                preNum++;
+                continue;
+            }
+            if(list.get(i).getLevel().equals("副教授")){
+                vPreNum++;
+                continue;
+            }
+            if(list.get(i).getLevel().equals("讲师")){
+                lecNum++;
+                continue;
+            }
+            if(list.get(i).getLevel().equals("助教")){
+                taNum++;
+                continue;
+            }
+        }
+        for(String title :legendData ){
+            Map<String,Object> m = new HashMap<String, Object>();
+            m.put("name",title);
+            if(title.equals("教授")){
+                m.put("value",preNum);
+            }else if(title.equals("副教授")){
+                m.put("value",vPreNum);
+            }else if(title.equals("讲师")){
+                m.put("value",lecNum);
+            }else if(title.equals("助教")){
+                m.put("value",taNum);
+            }
+            seriesData.add(m);
+
+        }
+
+        EchartDto dto = new EchartDto(legendData,seriesData);
+        return dto;
+    }
+    public EchartDto teachState(){
+        List<String> legendData = new ArrayList<String>();
+        legendData.add("教课中");
+        legendData.add("未教课");
+
+        List<Map<String,Object>> seriesData = new ArrayList<Map<String, Object>>();
+        List<TTeacher> list = teacherDao.findAll();
+        int sumTotal=0,inTech=0,outTeach=0;
+        sumTotal = list.size();
+        for(int i=0;i<sumTotal;i++){
+            if(list.get(i).getState()==1){
+                inTech++;
+            }else{
+                outTeach++;
+            }
+        }
+        for(String title :legendData ){
+            Map<String,Object> m = new HashMap<String, Object>();
+            m.put("name",title);
+            if(title.equals("教课中")){
+                m.put("value",inTech);
+            }else if(title.equals("未教课")){
+                m.put("value",outTeach);
+            }
+            seriesData.add(m);
+        }
+
+        EchartDto dto = new EchartDto(legendData,seriesData);
+        return dto;
     }
     //获取各种职称的人数
     public Map<String,Integer> getNumOfLevels(){
@@ -154,7 +236,7 @@ public class TeacherService {
         map.put("男:",manNum);
         map.put("女:",womenNum);
         map.put("教课中:",inTech);
-        map.put("未教课:",outTeach);
+        map.put("未教课:", outTeach);
         return map;
     }
 
@@ -175,7 +257,8 @@ public class TeacherService {
     public List<TAttachment> getMySchedule(Integer teacherId){
         TCourse course =   courseDao.findByTeacherId(teacherId);
         if(null == course){
-            throw new RuntimeException("没有对应的课程信息");
+            return null;
+           // throw new RuntimeException("没有对应的课程信息");
         }
         String schedule = course.getSchedule();
         if(StringUtils.isNotEmpty(schedule)){

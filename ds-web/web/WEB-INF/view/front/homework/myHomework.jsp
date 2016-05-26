@@ -47,17 +47,17 @@
                       <td>
                         <c:choose>
                           <c:when test="${empty myHomework.score}">
-                            <span class="text-danger">未批阅</span>
+                            <span class="label label-danger">未批阅</span>
                           </c:when>
                           <c:otherwise>
-                            <span class="text-success">已批阅</span>
+                            <span class="label label-success">已批阅</span>
                           </c:otherwise>
                         </c:choose>
                       </td>
                       <td>
                         <c:choose>
                           <c:when test="${not empty myHomework.attachmentId}">
-                            <a  class="btn btn-primary btn-sm">下载</a>
+                            <a href="${ctx}/front/download/${myHomework.attachmentId}" class="btn btn-primary btn-sm">下载</a>
                           </c:when>
                           <c:otherwise>
                             <span class="text-danger">没有附件</span>

@@ -10,6 +10,7 @@
     <mapping path="/teacher/*" decorator="/decorators/admin.jsp"/>
     <mapping path="/student/*" decorator="/decorators/admin.jsp"/>
     <mapping path="/group/*" decorator="/decorators/admin.jsp"/>
+    <mapping path="/score/*" decorator="/decorators/admin.jsp"/>
 
     <mapping path="/sys/**/add*" exclue="true"/>
     <mapping path="/sys/**/ajax*" exclue="true"/>
