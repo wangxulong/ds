@@ -276,7 +276,10 @@
                 },function(data){
                     if(data.status=="error"){
                         $(".errorInfo").text(data.message);
+                        $('button.login').removeClass("disabled");
+                        $("button.login > span").text("登录");
                         return;
+
                     }
                     window.location.href="${ctx}/admin/index";
                 },"JSON");
