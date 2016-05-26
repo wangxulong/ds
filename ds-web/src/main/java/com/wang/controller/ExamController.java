@@ -39,8 +39,8 @@ public class ExamController {
     public void index(Model model){
         ExamFormBean command = new ExamFormBean();
         model.addAttribute("command", command);
-        List<RCourseStudentFormBean> allStuScore=scoreService.getRCourseStudentInfo();
-        model.addAttribute("allStuScore",scoreService.getRCourseStudentInfo());
+       /* List<RCourseStudentFormBean> allStuScore=scoreService.getRCourseStudentInfo();
+        model.addAttribute("allStuScore",scoreService.getRCourseStudentInfo());*/
 
     }
 
