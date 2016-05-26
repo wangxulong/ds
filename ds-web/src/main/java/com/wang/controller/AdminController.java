@@ -1,9 +1,11 @@
 package com.wang.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.wang.auth.sys.entity.SysUser;
 import com.wang.auth.sys.service.SecurityService;
 import com.wang.auth.sys.service.SysUserService;
 import com.wang.dto.ResultMessage;
+import com.wang.service.TeacherService;
 import com.wang.util.PasswordHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,6 +28,8 @@ public class AdminController {
     private SysUserService sysUserService;
     @Resource
     private SecurityService securityService;
+    @Resource
+    private TeacherService teacherService;
     @RequestMapping("login")
     @ResponseBody
     public ResultMessage login(String name,String password){
@@ -45,7 +49,9 @@ public class AdminController {
     }
 
     @RequestMapping("index")
-    public void index(){
+    public void index(Model model){
+        model.addAttribute("teacherLevel", JSON.toJSONString(teacherService.teacherLeave()));
+        model.addAttribute("teachState", JSON.toJSONString(teacherService.teachState()));
     }
     @RequestMapping(value = "password",method = RequestMethod.GET)
     public void password(){
