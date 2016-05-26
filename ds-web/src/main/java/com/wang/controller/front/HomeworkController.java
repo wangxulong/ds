@@ -1,9 +1,11 @@
 package com.wang.controller.front;
 
-import com.wang.entity.THomework;
-import com.wang.entity.TStudent;
-import com.wang.entity.TTask;
+import com.wang.dao.RcourseStudentDao;
+import com.wang.entity.*;
 import com.wang.form.HomeworkFormBean;
+import com.wang.form.MaterialFormBean;
+import com.wang.service.MaterialService;
+import com.wang.service.StudentService;
 import com.wang.service.THomeworkService;
 import com.wang.service.TTaskService;
 import com.wang.util.ConstantUtil;
@@ -32,6 +34,12 @@ public class HomeworkController extends FrontController {
     @Resource
     private THomeworkService homeworkService;
 
+    @Resource
+    private StudentService studentService;
+
+    @Resource
+    private MaterialService materialService;
+
     @RequestMapping("index")
     public void index(HttpSession session,Model model){
         TStudent loginUser = getLoginUser(session);
@@ -58,7 +66,7 @@ public class HomeworkController extends FrontController {
     @RequestMapping(value = "upload",method = RequestMethod.POST)
     public String doPost(HomeworkFormBean homeworkFormBean,HttpSession session,HttpServletRequest request){
         homeworkFormBean.setStudentId(getLoginUser(session).getId());
-        homeworkService.addOneHomeWork(homeworkFormBean,getContentRealPath(request)+ConstantUtil.STUDENT_HOMEWORK_PATH);
+        homeworkService.addOneHomeWork(homeworkFormBean, getContentRealPath(request) + ConstantUtil.STUDENT_HOMEWORK_PATH);
         return "redirect:/front/homework/index";
     }
 
@@ -79,6 +87,13 @@ public class HomeworkController extends FrontController {
             throw new RuntimeException("晚了八百年了");
         }
     }
-
+    @RequestMapping(value = "material",method = RequestMethod.GET)
+    public String material(HttpSession session,Model model){
+        TStudent loginUser = getLoginUser(session);
+        TCourse course = studentService.getMyCourse(loginUser.getId());
+        List<TMaterial> materials = materialService.getAllByCourse(course.getId());
+        model.addAttribute("materials",materials);
+        return "/front/homework/material";
+    }
 
 }

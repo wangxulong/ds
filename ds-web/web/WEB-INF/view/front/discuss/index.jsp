@@ -66,7 +66,7 @@
 
                     </td>
                     <td>
-                      <a href="#" class="btn btn-primary btn-sm">详情</a>
+                      <%--<a href="#" class="btn btn-primary btn-sm">详情</a>--%>
                       <c:if test="${myTopic.state eq 0}">
                         <button data="${myTopic.studentTopicId}" class="btn btn-danger btn-sm delete">退选</button>
                       </c:if>

@@ -10,6 +10,7 @@ import com.wang.entity.RCourseStudent;
 import com.wang.entity.TCourse;
 import com.wang.entity.TStudent;
 import com.wang.entity.TTeacher;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
