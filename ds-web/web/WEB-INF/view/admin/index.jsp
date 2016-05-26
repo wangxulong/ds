@@ -5,6 +5,6 @@
     <title></title>
   </head>
   <body>
-  <h2> 欢迎您！${loginUser.userName}</h2>
+  <h2> 欢迎您！${n.userName}</h2>
   </body>
 </html>

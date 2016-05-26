@@ -103,6 +103,10 @@ public class THomeworkService {
     public void addOneHomeWork(HomeworkFormBean homework,String path){
 
         THomework  homeworkTemp = new THomework();
+        List<THomework> myHomework = tHomeworkDao.findByStudentIdAndTaskId(homework.getStudentId(),homework.getTaskId());
+        if(!myHomework.isEmpty()){
+            homeworkTemp = myHomework.get(0);
+        }
         homeworkTemp.setCreateTime(new Date());
         homeworkTemp.setTopic(homework.getTopic());
         homeworkTemp.setFinshTime(homework.getFinshTime());
@@ -125,16 +129,7 @@ public class THomeworkService {
             homeworkTemp.setAttachmentId(attachment.getId());
         }
         tHomeworkDao.save(homeworkTemp);
-        /*
-        if (homework.getPic().isEmpty()){  //没有附件
 
-            tHomeworkDao.save(homeworkTemp);
-
-        }else {                         //有附件
-
-            tHomeworkDao.save(homeworkTemp);
-
-        }*/
 
     }
 
