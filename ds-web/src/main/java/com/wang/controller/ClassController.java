@@ -1,6 +1,8 @@
 package com.wang.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.sun.corba.se.impl.orbutil.threadpool.ThreadPoolManagerImpl;
 import com.wang.entity.*;
 import com.wang.entity.enums.NoteState;
@@ -315,6 +317,34 @@ System.out.println("zjc"+file.isEmpty());
         }
 
         TSeminarTopic seminarTopic = seminarTopicService.findById(studentTopic.getTopicId());
+        seminarTopic.setStatus(4);
+        seminarTopicService.save(seminarTopic);
+        Map<String,Object> map = new HashMap<String, Object>();
+        map.put("status",100);
+        return map;
+    }
+
+
+    @ResponseBody
+    @RequestMapping("seminarTopic/score2")
+    public Map<String,Object> seminarTopicStudentScore(String jsonStr,Model model){
+        JSONArray scores = JSON.parseArray(jsonStr);
+        Integer stid = 0;
+        for(int i=0;i<scores.size();i++){
+            JSONObject score = scores.getJSONObject(i);
+            Integer studentId = score.getInteger("studentId");
+            Integer type = score.getInteger("type");
+            stid = score.getInteger("stid");
+            if(type==1){
+                Integer num = score.getInteger("num");
+                studentTopicService.score(stid,studentId,num,1);
+            }else{
+                String level = score.getString("level");
+                studentTopicService.score(stid,studentId,level,2);
+            }
+        }
+
+        TSeminarTopic seminarTopic = seminarTopicService.findById(stid);
         seminarTopic.setStatus(4);
         seminarTopicService.save(seminarTopic);
         Map<String,Object> map = new HashMap<String, Object>();

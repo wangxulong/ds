@@ -6,67 +6,57 @@
     <script>
         var interval = 1000;
         $(function(){
-
             $('#sub_btn').unbind('click');
             $('#sub_btn').bind('click',function(){
                 var stid = $("#inner_thead").attr("stid");
-
-
                 var type=$('input:radio[name="scoretype"]:checked').val();
-
-
+                var scores = [];
                 if(type==1){
                     $('input[name="score"]').each(function(){
-                        var score = $(this).val();
-                        var studentId = $(this).parents("tr").attr("studentId");
-                        $.ajax({
-                            url:'${ctx}/class/seminarTopic/score',
-                            type:'post',
-                            data:{
-                                score:score,
-                                studentId:studentId,
-                                topicId:stid,
-                                type:1
-                            },
-                            success:function(msg){
-
-                            },
-                            error:function(msg){
-                                alert("服务器访问错误!");
-                            }
-                        })
+                        /*scores.push($(this).val());
+                        studentIds.push($(this).parents("tr").attr("studentId"));*/
+                        var score = new Map();
+                        score['type'] = 1;
+                        score['stid'] = stid;
+                        score['num'] = $(this).val();
+                        score['studentId'] = $(this).parents("tr").attr("studentId");
+                        scores.push(score);
                     })
-
                 }else {
-
                     $('select[name="level"]').each(function () {
-
-                        var level = $(this).find("option:selected").text();
-                        var studentId = $(this).parents("tr").attr("studentId");
-
-                        $.ajax({
-                            url:'${ctx}/class/seminarTopic/score',
-                            type:'post',
-                            data:{
-                                level:level,
-                                studentId:studentId,
-                                topicId:stid,
-                                type:2
-                            },
-                            success:function(msg){
-
-                            },
-                            error:function(msg){
-                                alert("服务器访问错误!");
-                            }
-                        })
+                        var score = new Map();
+                        score['type'] = 2;
+                        score['stid'] = stid;
+                        score['level'] = $(this).val();
+                        score['studentId'] = $(this).parents("tr").attr("studentId");
+                        scores.push(score);
                     })
                 }
+                var scoresObj = eval(scores);
+                var jsonStr=JSON.stringify(scoresObj);
+                $.ajax({
+                    url:'${ctx}/class/seminarTopic/score2',
+                    type:'post',
+                    dataType:'json',
+                    data:{
+                        jsonStr:jsonStr
+                    },
+                    success:function(msg){
+                        $("#sample-table-1 tr").each(function(){
+                            if($(this).attr("stid")==stid){
+                                $(this).find("td").eq("5").html('<span class="label label-sm label-danger">已结束</span>');
+                                $(this).find("td").eq("6").find("a[name='score_btn']").remove();
+                            }
+                        })
+                        alert("提交成功！");
+                    },
+                    error:function(msg){
+                        alert("提交失败！");
+                    }
+                })
                 $("#myModal").hide();
 
 
-
-                window.setInterval(function(){location.reload();},300);
 
             });
 

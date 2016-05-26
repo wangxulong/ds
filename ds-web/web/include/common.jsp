@@ -90,3 +90,4 @@ window.jQuery || document.write("<script src='${ctx}/static/js/ace/assets/js/jqu
 <script src="${ctx}/static/js/ace/assets/js/jquery.inputlimiter.1.3.1.js"></script>
 <script src="${ctx}/static/js/ace/assets/js/jquery.maskedinput.js"></script>
 <script src="${ctx}/static/js/ace/assets/js/bootstrap-tag.js"></script>
+<script src="${ctx}/static/js/ace/assets/js/json/json2.js"></script>
